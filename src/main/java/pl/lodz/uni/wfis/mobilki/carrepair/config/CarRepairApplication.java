@@ -1,4 +1,4 @@
-package pl.lodz.uni.wfis.mobilki.carrepair;
+package pl.lodz.uni.wfis.mobilki.carrepair.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
