@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Josefin Sans';
+  src: url('../../../src/fonts/JosefinSans-Regular.ttf')
+    format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background: url(../src/images/login-page-bg-blurred-1920.jpg);
+  background-size: cover;
+}

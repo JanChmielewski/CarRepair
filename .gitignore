@@ -1,52 +1,24 @@
-# Java specific
-*.class
-
-# Gradle specific
-.gradle/
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-# Spring Tool Suite specific
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-# IntelliJ IDEA specific
-.idea/
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
-# NetBeans specific
-/nbproject/private/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-# Visual Studio Code specific
-.vscode/
-
-# macOS specific
-.DS_Store
-
-# Other
+# Logs
+logs
 *.log
-*.tmp
-*.bak
-*.swp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Ignore the HELP.md file
-HELP.md
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
