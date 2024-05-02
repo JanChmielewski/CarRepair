@@ -25,7 +25,8 @@ export default function Login() {
     if (idHasError || passwordHasError) {
       return;
     }
-    console.log(idValue, passwordValue);
+    // !! Temporary solution for easier coding
+    window.location.href = '/dashboard';
   }
 
   return (

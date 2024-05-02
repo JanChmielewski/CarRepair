@@ -1,0 +1,14 @@
+/* ------------------ NAVBAR ------------------ */
+
+/* ------------------ CARDS ------------------ */
+.card {
+  width: 100vw;
+  background-color: #151515;
+  border-bottom: #ff0099 solid 1px;
+  padding: 10px;
+}
+
+.car-data {
+  list-style-type: none;
+  display: inline-block;
+}
