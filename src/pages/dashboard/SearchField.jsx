@@ -1,13 +1,11 @@
-// SearchField.jsx
 import React from 'react';
 
-function SearchField({ searchQuery, handleSearchInputChange }) {
+function SearchField({ handleSearchInputChange }) {
   return (
     <input
       className="navbar-search"
       type="text"
-      placeholder="Szukaj"
-      value={searchQuery}
+      placeholder="Search"
       onChange={handleSearchInputChange}
     />
   );
