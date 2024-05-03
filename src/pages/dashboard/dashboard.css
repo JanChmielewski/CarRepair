@@ -1,3 +1,8 @@
+body {
+  background: none;
+  background-color: #151515;
+}
+
 /* ------------------ NAVBAR ------------------ */
 nav {
   position: fixed;
@@ -14,21 +19,18 @@ nav {
 }
 
 .navbar-search {
+  background-color: #151515;
+  color: #e1e1e1;
   width: 20vw;
   height: 40px;
   border-radius: 8px;
   border: none;
   padding: 10px;
-  font-family: Josefin Sans;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 18px;
 }
 
 /* ------------------ CARDS ------------------ */
-body {
-  background: none;
-  background-color: #151515;
-}
-
 .car-list {
   position: absolute;
   top: 80px;
@@ -50,9 +52,9 @@ body {
   padding: 20px;
   list-style-type: none;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 10vw;
+  gap: 5vw;
   align-content: center;
 }
 
@@ -64,6 +66,63 @@ body {
   font-size: 1.5em;
 }
 
+.card-icons {
+  padding: 10px;
+}
+
+.data-icon {
+  margin-right: 15px;
+}
+/* ------------------ DELETE DIALOG ------------------ */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #151515;
+  padding: 20px;
+  border: #ff0099 solid 1px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  width: 30%;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Small text shadow */
+}
+
+.cancel-btn {
+  background-color: #ff0099;
+  color: #151515;
+}
+button.cancel-btn {
+  color: #151515;
+}
+
+/* ------------------ @media ------------------ */
 /* Smaller screens */
 @media screen and (max-width: 1000px) {
   .car-data {
