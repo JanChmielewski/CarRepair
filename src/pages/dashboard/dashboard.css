@@ -1,6 +1,53 @@
 /* ------------------ NAVBAR ------------------ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #ff0099;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 999;
+}
+
+.navbar-search {
+  width: 20vw;
+  height: 40px;
+  border-radius: 8px;
+  font-family: Josefin Sans;
+}
+
+/* Adjust width for smaller screens */
+@media screen and (max-width: 1000px) {
+  .navbar-search {
+    width: 60vw;
+  }
+}
+
+/* Adjust width for phones */
+@media screen and (max-width: 600px) {
+  .navbar-search {
+    width: 90vw;
+  }
+}
 
 /* ------------------ CARDS ------------------ */
+body {
+  background: none;
+  background-color: #151515;
+}
+
+.car-list {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
 .card {
   width: 100vw;
   background-color: #151515;
@@ -10,5 +57,17 @@
 
 .car-data {
   list-style-type: none;
-  display: inline-block;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10vw;
+  align-content: center;
+}
+
+.car-data li {
+  width: 20vw;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
 }
