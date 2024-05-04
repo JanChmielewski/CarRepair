@@ -1,5 +1,6 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class UserController {
         user.setName(request.getName());
         user.setSurname(request.getSurname());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setAuthority("ROLE_USER");
+        user.setAuthority("USER");
 
         repository.save(user);
 
@@ -46,7 +47,8 @@ public class UserController {
     }
 
     @GetMapping("/test")
-    public String test() {
+    public String test(Authentication authentication) {
+        System.out.println(authentication);
         return "Access granted!";
     }
 

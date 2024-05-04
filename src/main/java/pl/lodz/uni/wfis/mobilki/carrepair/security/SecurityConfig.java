@@ -8,38 +8,34 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import pl.lodz.uni.wfis.mobilki.carrepair.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig {
+
+    private final CustomUserDetailsService customUserDetailsService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
+                .sessionManagement(sessionManagement -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .userDetailsService(customUserDetailsService)
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/test").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/test").hasAuthority("USER")
                         .anyRequest().authenticated()
                 );
         return http.build();
-    }
-
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.withUsername("123456")
-                .password("pass1")
-                .roles("USER")
-                .build();
-        UserDetails admin = User.withUsername("654321")
-                .password("pass2")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
     }
 }
