@@ -17,7 +17,7 @@ A simple web application for managing a list of cars and their owners.
 ## 📝 Table of Contents
 - [About](#about)
 - [Getting Started](#getting_started)
-- [TODO](../TODO.md)
+- [TODO](TODO.md)
 
 ## 🧐 About <a name = "about"></a>
 The Car Management System is a web application designed to help users manage a list of cars and their owners. It allows users to add, remove, and search for cars based on various criteria. This project aims to provide a simple and intuitive interface for car management tasks.
