@@ -1,11 +1,15 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.lodz.uni.wfis.mobilki.carrepair.dto.UserDTO;
 import pl.lodz.uni.wfis.mobilki.carrepair.mappers.UserMapper;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.UserRepository;
+import pl.lodz.uni.wfis.mobilki.carrepair.security.AppUserAdapter;
+
+import java.util.Random;
 
 @Service
 public class UserService {
@@ -19,15 +23,25 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public UserDTO register(UserDTO userDTO) {
-        User user = userMapper.toEntity(userDTO);
-        User savedUser = userRepository.save(user);
-        return userMapper.toDTO(savedUser);
+
+
+    public UserDetails loadUserByUsername(String workerCode) throws UsernameNotFoundException {
+        User user = userRepository
+                .findByWorkerCode(workerCode)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return new AppUserAdapter(user);
     }
 
-    public UserDTO findByWorkerCode(String workerCode) {
-        return userRepository.findByWorkerCode(workerCode)
-                .map(userMapper::toDTO)
-                .orElse(null);
+    public String generateWorkerCode() {
+        int workerCode;
+        do {
+            Random rnd = new Random();
+            workerCode = rnd.nextInt(999999);
+        } while (workerCodeExists(String.format("%06d", workerCode)));
+        return String.format("%06d", workerCode);
+    }
+
+    public boolean workerCodeExists(String workerCode) {
+        return userRepository.findByWorkerCode(workerCode).isPresent();
     }
 }

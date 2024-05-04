@@ -9,11 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table
-@Entity(name = "user")
+@Entity(name = "app_user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String workerCode;
 
     @Column
     private String name;
@@ -22,8 +26,7 @@ public class User {
     private String surname;
 
     @Column
-    private String workerCode;
-
-    @Column
     private String password;
+
+    private String authority;
 }

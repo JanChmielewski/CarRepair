@@ -1,17 +1,13 @@
-package pl.lodz.uni.wfis.mobilki.carrepair.dto;
+package pl.lodz.uni.wfis.mobilki.carrepair.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
-
-    private Long id;
+@Data
+public class AuthRequest {
     private String workerCode;
-    private String name;
-    private String surname;
     private String password;
 }
