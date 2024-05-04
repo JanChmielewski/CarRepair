@@ -1,5 +1,5 @@
 import React from 'react';
-import { cars } from '../utils/cars';
+import { cars } from '../../../utils/cars.js';
 import Card from './Card';
 
 function CarList({ searchQuery }) {
@@ -13,7 +13,12 @@ function CarList({ searchQuery }) {
     <div className="car-list">
       {filteredCars.map((car) => (
         <li key={car.id}>
-          <Card model={car.name} owner={car.owner} date={car.date} />
+          <Card
+            id={car.id}
+            model={car.name}
+            owner={car.owner}
+            date={car.date}
+          />
         </li>
       ))}
     </div>

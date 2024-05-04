@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import EditIcon from '../../../images/icons/edit-icon.svg?react';
 import ReadyIcon from '../../../images/icons/ready-icon.svg?react';
 import DeleteIcon from '../../../images/icons/delete-icon.svg?react';
@@ -8,12 +9,12 @@ import OwnerIcon from '../../../images/icons/person-icon.svg?react';
 import CarIcon from '../../../images/icons/car-icon.svg?react';
 import ClockIcon from '../../../images/icons/clock-icon.svg?react';
 
-const Card = ({ model, owner, date }) => {
+const Card = ({ id, model, owner, date }) => {
   const navigate = useNavigate();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const handleEditButton = () => {
-    navigate('/edit-details');
+    navigate(`/edit-details/${id}`);
   };
 
   const handleDeleteButton = () => {
@@ -39,11 +40,11 @@ const Card = ({ model, owner, date }) => {
           {date}
         </li>
         <div className="card-btns card-icons">
-          <button
-            className="edit-btn icons-btn"
-            onClick={handleEditButton}
-          >
-            <EditIcon className="icon pink-icon" />
+          <button className="edit-btn icons-btn">
+            <EditIcon
+              className="icon pink-icon"
+              onClick={handleEditButton}
+            />
           </button>
           <button
             className="trash-btn icons-btn"

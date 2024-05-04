@@ -3,7 +3,9 @@
 ---
 
 - [x] Document the README.md file.
-- [ ] Enhance the dashboard with intuitive icons for improved user experience.
+- [x] Enhance the dashboard with intuitive icons for improved user experience.
+- [ ] Change date format to "dd/mm/yyyy".
+- [ ] Divide EditDetails.jsx into different components.
 - [ ] Enhance error handling and provide informative error messages to users in case of failures or invalid inputs.
 - [ ] Implement functionality to delete cars from the system.
 - [ ] Develop a dedicated editing page to modify car settings and details.
