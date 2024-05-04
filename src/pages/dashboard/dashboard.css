@@ -14,8 +14,17 @@ nav {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   z-index: 999;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .navbar-search {
@@ -28,6 +37,11 @@ nav {
   padding: 10px;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 18px;
+}
+
+.navbar-icons {
+  display: flex;
+  gap: 10px;
 }
 
 /* ------------------ CARDS ------------------ */
@@ -129,6 +143,9 @@ button.cancel-btn {
     padding: 0;
     gap: 0.5vh;
   }
+  nav {
+    height: 80px;
+  }
   .navbar-search {
     width: 60vw;
   }
@@ -141,9 +158,17 @@ button.cancel-btn {
 /* Phones */
 @media screen and (max-width: 600px) {
   .navbar-search {
-    width: 90vw;
+    width: 80vw;
+    height: 30px;
   }
   .car-data li {
     font-size: 1.3em;
+  }
+  .navbar-container {
+    justify-content: center;
+    gap: 5px;
+  }
+  .navbar-icons {
+    gap: 15px;
   }
 }

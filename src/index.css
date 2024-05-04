@@ -158,3 +158,12 @@ button:focus {
 .black-icon {
   fill: #000000;
 }
+
+/* ---------- PHONES ---------- */
+
+@media screen and (max-width: 600px) {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+}

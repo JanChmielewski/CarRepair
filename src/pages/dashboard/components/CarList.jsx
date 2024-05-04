@@ -1,5 +1,5 @@
 import React from 'react';
-import { cars } from './cars';
+import { cars } from '../utils/cars';
 import Card from './Card';
 
 function CarList({ searchQuery }) {

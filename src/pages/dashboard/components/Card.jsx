@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchIcon from '../../images/icons/search-icon.svg?react';
-import EditIcon from '../../images/icons/edit-icon.svg?react';
-import ReadyIcon from '../../images/icons/ready-icon.svg?react';
-import DeleteIcon from '../../images/icons/delete-icon.svg?react';
+import EditIcon from '../../../images/icons/edit-icon.svg?react';
+import ReadyIcon from '../../../images/icons/ready-icon.svg?react';
+import DeleteIcon from '../../../images/icons/delete-icon.svg?react';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
-import OwnerIcon from '../../images/icons/person-icon.svg?react';
-import CarIcon from '../../images/icons/car-icon.svg?react';
-import ClockIcon from '../../images/icons/clock-icon.svg?react';
+import OwnerIcon from '../../../images/icons/person-icon.svg?react';
+import CarIcon from '../../../images/icons/car-icon.svg?react';
+import ClockIcon from '../../../images/icons/clock-icon.svg?react';
 
 const Card = ({ model, owner, date }) => {
   const navigate = useNavigate();
