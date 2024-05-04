@@ -1,11 +1,10 @@
-package pl.lodz.uni.wfis.mobilki.carrepair.config;
+package pl.lodz.uni.wfis.mobilki.carrepair;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication
-@ComponentScan({"pl.lodz.uni.wfis.mobilki.carrepair.repository", "pl.lodz.uni.wfis.mobilki.carrepair.mappers"})
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class CarRepairApplication {
 
     public static void main(String[] args) {
