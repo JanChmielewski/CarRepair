@@ -46,7 +46,7 @@ public class UserController {
                 "\nAuthority: " + user.getAuthority());
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok("Logged in! \nWorker code: " + loginRequest.getWorkerCode());
     }
