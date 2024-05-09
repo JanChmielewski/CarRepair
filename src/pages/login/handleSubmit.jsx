@@ -1,12 +1,10 @@
-//!!Not used right now, not integrated with back - end yet
-
 async function handleSubmit(
   idValue,
   passwordValue,
   idHasError,
   passwordHasError,
   setLoginError,
-  history
+  navigate
 ) {
   try {
     // Prevent page reloading when submitting a form
@@ -16,13 +14,13 @@ async function handleSubmit(
       return;
     }
 
-    const response = await fetch('/api/login', {
+    const response = await fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: idValue,
+        workerCode: idValue,
         password: passwordValue,
       }),
     });
@@ -37,5 +35,4 @@ async function handleSubmit(
     setLoginError('Wystąpił błąd podczas logowania.');
   }
 }
-
 export default handleSubmit;
