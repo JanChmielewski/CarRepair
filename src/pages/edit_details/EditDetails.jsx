@@ -1,25 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { cars } from '../../utils/cars';
-
-// Reusable Input Component
-const InputField = ({
-  label,
-  name,
-  value,
-  onChange,
-  type = 'text',
-}) => (
-  <p>
-    {label}:{' '}
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-    />
-  </p>
-);
+import InputField from './InputField'; // Import InputField component
+import './EditDetails.css';
 
 function EditDetails() {
   const { id } = useParams();
@@ -70,7 +53,6 @@ function EditDetails() {
 
   return (
     <div>
-      <h1>Edit Details</h1>
       {selectedCar ? (
         <div>
           {inputFields.map((field) => (
