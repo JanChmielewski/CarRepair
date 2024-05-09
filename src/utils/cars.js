@@ -1,6 +1,6 @@
 export const cars = [
   {
-    VinNumber: '1HGBH41JXMN109186',
+    vinNumber: '1HGBH41JXMN109186',
     name: 'Toyota Camry',
     owner: 'John Doe',
     phoneNumber: '555-555-555',
@@ -9,7 +9,7 @@ export const cars = [
     date: '23-10-2023',
   },
   {
-    VinNumber: '2HGFC2F59JH520434',
+    vinNumber: '2HGFC2F59JH520434',
     name: 'Honda Civic',
     owner: 'Jane Smith',
     phoneNumber: '555-5678',
@@ -18,7 +18,7 @@ export const cars = [
     date: '24-10-2023',
   },
   {
-    VinNumber: '1FAFP4041KF131509',
+    vinNumber: '1FAFP4041KF131509',
     name: 'Ford Mustang',
     owner: 'Michael Johnson',
     phoneNumber: '555-9012',
@@ -27,7 +27,7 @@ export const cars = [
     date: '25-10-2023',
   },
   {
-    VinNumber: '1G1YY32G915120062',
+    vinNumber: '1G1YY32G915120062',
     name: 'Chevrolet Corvette',
     owner: 'Emily Davis',
     phoneNumber: '555-3456',
@@ -36,7 +36,7 @@ export const cars = [
     date: '26-10-2023',
   },
   {
-    VinNumber: '5UXWX9C53H0W58752',
+    vinNumber: '5UXWX9C53H0W58752',
     name: 'BMW X5',
     owner: 'David Brown',
     phoneNumber: '555-7890',
@@ -45,7 +45,7 @@ export const cars = [
     date: '27-10-2023',
   },
   {
-    VinNumber: 'JTHGL46F595025883',
+    vinNumber: 'JTHGL46F595025883',
     name: 'Lexus LS',
     owner: 'Sarah Wilson',
     phoneNumber: '555-2345',

@@ -1,3 +1,4 @@
+// handleChange.js
 import { handlePhoneNumber } from './handlePhoneNumber';
 import { handleVinNumber } from './handleVinNumber';
 
@@ -11,7 +12,7 @@ export const handleChange = (
 
   if (name === 'phoneNumber') {
     handlePhoneNumber(value, setEditedCar, setPhoneNumberError);
-  } else if (name === 'VinNumber') {
+  } else if (name === 'vinNumber') {
     handleVinNumber(value, setEditedCar, setPhoneNumberError);
   } else {
     setEditedCar((prevCar) => ({

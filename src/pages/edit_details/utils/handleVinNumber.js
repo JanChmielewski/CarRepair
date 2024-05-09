@@ -1,3 +1,4 @@
+// handleVinNumber.js
 const VIN_LENGTH_MIN = 11;
 const VIN_LENGTH_MAX = 17;
 
@@ -9,7 +10,7 @@ export const handleVinNumber = (
   const formattedValue = value.toUpperCase().slice(0, VIN_LENGTH_MAX);
   setEditedCar((prevCar) => ({
     ...prevCar,
-    VinNumber: formattedValue,
+    vinNumber: formattedValue,
   }));
   validateVinNumberLength(formattedValue, setPhoneNumberError);
 };

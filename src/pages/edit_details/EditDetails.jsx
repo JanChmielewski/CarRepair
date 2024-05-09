@@ -7,8 +7,10 @@ import { handleChange } from './utils/handleChange.js';
 import './EditDetails.css';
 
 function EditDetails() {
-  const { id } = useParams();
-  const selectedCar = cars.find((car) => car.VinNumber === id);
+  const { vinNumber } = useParams();
+  console.log('VinNumber:', vinNumber);
+
+  const selectedCar = cars.find((car) => car.vinNumber === vinNumber);
   const [editedCar, setEditedCar] = useState(selectedCar || {});
   const [phoneNumberError, setPhoneNumberError] = useState('');
 
