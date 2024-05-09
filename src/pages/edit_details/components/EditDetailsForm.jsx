@@ -28,7 +28,7 @@ function EditDetailsForm({
   };
 
   const inputFields = [
-    { label: 'Numer VIN', name: 'VinNumber' },
+    { label: 'Numer VIN', name: 'vinNumber' },
     { label: 'Model', name: 'name' },
     { label: 'Klient', name: 'owner' },
     {

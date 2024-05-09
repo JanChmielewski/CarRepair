@@ -8,7 +8,6 @@ import './EditDetails.css';
 
 function EditDetails() {
   const { vinNumber } = useParams();
-  console.log('VinNumber:', vinNumber);
 
   const selectedCar = cars.find((car) => car.vinNumber === vinNumber);
   const [editedCar, setEditedCar] = useState(selectedCar || {});
