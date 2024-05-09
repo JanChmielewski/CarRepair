@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import Input from './Input.jsx';
 import { hasMinLength } from './validation.js';
 import { useInput } from './useInput.js';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import handleSubmit from './handleSubmit.jsx'; // Import handleSubmit function
+import { useNavigate } from 'react-router-dom';
+import handleSubmit from './handleSubmit.js';
 
 export default function Login() {
-  const navigate = useNavigate(); // Initialize useNavigate
-  const [loginError, setLoginError] = useState(null); // Define loginError state
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState(null);
 
   // Setting aliases for inputs
   const {
@@ -25,18 +25,16 @@ export default function Login() {
     hasError: passwordHasError,
   } = useInput('', (value) => hasMinLength(value, 6));
 
-  // Handle form submission
   const handleSubmitForm = (event) => {
     event.preventDefault();
 
-    // Call the handleSubmit function with necessary parameters
     handleSubmit(
       idValue,
       passwordValue,
       idHasError,
       passwordHasError,
-      setLoginError, // Pass setLoginError to handleSubmit
-      navigate // Pass navigate for navigation
+      setLoginError,
+      navigate
     );
   };
 

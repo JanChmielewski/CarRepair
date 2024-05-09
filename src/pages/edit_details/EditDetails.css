@@ -6,3 +6,13 @@
 .details-input-label {
   font-size: 20px;
 }
+
+.not-found-error {
+  color: red;
+  font-weight: bold;
+}
+
+/* This shows only when inputing incorrect phone number (less than 9 digits) so remember about that when editing */
+.number-error {
+  color: red;
+}

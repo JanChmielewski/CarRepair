@@ -4,6 +4,7 @@
 
 - [x] Document the README.md file.
 - [x] Enhance the dashboard with intuitive icons for improved user experience.
+- [ ] Change login folder structure (add utils).
 - [ ] (Optional) Change date format to "dd/mm/yyyy".
 - [ ] Divide EditDetails.jsx into different components.
 - [ ] Enhance error handling and provide informative error messages to users in case of failures or invalid inputs.

@@ -1,40 +1,19 @@
-import React, { useState, useEffect } from 'react';
+// EditDetails.jsx
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { cars } from '../../utils/cars';
-import InputField from './InputField'; // Import InputField component
+import EditDetailsForm from './components/EditDetailsForm';
+import { handleChange } from './utils/handleChange.js';
 import './EditDetails.css';
 
 function EditDetails() {
   const { id } = useParams();
-  const selectedCar = cars.find((car) => car.id === parseInt(id));
+  const selectedCar = cars.find((car) => car.VinNumber === id);
   const [editedCar, setEditedCar] = useState(selectedCar || {});
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
-  useEffect(() => {
-    if (selectedCar && selectedCar.date) {
-      const [day, month, year] = selectedCar.date.split('-');
-      const formattedDate = `${year}-${month}-${day}`;
-      setEditedCar((prevCar) => ({
-        ...prevCar,
-        date: formattedDate,
-      }));
-    }
-  }, [selectedCar]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditedCar((prevCar) => ({ ...prevCar, [name]: value }));
-  };
-
-  const formatDateForInput = (dateString) => {
-    if (!dateString) return '';
-    const [year, month, day] = dateString.split('-');
-    return `${day}/${month}/${year}`;
-  };
-
-  const parseDate = (dateString) => {
-    if (!dateString) return '';
-    const [day, month, year] = dateString.split('/');
-    return `${year}-${month}-${day}`;
+  const handleChangeWrapper = (e) => {
+    handleChange(e, editedCar, setEditedCar, setPhoneNumberError);
   };
 
   const handleSave = () => {
@@ -42,34 +21,15 @@ function EditDetails() {
     // Add logic to save edited car details
   };
 
-  const inputFields = [
-    { label: 'Name', name: 'name' },
-    { label: 'Owner', name: 'owner' },
-    { label: 'Phone Number', name: 'phoneNumber', type: 'tel' },
-    { label: 'Info from Client', name: 'infoFromClient' },
-    { label: 'Additional Info', name: 'additionalInfo' },
-    { label: 'Date', name: 'date', type: 'date' },
-  ];
-
   return (
     <div>
-      {selectedCar ? (
-        <div>
-          {inputFields.map((field) => (
-            <InputField
-              key={field.name}
-              label={field.label}
-              name={field.name}
-              value={editedCar[field.name] || ''}
-              onChange={handleChange}
-              type={field.type}
-            />
-          ))}
-          <button onClick={handleSave}>Save</button>
-        </div>
-      ) : (
-        <p>Car not found</p>
-      )}
+      <EditDetailsForm
+        selectedCar={selectedCar}
+        editedCar={editedCar}
+        phoneNumberError={phoneNumberError}
+        onChange={handleChangeWrapper}
+        onSave={handleSave}
+      />
     </div>
   );
 }

@@ -7,7 +7,6 @@ async function handleSubmit(
   navigate
 ) {
   try {
-    // Prevent page reloading when submitting a form
     event.preventDefault();
 
     if (idHasError || passwordHasError) {
