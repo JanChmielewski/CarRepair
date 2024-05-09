@@ -1,0 +1,8 @@
+To do in this page:
+- change the VIN error message to display right under the VIN num field
+- fix the date problem
+- make the logic for save button
+- improve the vin number input protection (must contain numbers)
+- make the client and model field protection (must be less than X characters)
+- (to consider) remove the phone number formatting
+- clean up

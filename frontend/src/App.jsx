@@ -14,7 +14,10 @@ function App() {
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/" element={<Login />} />
-        <Route path="/edit-details/:id" element={<EditDetails />} />
+        <Route
+          path="/edit-details/:vinNumber"
+          element={<EditDetails />}
+        />
       </Routes>
     </Router>
   );

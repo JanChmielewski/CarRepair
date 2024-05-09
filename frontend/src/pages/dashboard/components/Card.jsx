@@ -9,12 +9,12 @@ import OwnerIcon from '../../../images/icons/person-icon.svg?react';
 import CarIcon from '../../../images/icons/car-icon.svg?react';
 import ClockIcon from '../../../images/icons/clock-icon.svg?react';
 
-const Card = ({ id, model, owner, date }) => {
+const Card = ({ vinNumber, model, owner, date }) => {
   const navigate = useNavigate();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const handleEditButton = () => {
-    navigate(`/edit-details/${id}`);
+    navigate(`/edit-details/${vinNumber}`);
   };
 
   const handleDeleteButton = () => {
