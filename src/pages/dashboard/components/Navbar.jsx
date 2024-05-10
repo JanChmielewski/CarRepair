@@ -15,7 +15,7 @@ function Navbar({ handleSearchInputChange }) {
           <IconButton icon={Icons.Calendar} destination="/calendar" />
           <IconButton
             icon={Icons.AddNew}
-            destination="/add-new-car"
+            destination="/edit-details/add-new-car"
           />
           <IconButton icon={Icons.Logout} destination="/" />
         </div>

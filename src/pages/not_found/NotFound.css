@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+h2 {
+  font-size: 60px;
+}
+
+p {
+  font-size: 30px;
+}
+
+.prev-page-icon {
+  width: 80px !important;
+  height: 80px !important;
+}
