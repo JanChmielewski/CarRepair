@@ -141,7 +141,7 @@ button:focus {
 
 .icons-btn:hover,
 .icons-btn:focus {
-  .white-icon {
+  .pink-icon {
     fill: #700c48;
   }
 }

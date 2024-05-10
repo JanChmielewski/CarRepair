@@ -1,7 +1,11 @@
-// EditDetailsForm.jsx
 import React from 'react';
 import InputField from './InputField';
 import Icons from '../../../utils/icons';
+
+const formatDate = (dateString) => {
+  const [day, month, year] = dateString.split('-');
+  return `${year}-${month}-${day}`;
+};
 
 function EditDetailsForm({
   selectedCar,
@@ -17,9 +21,14 @@ function EditDetailsForm({
         <InputField
           label={field.label}
           name={field.name}
-          value={editedCar[field.name] || ''}
+          value={
+            field.name === 'date'
+              ? formatDate(editedCar[field.name])
+              : editedCar[field.name] || ''
+          }
           onChange={onChange}
-          type={field.type}
+          type={field.type === 'date' ? 'date' : 'text'}
+          maxLength={field.maxLength}
         />
         {field.name === 'vinNumber' && vinNumberError && (
           <p className="vin-error">{vinNumberError}</p>
@@ -38,8 +47,8 @@ function EditDetailsForm({
       showError: !!vinNumberError,
       errorMessage: vinNumberError,
     },
-    { label: 'Model', name: 'name' },
-    { label: 'Klient', name: 'owner' },
+    { label: 'Model', name: 'name', maxLength: 40 },
+    { label: 'Klient', name: 'owner', maxLength: 40 },
     {
       label: 'Numer telefonu',
       name: 'phoneNumber',

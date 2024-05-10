@@ -4,6 +4,9 @@ import { cars } from '../../utils/cars';
 import EditDetailsForm from './components/EditDetailsForm';
 import { handleChange } from './utils/handleChange.js';
 import './EditDetails.css';
+import Icons from '../../utils/icons.js';
+import '../../components/PreviousPageButton.jsx';
+import PreviousPageButton from '../../components/PreviousPageButton.jsx';
 
 function EditDetails() {
   const { vinNumber } = useParams();
@@ -18,22 +21,25 @@ function EditDetails() {
   };
 
   return (
-    <EditDetailsForm
-      selectedCar={selectedCar}
-      editedCar={editedCar}
-      phoneNumberError={phoneNumberError}
-      vinNumberError={vinNumberError}
-      onChange={(e) =>
-        handleChange(
-          e,
-          editedCar,
-          setEditedCar,
-          setPhoneNumberError,
-          setVinNumberError
-        )
-      }
-      onSave={handleSave}
-    />
+    <div>
+      <PreviousPageButton buttonColor="pink" />
+      <EditDetailsForm
+        selectedCar={selectedCar}
+        editedCar={editedCar}
+        phoneNumberError={phoneNumberError}
+        vinNumberError={vinNumberError}
+        onChange={(e) =>
+          handleChange(
+            e,
+            editedCar,
+            setEditedCar,
+            setPhoneNumberError,
+            setVinNumberError
+          )
+        }
+        onSave={handleSave}
+      />
+    </div>
   );
 }
 

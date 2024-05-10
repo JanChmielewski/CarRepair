@@ -13,6 +13,7 @@ import SettingsIcon from '../images/icons/settings-icon.svg?react';
 import TagIcon from '../images/icons/tag-icon.svg?react';
 import UploadIcon from '../images/icons/upload-icon.svg?react';
 import AddNewCarIcon from '../images/icons/add-box-icon.svg?react';
+import ArrowBackIcon from '../images/icons/arrow-back-icon.svg?react';
 
 const Icons = {
   Save: SaveIcon,
@@ -30,6 +31,7 @@ const Icons = {
   Tag: TagIcon,
   Upload: UploadIcon,
   AddNew: AddNewCarIcon,
+  GoBack: ArrowBackIcon,
 };
 
 export default Icons;
