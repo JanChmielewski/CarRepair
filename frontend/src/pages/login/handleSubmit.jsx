@@ -16,6 +16,8 @@ async function handleSubmit(
 
     const response = await fetch('http://localhost:8080/login', {
       method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
