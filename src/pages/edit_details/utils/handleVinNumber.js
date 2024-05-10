@@ -5,29 +5,27 @@ const VIN_LENGTH_MAX = 17;
 export const handleVinNumber = (
   value,
   setEditedCar,
-  setPhoneNumberError
+  setVinNumberError
 ) => {
   const formattedValue = value.toUpperCase().slice(0, VIN_LENGTH_MAX);
   setEditedCar((prevCar) => ({
     ...prevCar,
     vinNumber: formattedValue,
   }));
-  validateVinNumberLength(formattedValue, setPhoneNumberError);
+  validateVinNumber(formattedValue, setVinNumberError);
 };
 
-const validateVinNumberLength = (
-  formattedValue,
-  setPhoneNumberError
-) => {
-  if (formattedValue.length < VIN_LENGTH_MIN) {
-    setPhoneNumberError(
+const validateVinNumber = (formattedValue, setVinNumberError) => {
+  const hasValidLength = formattedValue.length >= VIN_LENGTH_MIN;
+  const hasNumbers = /\d/.test(formattedValue);
+
+  if (!hasValidLength) {
+    setVinNumberError(
       'Numer VIN musi zawierać co najmniej 11 znaków.'
     );
-  } else if (formattedValue.length > VIN_LENGTH_MAX) {
-    setPhoneNumberError(
-      'Numer VIN nie może zawierać więcej niż 17 znaków.'
-    );
+  } else if (!hasNumbers) {
+    setVinNumberError('Numer VIN musi zawierać cyfry.');
   } else {
-    setPhoneNumberError('');
+    setVinNumberError('');
   }
 };

@@ -1,4 +1,3 @@
-// EditDetails.jsx
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { cars } from '../../utils/cars';
@@ -8,14 +7,10 @@ import './EditDetails.css';
 
 function EditDetails() {
   const { vinNumber } = useParams();
-
   const selectedCar = cars.find((car) => car.vinNumber === vinNumber);
   const [editedCar, setEditedCar] = useState(selectedCar || {});
   const [phoneNumberError, setPhoneNumberError] = useState('');
-
-  const handleChangeWrapper = (e) => {
-    handleChange(e, editedCar, setEditedCar, setPhoneNumberError);
-  };
+  const [vinNumberError, setVinNumberError] = useState('');
 
   const handleSave = () => {
     console.log('Save clicked', editedCar);
@@ -23,15 +18,22 @@ function EditDetails() {
   };
 
   return (
-    <div>
-      <EditDetailsForm
-        selectedCar={selectedCar}
-        editedCar={editedCar}
-        phoneNumberError={phoneNumberError}
-        onChange={handleChangeWrapper}
-        onSave={handleSave}
-      />
-    </div>
+    <EditDetailsForm
+      selectedCar={selectedCar}
+      editedCar={editedCar}
+      phoneNumberError={phoneNumberError}
+      vinNumberError={vinNumberError}
+      onChange={(e) =>
+        handleChange(
+          e,
+          editedCar,
+          setEditedCar,
+          setPhoneNumberError,
+          setVinNumberError
+        )
+      }
+      onSave={handleSave}
+    />
   );
 }
 

@@ -6,14 +6,15 @@ export const handleChange = (
   e,
   editedCar,
   setEditedCar,
-  setPhoneNumberError
+  setPhoneNumberError,
+  setVinNumberError
 ) => {
   const { name, value } = e.target;
 
   if (name === 'phoneNumber') {
     handlePhoneNumber(value, setEditedCar, setPhoneNumberError);
   } else if (name === 'vinNumber') {
-    handleVinNumber(value, setEditedCar, setPhoneNumberError);
+    handleVinNumber(value, setEditedCar, setVinNumberError);
   } else {
     setEditedCar((prevCar) => ({
       ...prevCar,

@@ -1,5 +1,6 @@
-To do in this page:
-- change the VIN error message to display right under the VIN num field
+### To do in this page:
+
+- [x] change the VIN error message to display right under the VIN num field
 - fix the date problem
 - make the logic for save button
 - improve the vin number input protection (must contain numbers)

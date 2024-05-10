@@ -6,6 +6,7 @@ function EditDetailsForm({
   selectedCar,
   editedCar,
   phoneNumberError,
+  vinNumberError,
   onChange,
   onSave,
 }) {
@@ -18,17 +19,24 @@ function EditDetailsForm({
           value={editedCar[field.name] || ''}
           onChange={onChange}
           type={field.type}
-          showError={field.showError}
         />
-        {field.showError && (
-          <p className="number-error">{field.errorMessage}</p>
+        {field.name === 'vinNumber' && vinNumberError && (
+          <p className="vin-error">{vinNumberError}</p>
+        )}
+        {field.name === 'phoneNumber' && phoneNumberError && (
+          <p className="number-error">{phoneNumberError}</p>
         )}
       </div>
     ));
   };
 
   const inputFields = [
-    { label: 'Numer VIN', name: 'vinNumber' },
+    {
+      label: 'Numer VIN',
+      name: 'vinNumber',
+      showError: !!vinNumberError,
+      errorMessage: vinNumberError,
+    },
     { label: 'Model', name: 'name' },
     { label: 'Klient', name: 'owner' },
     {
@@ -46,9 +54,11 @@ function EditDetailsForm({
   return (
     <div>
       {selectedCar ? (
-        <div>
+        <div className="details-form">
           {renderInputFields()}
-          <button onClick={onSave}>Save</button>
+          <button className="save-btn" onClick={onSave}>
+            Save
+          </button>
         </div>
       ) : (
         <p className="not-found-message">
