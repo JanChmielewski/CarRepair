@@ -1,4 +1,3 @@
-// handleChange.js
 import { handlePhoneNumber } from './handlePhoneNumber';
 import { handleVinNumber } from './handleVinNumber';
 
@@ -11,14 +10,15 @@ export const handleChange = (
 ) => {
   const { name, value } = e.target;
 
-  if (name === 'phoneNumber') {
-    handlePhoneNumber(value, setEditedCar, setPhoneNumberError);
-  } else if (name === 'vinNumber') {
-    handleVinNumber(value, setEditedCar, setVinNumberError);
-  } else {
-    setEditedCar((prevCar) => ({
-      ...prevCar,
-      [name]: value,
-    }));
+  switch (name) {
+    case 'phoneNumber':
+      handlePhoneNumber(value, setEditedCar, setPhoneNumberError);
+      break;
+    case 'vinNumber':
+      handleVinNumber(value, setEditedCar, setVinNumberError);
+      break;
+    default:
+      setEditedCar((prevCar) => ({ ...prevCar, [name]: value }));
+      break;
   }
 };

@@ -19,7 +19,11 @@ const validateVinNumber = (formattedValue, setVinNumberError) => {
   const hasValidLength = formattedValue.length >= VIN_LENGTH_MIN;
   const hasNumbers = /\d/.test(formattedValue);
 
-  if (!hasValidLength) {
+  if (!hasNumbers && !hasValidLength) {
+    setVinNumberError(
+      'Numer VIN musi zawierać co najmniej 11 znaków i cyfry.'
+    );
+  } else if (!hasValidLength) {
     setVinNumberError(
       'Numer VIN musi zawierać co najmniej 11 znaków.'
     );

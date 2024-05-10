@@ -1,6 +1,7 @@
 // EditDetailsForm.jsx
 import React from 'react';
 import InputField from './InputField';
+import Icons from '../../../utils/icons';
 
 function EditDetailsForm({
   selectedCar,
@@ -57,6 +58,7 @@ function EditDetailsForm({
         <div className="details-form">
           {renderInputFields()}
           <button className="save-btn" onClick={onSave}>
+            <Icons.Save className="icon black-icon save-icon" />
             Save
           </button>
         </div>
