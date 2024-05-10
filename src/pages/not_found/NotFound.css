@@ -5,15 +5,15 @@
   gap: 20px;
 }
 
-h2 {
+.not-found-header {
   font-size: 60px;
 }
 
-p {
+.not-found-text {
   font-size: 30px;
 }
 
 .prev-page-icon {
-  width: 80px !important;
-  height: 80px !important;
+  width: 80px;
+  height: 80px;
 }

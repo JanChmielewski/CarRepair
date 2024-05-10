@@ -6,8 +6,10 @@ const NotFound = () => {
   return (
     <div className="container">
       <div>
-        <h2>Strona nie znaleziona</h2>
-        <p>Przepraszamy, strona, której szukasz, nie istnieje.</p>
+        <h2 className="not-found-header">Strona nie znaleziona</h2>
+        <p className="not-found-text">
+          Przepraszamy, strona, której szukasz, nie istnieje.
+        </p>
       </div>
       <PreviousPageButton
         buttonColor={'pink'}
