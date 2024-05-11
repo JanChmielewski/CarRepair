@@ -4,7 +4,7 @@ async function handleSubmit(
   idHasError,
   passwordHasError,
   setLoginError,
-  navigate
+  history
 ) {
   try {
     event.preventDefault();
@@ -15,6 +15,8 @@ async function handleSubmit(
 
     const response = await fetch('http://localhost:8080/login', {
       method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -25,7 +27,7 @@ async function handleSubmit(
     });
 
     if (response.ok) {
-      navigate('/dashboard');
+      history.push('/dashboard');
     } else {
       setLoginError('Niepoprawne ID lub hasło.');
     }

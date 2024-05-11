@@ -1,13 +1,22 @@
-// EditDetailsForm.jsx
 import React from 'react';
-import InputField from './InputField';
+import InputField from './InputField/InputField';
+import inputFields from '../utils/inputFields';
+import SaveButton from './SaveButton';
+
+const formatDate = (dateString) => {
+  if (!dateString) return '';
+  const [day, month, year] = dateString.split('-');
+  return `${year}-${month}-${day}`;
+};
 
 function EditDetailsForm({
   selectedCar,
   editedCar,
   phoneNumberError,
+  vinNumberError,
   onChange,
   onSave,
+  isNewCar,
 }) {
   const renderInputFields = () => {
     return inputFields.map((field) => (
@@ -15,45 +24,40 @@ function EditDetailsForm({
         <InputField
           label={field.label}
           name={field.name}
-          value={editedCar[field.name] || ''}
+          value={
+            field.name === 'date'
+              ? formatDate(editedCar[field.name])
+              : editedCar[field.name] || ''
+          }
           onChange={onChange}
-          type={field.type}
-          showError={field.showError}
+          type={field.type === 'date' ? 'date' : 'text'}
+          maxLength={field.maxLength}
         />
-        {field.showError && (
-          <p className="number-error">{field.errorMessage}</p>
+        {field.name === 'vinNumber' && vinNumberError && (
+          <p className="vin-error">{vinNumberError}</p>
+        )}
+        {field.name === 'phoneNumber' && phoneNumberError && (
+          <p className="number-error">{phoneNumberError}</p>
         )}
       </div>
     ));
   };
 
-  const inputFields = [
-    { label: 'Numer VIN', name: 'vinNumber' },
-    { label: 'Model', name: 'name' },
-    { label: 'Klient', name: 'owner' },
-    {
-      label: 'Numer telefonu',
-      name: 'phoneNumber',
-      type: 'tel',
-      showError: !!phoneNumberError,
-      errorMessage: phoneNumberError,
-    },
-    { label: 'Informacje od klienta', name: 'infoFromClient' },
-    { label: 'Informacje od mechanika', name: 'additionalInfo' },
-    { label: 'Data przyjęcia', name: 'date', type: 'date' },
-  ];
-
   return (
-    <div>
-      {selectedCar ? (
-        <div>
+    <div className="details-form">
+      {isNewCar || selectedCar !== null ? (
+        <div className="details-form">
           {renderInputFields()}
-          <button onClick={onSave}>Save</button>
+          <SaveButton onClick={onSave} />
         </div>
       ) : (
         <p className="not-found-message">
-          Nie udało się znaleźć samochodu o podanym numerze VIN.
-          Sprawdź poprawność numeru i spróbuj ponownie
+          {!isNewCar && (
+            <>
+              Nie udało się znaleźć samochodu o podanym numerze VIN.
+              Sprawdź poprawność numeru i spróbuj ponownie
+            </>
+          )}
         </p>
       )}
     </div>
