@@ -1,0 +1,174 @@
+body {
+  background: none;
+  background-color: #151515;
+}
+
+/* ------------------ NAVBAR ------------------ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #ff0099;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 999;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.navbar-search {
+  background-color: #151515;
+  color: #e1e1e1;
+  width: 20vw;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  padding: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
+}
+
+.navbar-icons {
+  display: flex;
+  gap: 10px;
+}
+
+/* ------------------ CARDS ------------------ */
+.car-list {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
+.card {
+  width: 100vw;
+  background-color: #151515;
+  border-bottom: #ff0099 solid 1px;
+  padding: 10px;
+}
+
+.car-data {
+  margin: 0;
+  padding: 20px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 5vw;
+  align-content: center;
+}
+
+.car-data li {
+  width: 20vw;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.card-icons {
+  padding: 10px;
+}
+
+.data-icon {
+  margin-right: 15px;
+}
+/* ------------------ DELETE DIALOG ------------------ */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #151515;
+  padding: 20px;
+  border: #ff0099 solid 1px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  width: 30%;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Small text shadow */
+}
+
+.cancel-btn {
+  background-color: #ff0099;
+  color: #151515;
+}
+button.cancel-btn {
+  color: #151515;
+}
+
+/* ------------------ @media ------------------ */
+/* Smaller screens */
+@media screen and (max-width: 1000px) {
+  .car-data {
+    padding: 0;
+    gap: 0.5vh;
+  }
+  nav {
+    height: 80px;
+  }
+  .navbar-search {
+    width: 60vw;
+  }
+  .car-data li {
+    width: 100vw;
+    justify-content: center;
+  }
+}
+
+/* Phones */
+@media screen and (max-width: 600px) {
+  .navbar-search {
+    width: 80vw;
+    height: 30px;
+  }
+  .car-data li {
+    font-size: 1.3em;
+  }
+  .navbar-container {
+    justify-content: center;
+    gap: 5px;
+  }
+  .navbar-icons {
+    gap: 15px;
+  }
+}
