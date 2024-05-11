@@ -36,7 +36,10 @@ public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFil
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form
-                        .loginPage("http://localhost:5173")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("workerCode")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("http://localhost:5173/dashboard", true)
                         .permitAll()
                 )
                 .authorizeHttpRequests(auth -> auth
