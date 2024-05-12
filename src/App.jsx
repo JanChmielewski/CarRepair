@@ -4,9 +4,11 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Login from './pages/login/Login.jsx';
 import Dashboard from './pages/dashboard/Dashboard.jsx';
 import EditDetails from './pages/edit_details/EditDetails.jsx';
+import NotFound from './pages/not_found/NotFound.jsx';
 
 function App() {
   return (
@@ -14,7 +16,16 @@ function App() {
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/" element={<Login />} />
-        <Route path="/edit-details/:id" element={<EditDetails />} />
+        <Route
+          path="/edit-details/:vinNumber"
+          element={<EditDetails />}
+        />
+        <Route
+          path="/edit-details/add-new-car"
+          element={<EditDetails />}
+        />
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
     </Router>
   );

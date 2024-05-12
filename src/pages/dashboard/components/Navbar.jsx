@@ -1,10 +1,8 @@
 import React from 'react';
 
 import SearchField from './SearchField';
-import CalendarIcon from '../../../images/icons/calendar-icon.svg?react';
-import AddCarIcon from '../../../images/icons/add-box-icon.svg?react';
-import LogoutIcon from '../../../images/icons/logout-icon.svg?react';
 import IconButton from './IconButton';
+import Icons from '../../../utils/icons';
 
 function Navbar({ handleSearchInputChange }) {
   return (
@@ -14,9 +12,12 @@ function Navbar({ handleSearchInputChange }) {
           handleSearchInputChange={handleSearchInputChange}
         />
         <div className="navbar-icons">
-          <IconButton icon={CalendarIcon} destination="/calendar" />
-          <IconButton icon={AddCarIcon} destination="/add-new-car" />
-          <IconButton icon={LogoutIcon} destination="/" />
+          <IconButton icon={Icons.Calendar} destination="/calendar" />
+          <IconButton
+            icon={Icons.AddNew}
+            destination="/edit-details/add-new-car"
+          />
+          <IconButton icon={Icons.Logout} destination="/" />
         </div>
       </div>
     </nav>

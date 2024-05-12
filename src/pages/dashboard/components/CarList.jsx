@@ -12,9 +12,9 @@ function CarList({ searchQuery }) {
   return (
     <div className="car-list">
       {filteredCars.map((car) => (
-        <li key={car.id}>
+        <li key={car.vinNumber}>
           <Card
-            id={car.id}
+            vinNumber={car.vinNumber}
             model={car.name}
             owner={car.owner}
             date={car.date}

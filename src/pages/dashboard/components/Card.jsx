@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
-import EditIcon from '../../../images/icons/edit-icon.svg?react';
-import ReadyIcon from '../../../images/icons/ready-icon.svg?react';
-import DeleteIcon from '../../../images/icons/delete-icon.svg?react';
+import { useNavigate } from 'react-router-dom';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
-import OwnerIcon from '../../../images/icons/person-icon.svg?react';
-import CarIcon from '../../../images/icons/car-icon.svg?react';
-import ClockIcon from '../../../images/icons/clock-icon.svg?react';
+import Icons from '../../../utils/icons';
 
-const Card = ({ id, model, owner, date }) => {
+const Card = ({ vinNumber, model, owner, date }) => {
   const navigate = useNavigate();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const handleEditButton = () => {
-    navigate(`/edit-details/${id}`);
+    navigate(`/edit-details/${vinNumber}`);
   };
 
   const handleDeleteButton = () => {
@@ -25,23 +19,23 @@ const Card = ({ id, model, owner, date }) => {
     <div className="card">
       <ul className="car-data">
         <div className="card-icons">
-          <ReadyIcon className="icon pink-icon" />
+          <Icons.Completed className="icon pink-icon" />
         </div>
         <li>
-          <CarIcon className="icon pink-icon data-icon" />
+          <Icons.Car className="icon pink-icon data-icon" />
           {model}
         </li>
         <li>
-          <OwnerIcon className="icon pink-icon data-icon" />
+          <Icons.Owner className="icon pink-icon data-icon" />
           {owner}
         </li>
         <li>
-          <ClockIcon className="icon pink-icon data-icon" />
+          <Icons.Clock className="icon pink-icon data-icon" />
           {date}
         </li>
         <div className="card-btns card-icons">
           <button className="edit-btn icons-btn">
-            <EditIcon
+            <Icons.Edit
               className="icon pink-icon"
               onClick={handleEditButton}
             />
@@ -50,7 +44,7 @@ const Card = ({ id, model, owner, date }) => {
             className="trash-btn icons-btn"
             onClick={handleDeleteButton}
           >
-            <DeleteIcon className="icon pink-icon" />
+            <Icons.Remove className="icon pink-icon" />
           </button>
         </div>
       </ul>
