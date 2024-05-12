@@ -6,11 +6,14 @@
 }
 
 .not-found-header {
+  color: #ff0099;
   font-size: 60px;
 }
 
 .not-found-text {
   font-size: 30px;
+  width: 700px; 
+  word-wrap: break-word;
 }
 
 .prev-page-icon {

@@ -44,7 +44,10 @@ function EditDetails() {
 
   return (
     <div>
-      <PreviousPageButton buttonColor="pink" />
+      <PreviousPageButton
+        buttonColor="pink"
+        arrowClassName="go-back-arrow"
+      />
       <EditDetailsForm
         selectedCar={selectedCar}
         editedCar={editedCar}
