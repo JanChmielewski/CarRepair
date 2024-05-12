@@ -1,10 +1,11 @@
 async function handleSubmit(
+  event,
   idValue,
   passwordValue,
   idHasError,
   passwordHasError,
   setLoginError,
-  history
+  navigate
 ) {
   try {
     event.preventDefault();
@@ -27,7 +28,7 @@ async function handleSubmit(
     });
 
     if (response.ok) {
-      history.push('/dashboard');
+      navigate('/dashboard');
     } else {
       setLoginError('Niepoprawne ID lub hasło.');
     }
@@ -36,4 +37,5 @@ async function handleSubmit(
     setLoginError('Wystąpił błąd podczas logowania.');
   }
 }
+
 export default handleSubmit;

@@ -7,6 +7,7 @@ export const cars = [
     infoFromClient: 'Client prefers red color',
     additionalInfo: 'Well-maintained, low mileage',
     date: '23-10-2023',
+    deadline: '07-11-2023',
   },
   {
     vinNumber: '2HGFC2F59JH520434',
@@ -16,6 +17,7 @@ export const cars = [
     infoFromClient: 'Client wants automatic transmission',
     additionalInfo: 'Fuel-efficient, great for city driving',
     date: '24-10-2023',
+    deadline: '08-11-2023',
   },
   {
     vinNumber: '1FAFP4041KF131509',
@@ -25,6 +27,7 @@ export const cars = [
     infoFromClient: 'Client is looking for a sporty model',
     additionalInfo: 'Powerful engine, sleek design',
     date: '25-10-2023',
+    deadline: '09-11-2023',
   },
   {
     vinNumber: '1G1YY32G915120062',
@@ -34,6 +37,7 @@ export const cars = [
     infoFromClient: 'Client needs extra trunk space',
     additionalInfo: 'Sporty, high-performance vehicle',
     date: '26-10-2023',
+    deadline: '10-11-2023',
   },
   {
     vinNumber: '5UXWX9C53H0W58752',
@@ -43,6 +47,7 @@ export const cars = [
     infoFromClient: 'Client prefers luxury features',
     additionalInfo: 'Premium materials, advanced technology',
     date: '27-10-2023',
+    deadline: '11-11-2023',
   },
   {
     vinNumber: 'JTHGL46F595025883',
@@ -52,5 +57,6 @@ export const cars = [
     infoFromClient: 'Client wants a comfortable ride',
     additionalInfo: 'Luxury sedan, smooth handling',
     date: '28-10-2023',
+    deadline: '12-11-2023',
   },
 ];
