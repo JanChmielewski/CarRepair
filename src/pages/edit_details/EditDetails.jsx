@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { cars } from '../../utils/cars';
+import React, { useState, useEffect } from 'react';
+import {
+  useParams,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import EditDetailsForm from './components/EditDetailsForm';
-import { handleChange } from './utils/handleChange.js';
-import './EditDetails.css';
-import '../../components/PreviousPageButton.jsx';
 import PreviousPageButton from '../../components/PreviousPageButton.jsx';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { handleChange } from './utils/handleChange.js';
+import { cars } from '../../utils/cars';
+import './EditDetails.css';
 
 function EditDetails() {
   const navigate = useNavigate();

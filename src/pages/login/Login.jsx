@@ -26,9 +26,8 @@ export default function Login() {
   } = useInput('', (value) => hasMinLength(value, 6));
 
   const handleSubmitForm = (event) => {
-    event.preventDefault();
-
     handleSubmit(
+      event,
       idValue,
       passwordValue,
       idHasError,

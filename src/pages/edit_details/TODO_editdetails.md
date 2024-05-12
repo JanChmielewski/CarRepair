@@ -8,4 +8,5 @@
 - [x] improve the vin number input protection (must contain numbers)
 - [x] make the client and model field protection (must be less than X characters)
 - [x] remove the phone number formatting
+- [ ] add a deadline field
 - clean up
