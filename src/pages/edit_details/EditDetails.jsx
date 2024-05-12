@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import EditDetailsForm from './components/EditDetailsForm';
 import PreviousPageButton from '../../components/PreviousPageButton';
-import { handleChange } from './utils/handleChange';
+import handleInputChange from './utils/handleInputChange';
 import { cars, clients, repairs } from '../../utils';
 
 import './EditDetails.css';
@@ -50,9 +50,6 @@ function EditDetails() {
   const [editedCar, setEditedCar] = useState(
     isNewCar ? {} : selectedCar || {}
   );
-  const [phoneNumberError, setPhoneNumberError] = useState('');
-  const [vinNumberError, setVinNumberError] = useState('');
-
   const handleSave = () => {
     console.log('Save clicked', editedCar);
     // Add logic to save edited car details
@@ -64,16 +61,8 @@ function EditDetails() {
       <EditDetailsForm
         selectedCar={selectedCar}
         editedCar={editedCar}
-        phoneNumberError={phoneNumberError}
-        vinNumberError={vinNumberError}
         onChange={(e) =>
-          handleChange(
-            e,
-            editedCar,
-            setEditedCar,
-            setPhoneNumberError,
-            setVinNumberError
-          )
+          handleInputChange(e, editedCar, setEditedCar)
         }
         onSave={handleSave}
         isNewCar={isNewCar}

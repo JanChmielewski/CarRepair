@@ -7,12 +7,7 @@ const formatDate = (dateString) => {
   return `${year}-${month}-${day}`;
 };
 
-const RenderInputFields = ({
-  editedCar,
-  vinNumberError,
-  phoneNumberError,
-  onChange,
-}) => {
+const RenderInputFields = ({ editedCar, onChange }) => {
   const renderField = (field) => {
     const value =
       field.name === 'date'
@@ -29,12 +24,6 @@ const RenderInputFields = ({
           type={field.type === 'date' ? 'date' : 'text'}
           maxLength={field.maxLength}
         />
-        {field.name === 'vinNumber' && vinNumberError && (
-          <p className="vin-error">{vinNumberError}</p>
-        )}
-        {field.name === 'phoneNumber' && phoneNumberError && (
-          <p className="number-error">{phoneNumberError}</p>
-        )}
       </div>
     );
   };

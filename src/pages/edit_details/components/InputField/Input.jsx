@@ -1,4 +1,3 @@
-// Input.jsx
 import React from 'react';
 
 const Input = ({
@@ -11,7 +10,6 @@ const Input = ({
   maxLength,
   minLength,
   placeholder,
-  required = false,
 }) => (
   <input
     type={type}
@@ -23,7 +21,6 @@ const Input = ({
     maxLength={maxLength}
     minLength={minLength}
     placeholder={placeholder}
-    required={required}
   />
 );
 

@@ -1,33 +1,42 @@
 // InputField.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import InputLabel from './InputLabel';
 import Input from './Input';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from './ErrorMessage'; // Import ErrorMessage component
+import setError from '../../utils/setError';
 
 const InputField = ({
   label,
   name,
   value,
   onChange,
-  onBlur,
   type = 'text',
-  showError = false,
-  errorMessage = '',
   className = 'details-input',
   labelClassName = 'details-input-label',
   minLength = null,
   maxLength = null,
+  isRequired = false,
+  isOnlyDigits = false, // Add isOnlyDigits prop
 }) => {
-  const [inputValue, setInputValue] = useState(value);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null); // State to manage error message
 
-  const handleChange = (e) => {
-    let inputValue = e.target.value;
-    if (maxLength && inputValue.length > maxLength) {
-      inputValue = inputValue.slice(0, maxLength);
-    }
-    setInputValue(inputValue);
-    onChange(e);
+  // Function to handle onBlur event
+  const handleBlur = (e) => {
+    const { value } = e.target;
+    const errorMessage = validateInput(value);
+    setError(errorMessage); // Update error state
+  };
+
+  // Function to validate input based on props
+  const validateInput = (value) => {
+    return setError(
+      label,
+      value,
+      maxLength,
+      minLength,
+      isOnlyDigits,
+      isRequired
+    );
   };
 
   return (
@@ -36,16 +45,16 @@ const InputField = ({
       <Input
         type={type}
         name={name}
-        value={inputValue}
-        onChange={handleChange}
-        onBlur={onBlur}
+        value={value}
+        onChange={onChange}
+        onBlur={handleBlur} // Pass handleBlur function to onBlur prop
         className={className}
         maxLength={maxLength}
-        required
+        minLength={minLength}
+        isRequired={isRequired}
       />
-      {showError && (errorMessage || error) && (
-        <ErrorMessage message={errorMessage || error} />
-      )}
+      {error && <ErrorMessage message={error} />}{' '}
+      {/* Display error message if exists */}
     </div>
   );
 };
