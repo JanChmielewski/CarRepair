@@ -1,17 +1,13 @@
 const PHONE_NUMBER_LENGTH_MAX = 11;
 
-// Formats the phone number in the format xxx-xxx-xxx
 export const formatPhoneNumber = (phoneNumberInput) => {
   if (!phoneNumberInput) return '';
 
-  const formattedValue = phoneNumberInput
+  return phoneNumberInput
     .replace(/\D/g, '')
-    .replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
-
-  return formattedValue.slice(0, PHONE_NUMBER_LENGTH_MAX);
+    .slice(0, PHONE_NUMBER_LENGTH_MAX);
 };
 
-// Handles the phone number input, formats it, and validates it
 export const handlePhoneNumber = (
   phoneNumberInput,
   setEditedCar,

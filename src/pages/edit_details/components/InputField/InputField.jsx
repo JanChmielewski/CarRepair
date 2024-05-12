@@ -1,25 +1,25 @@
 // InputField.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputLabel from './InputLabel';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
 
-const InputField = (props) => {
-  const {
-    label,
-    name,
-    value,
-    onChange,
-    onBlur,
-    type = 'text',
-    showError = false,
-    errorMessage = '',
-    className = 'details-input',
-    labelClassName = 'details-input-label',
-    maxLength = null,
-  } = props;
-
+const InputField = ({
+  label,
+  name,
+  value,
+  onChange,
+  onBlur,
+  type = 'text',
+  showError = false,
+  errorMessage = '',
+  className = 'details-input',
+  labelClassName = 'details-input-label',
+  minLength = null,
+  maxLength = null,
+}) => {
   const [inputValue, setInputValue] = useState(value);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     let inputValue = e.target.value;
@@ -28,13 +28,6 @@ const InputField = (props) => {
     }
     setInputValue(inputValue);
     onChange(e);
-  };
-
-  const renderPlaceholder = () => {
-    if (type === 'date') {
-      return 'dd-mm-yyyy';
-    }
-    return '';
   };
 
   return (
@@ -48,10 +41,10 @@ const InputField = (props) => {
         onBlur={onBlur}
         className={className}
         maxLength={maxLength}
-        placeholder={renderPlaceholder()}
+        required
       />
-      {showError && errorMessage && (
-        <ErrorMessage message={errorMessage} />
+      {showError && (errorMessage || error) && (
+        <ErrorMessage message={errorMessage || error} />
       )}
     </div>
   );

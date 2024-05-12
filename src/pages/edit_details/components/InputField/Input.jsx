@@ -9,7 +9,9 @@ const Input = ({
   onBlur,
   className,
   maxLength,
+  minLength,
   placeholder,
+  required = false,
 }) => (
   <input
     type={type}
@@ -19,7 +21,9 @@ const Input = ({
     onBlur={onBlur}
     className={className}
     maxLength={maxLength}
+    minLength={minLength}
     placeholder={placeholder}
+    required={required}
   />
 );
 

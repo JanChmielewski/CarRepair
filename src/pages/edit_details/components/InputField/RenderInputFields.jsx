@@ -1,4 +1,3 @@
-// RenderInputFields.js
 import React from 'react';
 import InputField from './InputField/InputField';
 import inputFields from '../utils/inputFields';

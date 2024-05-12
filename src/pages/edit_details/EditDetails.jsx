@@ -5,9 +5,10 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import EditDetailsForm from './components/EditDetailsForm';
-import PreviousPageButton from '../../components/PreviousPageButton.jsx';
-import { handleChange } from './utils/handleChange.js';
-import { cars } from '../../utils/cars';
+import PreviousPageButton from '../../components/PreviousPageButton';
+import { handleChange } from './utils/handleChange';
+import { cars, clients, repairs } from '../../utils';
+
 import './EditDetails.css';
 
 function EditDetails() {
@@ -16,20 +17,35 @@ function EditDetails() {
   const location = useLocation();
   const isNewCar = location.pathname === '/edit-details/add-new-car';
 
+  const allData = [...cars, ...clients, ...repairs];
+
   let selectedCar = null;
+
   if (!isNewCar) {
-    selectedCar = cars.find((car) => car.vinNumber === vinNumber);
+    selectedCar = allData.find((item) =>
+      ['vinNumber', 'id', 'repairID'].some(
+        (key) => key in item && item[key] === vinNumber
+      )
+    );
+
+    if (selectedCar) {
+      const clientData = clients.find(
+        (client) => client.id === selectedCar.vinNumber
+      );
+      const repairData = repairs.find(
+        (repair) => repair.repairID === selectedCar.vinNumber
+      );
+      selectedCar = { ...selectedCar, ...clientData, ...repairData };
+    }
   }
 
   useEffect(() => {
     if (
       !isNewCar &&
-      !cars.some((car) => car.vinNumber === vinNumber)
-    ) {
-      console.log('Redirecting to /not-found');
+      !allData.some((item) => item.vinNumber === vinNumber)
+    )
       navigate('/not-found');
-    }
-  }, [isNewCar, cars, vinNumber, navigate]);
+  }, [isNewCar, allData, vinNumber, navigate]);
 
   const [editedCar, setEditedCar] = useState(
     isNewCar ? {} : selectedCar || {}
@@ -60,7 +76,8 @@ function EditDetails() {
           )
         }
         onSave={handleSave}
-        isNewCar={isNewCar} // Pass isNewCar as prop to indicate if it's a new car
+        isNewCar={isNewCar}
+        allData={allData}
       />
     </div>
   );
