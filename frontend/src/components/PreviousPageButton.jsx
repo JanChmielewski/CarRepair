@@ -5,6 +5,7 @@ import Icons from '../utils/icons';
 const PreviousPageButton = ({
   buttonColor,
   pageDestination,
+  arrowClassName = '',
   iconClassName = '',
 }) => {
   let history = useNavigate();
@@ -21,7 +22,10 @@ const PreviousPageButton = ({
     buttonColor === 'pink' ? 'pink-icon' : 'black-icon';
 
   return (
-    <button className="icons-btn" onClick={goBack}>
+    <button
+      className={`icons-btn ${arrowClassName}`}
+      onClick={goBack}
+    >
       <Icons.GoBack
         className={`icon ${iconClass} ${iconClassName}`}
       />

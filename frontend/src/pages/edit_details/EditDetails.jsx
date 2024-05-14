@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { cars } from '../../utils/cars';
+import React, { useState, useEffect } from 'react';
+import {
+  useParams,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import EditDetailsForm from './components/EditDetailsForm';
-import { handleChange } from './utils/handleChange.js';
+import PreviousPageButton from '../../components/PreviousPageButton';
+import handleInputChange from './utils/handleInputChange';
+import { cars, clients, repairs } from '../../utils';
+
 import './EditDetails.css';
-import '../../components/PreviousPageButton.jsx';
-import PreviousPageButton from '../../components/PreviousPageButton.jsx';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function EditDetails() {
   const navigate = useNavigate();
@@ -15,30 +17,68 @@ function EditDetails() {
   const location = useLocation();
   const isNewCar = location.pathname === '/edit-details/add-new-car';
 
+  const allData = [...cars, ...clients, ...repairs];
+
   let selectedCar = null;
+
   if (!isNewCar) {
-    selectedCar = cars.find((car) => car.vinNumber === vinNumber);
+    selectedCar = allData.find((item) =>
+      ['vinNumber', 'id', 'repairID'].some(
+        (key) => key in item && item[key] === vinNumber
+      )
+    );
+
+    if (selectedCar) {
+      const clientData = clients.find(
+        (client) => client.id === selectedCar.vinNumber
+      );
+      const repairData = repairs.find(
+        (repair) => repair.repairID === selectedCar.vinNumber
+      );
+      selectedCar = { ...selectedCar, ...clientData, ...repairData };
+    }
   }
 
   useEffect(() => {
     if (
       !isNewCar &&
-      !cars.some((car) => car.vinNumber === vinNumber)
-    ) {
-      console.log('Redirecting to /not-found');
+      !allData.some((item) => item.vinNumber === vinNumber)
+    )
       navigate('/not-found');
-    }
-  }, [isNewCar, cars, vinNumber, navigate]);
+  }, [isNewCar, allData, vinNumber, navigate]);
 
   const [editedCar, setEditedCar] = useState(
     isNewCar ? {} : selectedCar || {}
   );
-  const [phoneNumberError, setPhoneNumberError] = useState('');
-  const [vinNumberError, setVinNumberError] = useState('');
 
-  const handleSave = () => {
-    console.log('Save clicked', editedCar);
-    // Add logic to save edited car details
+  const handleSave = async () => {
+    try {
+      const url = isNewCar
+        ? '/api/add-new-car'
+        : '/api/update-car-details';
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: selectedCar.id, // Include the ID of the car
+          ...editedCar, // Include the edited car details
+        }),
+      };
+      const response = await fetch(url, requestOptions);
+
+      if (response.ok) {
+        console.log('Car details saved successfully');
+        // Optionally, you can navigate to a different page or show a success message here
+      } else {
+        console.error('Failed to save car details');
+        // Handle error scenario here
+      }
+    } catch (error) {
+      console.error('Error saving car details:', error);
+      // Handle error scenario here
+    }
   };
 
   return (
@@ -47,19 +87,12 @@ function EditDetails() {
       <EditDetailsForm
         selectedCar={selectedCar}
         editedCar={editedCar}
-        phoneNumberError={phoneNumberError}
-        vinNumberError={vinNumberError}
         onChange={(e) =>
-          handleChange(
-            e,
-            editedCar,
-            setEditedCar,
-            setPhoneNumberError,
-            setVinNumberError
-          )
+          handleInputChange(e, editedCar, setEditedCar)
         }
         onSave={handleSave}
-        isNewCar={isNewCar} // Pass isNewCar as prop to indicate if it's a new car
+        isNewCar={isNewCar}
+        allData={allData}
       />
     </div>
   );
