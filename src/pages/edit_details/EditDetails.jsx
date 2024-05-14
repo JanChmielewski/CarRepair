@@ -50,9 +50,35 @@ function EditDetails() {
   const [editedCar, setEditedCar] = useState(
     isNewCar ? {} : selectedCar || {}
   );
-  const handleSave = () => {
-    console.log('Save clicked', editedCar);
-    // Add logic to save edited car details
+
+  const handleSave = async () => {
+    try {
+      const url = isNewCar
+        ? '/api/add-new-car'
+        : '/api/update-car-details';
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: selectedCar.id, // Include the ID of the car
+          ...editedCar, // Include the edited car details
+        }),
+      };
+      const response = await fetch(url, requestOptions);
+
+      if (response.ok) {
+        console.log('Car details saved successfully');
+        // Optionally, you can navigate to a different page or show a success message here
+      } else {
+        console.error('Failed to save car details');
+        // Handle error scenario here
+      }
+    } catch (error) {
+      console.error('Error saving car details:', error);
+      // Handle error scenario here
+    }
   };
 
   return (
