@@ -6,7 +6,7 @@ import inputFields from '../utils/inputFields';
 import { formatDate } from '../utils/formatDate';
 import setError from '../utils/setError';
 
-function EditDetailsForm({ editedCar, onChange, onSave }) {
+function EditDetailsForm({ editedRepair, onChange, onSave }) {
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -21,8 +21,8 @@ function EditDetailsForm({ editedCar, onChange, onSave }) {
     return inputFields.map((field) => {
       const value =
         field.name === 'date'
-          ? formatDate(editedCar[field.name])
-          : editedCar[field.name] || '';
+          ? formatDate(editedRepair[field.name])
+          : editedRepair[field.name] || '';
 
       return (
         <div key={field.name}>
@@ -57,7 +57,7 @@ function EditDetailsForm({ editedCar, onChange, onSave }) {
       let isEmail = field.name === 'email';
       let errorMessage = setError(
         field.label,
-        editedCar[field.name],
+        editedRepair[field.name],
         field.maxLength,
         field.minLength,
         isOnlyDigits,
@@ -66,8 +66,8 @@ function EditDetailsForm({ editedCar, onChange, onSave }) {
       );
       if (
         isEmail &&
-        editedCar[field.name] &&
-        !validateEmail(editedCar[field.name])
+        editedRepair[field.name] &&
+        !validateEmail(editedRepair[field.name])
       ) {
         errorMessage = 'Wprowadź poprawny adres email';
       }

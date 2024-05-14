@@ -4,12 +4,13 @@ import Card from './Card';
 
 function CarList({ searchQuery }) {
   const carClient = (car) =>
-    clients.find((client) => client.id === car.vinNumber);
+    clients.find((client) => client.clientID === car.clientID);
 
   const filteredCars = cars.filter((car) => {
     const client = carClient(car);
     const ownerName = client ? client.ownerName.toLowerCase() : '';
-    const modelName = car.model.toLowerCase();
+    const modelName =
+      car.model.toLowerCase() + car.brand.toLowerCase();
     const query = searchQuery.toLowerCase();
 
     return modelName.includes(query) || ownerName.includes(query);
@@ -19,7 +20,7 @@ function CarList({ searchQuery }) {
     <div className="car-list">
       {filteredCars.map((car) => {
         const carRepairs = repairs.filter(
-          (repair) => repair.repairID === car.vinNumber
+          (repair) => repair.repairID === car.carID // Changed to search by repairID
         );
         const client = carClient(car);
         const deadlineRepair =
@@ -32,10 +33,13 @@ function CarList({ searchQuery }) {
             : null;
 
         return (
-          <li key={car.vinNumber}>
+          <li key={car.carID}>
             <Card
-              vinNumber={car.vinNumber}
+              repairID={
+                carRepairs.length > 0 ? carRepairs[0].repairID : null
+              }
               model={car.model}
+              brand={car.brand}
               owner={client ? client.ownerName : ''}
               date={deadlineRepair ? deadlineRepair.deadlineDate : ''}
               repairs={carRepairs}

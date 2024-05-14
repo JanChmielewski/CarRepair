@@ -13,85 +13,87 @@ import './EditDetails.css';
 
 function EditDetails() {
   const navigate = useNavigate();
-  const { vinNumber } = useParams();
+  const { repairID } = useParams();
   const location = useLocation();
-  const isNewCar = location.pathname === '/edit-details/add-new-car';
+  const isNewRepair =
+    location.pathname === '/edit-details/add-new-car';
 
   const allData = [...cars, ...clients, ...repairs];
 
-  let selectedCar = null;
+  let selectedRepair = null;
 
-  if (!isNewCar) {
-    selectedCar = allData.find((item) =>
-      ['vinNumber', 'id', 'repairID'].some(
-        (key) => key in item && item[key] === vinNumber
-      )
+  if (!isNewRepair) {
+    selectedRepair = repairs.find(
+      (item) => item.repairID === parseInt(repairID)
     );
 
-    if (selectedCar) {
+    if (selectedRepair) {
+      const carData = cars.find(
+        (car) => car.carID === selectedRepair.carID
+      );
       const clientData = clients.find(
-        (client) => client.id === selectedCar.vinNumber
+        (client) => client.clientID === carData.clientID
       );
-      const repairData = repairs.find(
-        (repair) => repair.repairID === selectedCar.vinNumber
-      );
-      selectedCar = { ...selectedCar, ...clientData, ...repairData };
+      selectedRepair = {
+        ...selectedRepair,
+        ...carData,
+        ...clientData,
+      };
     }
   }
 
   useEffect(() => {
     if (
-      !isNewCar &&
-      !allData.some((item) => item.vinNumber === vinNumber)
+      !isNewRepair &&
+      !repairs.some((item) => item.repairID === parseInt(repairID))
     )
       navigate('/not-found');
-  }, [isNewCar, allData, vinNumber, navigate]);
+  }, [isNewRepair, repairs, repairID, navigate]);
 
-  const [editedCar, setEditedCar] = useState(
-    isNewCar ? {} : selectedCar || {}
+  const [editedRepair, setEditedRepair] = useState(
+    isNewRepair ? {} : selectedRepair || {}
   );
 
   const handleSave = async () => {
     try {
-      const url = isNewCar
-        ? '/api/add-new-car'
-        : '/api/update-car-details';
+      const url = isNewRepair
+        ? '/api/add-new-repair'
+        : '/api/update-repair-details';
       const requestOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: selectedCar.id, // Include the ID of the car
-          ...editedCar, // Include the edited car details
+          id: selectedRepair.repairID,
+          ...editedRepair,
         }),
       };
       const response = await fetch(url, requestOptions);
 
       if (response.ok) {
-        console.log('Car details saved successfully');
-        // Optionally, you can navigate to a different page or show a success message here
+        console.log('Repair details saved successfully');
       } else {
-        console.error('Failed to save car details');
-        // Handle error scenario here
+        console.error('Failed to save repair details');
       }
     } catch (error) {
-      console.error('Error saving car details:', error);
-      // Handle error scenario here
+      console.error('Error saving repair details:', error);
     }
   };
 
   return (
     <div>
-      <PreviousPageButton buttonColor="pink" />
+      <div className="buttons">
+        <PreviousPageButton buttonColor="pink" />
+      </div>
       <EditDetailsForm
-        selectedCar={selectedCar}
-        editedCar={editedCar}
+        selectedRepair={selectedRepair}
+        editedRepair={editedRepair}
         onChange={(e) =>
-          handleInputChange(e, editedCar, setEditedCar)
+          handleInputChange(e, editedRepair, setEditedRepair)
         }
         onSave={handleSave}
-        isNewCar={isNewCar}
+        isNewRepair={isNewRepair}
         allData={allData}
       />
     </div>

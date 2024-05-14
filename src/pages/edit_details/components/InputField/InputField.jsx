@@ -1,4 +1,3 @@
-// InputField.jsx
 import React, { useState } from 'react';
 import InputLabel from './InputLabel';
 import Input from './Input';
