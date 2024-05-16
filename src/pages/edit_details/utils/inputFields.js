@@ -14,6 +14,13 @@ const inputFields = [
     required: true,
   },
   {
+    label: 'Silnik',
+    name: 'engine',
+    maxLength: 50,
+    minLength: 1,
+    required: false,
+  },
+  {
     label: 'Właściciel',
     name: 'ownerName',
     maxLength: 40,

@@ -7,12 +7,12 @@ const formatDate = (dateString) => {
   return `${year}-${month}-${day}`;
 };
 
-const RenderInputFields = ({ editedCar, onChange }) => {
+const RenderInputFields = ({ editedRepair, onChange }) => {
   const renderField = (field) => {
     const value =
       field.name === 'date'
-        ? formatDate(editedCar[field.name])
-        : editedCar[field.name] || '';
+        ? formatDate(editedRepair[field.name])
+        : editedRepair[field.name] || '';
 
     return (
       <div key={field.name}>
