@@ -1,4 +1,3 @@
-// Input.jsx
 import React from 'react';
 
 const Input = ({
@@ -9,6 +8,7 @@ const Input = ({
   onBlur,
   className,
   maxLength,
+  minLength,
   placeholder,
 }) => (
   <input
@@ -19,6 +19,7 @@ const Input = ({
     onBlur={onBlur}
     className={className}
     maxLength={maxLength}
+    minLength={minLength}
     placeholder={placeholder}
   />
 );

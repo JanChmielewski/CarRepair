@@ -26,6 +26,8 @@
   font-size: 20px;
 }
 
+/* & ---- VIN and phone number errors ---- */
+/* ? This shows only when inputting an incorrect phone (vin) number (less than 9 (11) digits) so remember that when editing */
 .number-error,
 .vin-error {
   color: red;

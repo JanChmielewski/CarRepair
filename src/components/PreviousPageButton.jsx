@@ -22,7 +22,10 @@ const PreviousPageButton = ({
     buttonColor === 'pink' ? 'pink-icon' : 'black-icon';
 
   return (
-    <button className={`icons-btn ${arrowClassName}`} onClick={goBack}>
+    <button
+      className={`icons-btn ${arrowClassName}`}
+      onClick={goBack}
+    >
       <Icons.GoBack
         className={`icon ${iconClass} ${iconClassName}`}
       />

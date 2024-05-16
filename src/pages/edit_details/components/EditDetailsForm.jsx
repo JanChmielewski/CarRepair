@@ -1,65 +1,96 @@
-import React from 'react';
+// EditDetailsForm.jsx
+import React, { useState } from 'react';
 import InputField from './InputField/InputField';
-import inputFields from '../utils/inputFields';
 import SaveButton from './SaveButton';
+import inputFields from '../utils/inputFields';
+import { formatDate } from '../utils/formatDate';
+import setError from '../utils/setError';
 
-const formatDate = (dateString) => {
-  if (!dateString) return '';
-  const [day, month, year] = dateString.split('-');
-  return `${year}-${month}-${day}`;
-};
+function EditDetailsForm({ editedCar, onChange, onSave }) {
+  const [errors, setErrors] = useState({});
 
-function EditDetailsForm({
-  selectedCar,
-  editedCar,
-  phoneNumberError,
-  vinNumberError,
-  onChange,
-  onSave,
-  isNewCar,
-}) {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const updatedErrors = { ...errors };
+    delete updatedErrors[name];
+    setErrors(updatedErrors);
+    onChange(e);
+  };
+
   const renderInputFields = () => {
-    return inputFields.map((field) => (
-      <div key={field.name}>
-        <InputField
-          label={field.label}
-          name={field.name}
-          value={
-            field.name === 'date'
-              ? formatDate(editedCar[field.name])
-              : editedCar[field.name] || ''
-          }
-          onChange={onChange}
-          type={field.type === 'date' ? 'date' : 'text'}
-          maxLength={field.maxLength}
-        />
-        {field.name === 'vinNumber' && vinNumberError && (
-          <p className="vin-error">{vinNumberError}</p>
-        )}
-        {field.name === 'phoneNumber' && phoneNumberError && (
-          <p className="number-error">{phoneNumberError}</p>
-        )}
-      </div>
-    ));
+    return inputFields.map((field) => {
+      const value =
+        field.name === 'date'
+          ? formatDate(editedCar[field.name])
+          : editedCar[field.name] || '';
+
+      return (
+        <div key={field.name}>
+          <InputField
+            label={field.label}
+            name={field.name}
+            value={value}
+            onChange={handleChange}
+            onBlur={() => {}}
+            type={field.type === 'date' ? 'date' : 'text'}
+            maxLength={field.maxLength}
+            minLength={field.minLength}
+            isRequired={field.required}
+            isOnlyDigits={
+              field.name === 'phone' || field.name === 'mileage'
+            }
+          />
+          {errors[field.name] && (
+            <p className="error-message red">{errors[field.name]}</p>
+          )}{' '}
+          {/* Display error message if exists */}
+        </div>
+      );
+    });
+  };
+
+  const handleSave = () => {
+    const formErrors = {};
+    inputFields.forEach((field) => {
+      let isOnlyDigits =
+        field.name === 'phone' || field.name === 'mileage';
+      let isEmail = field.name === 'email';
+      let errorMessage = setError(
+        field.label,
+        editedCar[field.name],
+        field.maxLength,
+        field.minLength,
+        isOnlyDigits,
+        field.required,
+        isEmail
+      );
+      if (
+        isEmail &&
+        editedCar[field.name] &&
+        !validateEmail(editedCar[field.name])
+      ) {
+        errorMessage = 'Wprowadź poprawny adres email';
+      }
+      if (errorMessage) {
+        formErrors[field.name] = errorMessage;
+      }
+    });
+    setErrors(formErrors);
+
+    if (Object.keys(formErrors).length === 0) {
+      onSave();
+    }
+  };
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(String(email).toLowerCase());
   };
 
   return (
     <div className="details-form">
-      {isNewCar || selectedCar !== null ? (
-        <div className="details-form">
-          {renderInputFields()}
-          <SaveButton onClick={onSave} />
-        </div>
-      ) : (
-        <p className="not-found-message">
-          {!isNewCar && (
-            <>
-              Nie udało się znaleźć samochodu o podanym numerze VIN.
-              Sprawdź poprawność numeru i spróbuj ponownie
-            </>
-          )}
-        </p>
-      )}
+      {renderInputFields()}
+      <SaveButton onClick={handleSave} />
     </div>
   );
 }
