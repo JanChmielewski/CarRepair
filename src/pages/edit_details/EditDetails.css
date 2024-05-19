@@ -1,50 +1,71 @@
-/* !Please delete instructions comments when finished editing */
+.edit-details-container {
+  width: 100vw;
+}
+
+.go-back-arrow {
+  text-align: left;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+}
+
+.go-back-arrow svg {
+  width: 60px;
+  height: 60px;
+}
 
 /* & ---- Input fields ---- */
 
 .details-form {
-  display: flex; /* ^ https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-content: center;
-  gap: 20px;
 }
+
 .details-input {
   height: 30px;
   background-color: #15130e;
   color: #eeeeee;
+  border: #ff0099 solid 1px;
+  border-radius: 8px;
+  padding: 18px;
+  min-width: 200px;
+  margin: 2px 15px;
+  width: 30vw;
+  font-size: 21px;
+  text-align: center;
 }
 
 .details-input-label {
-  font-size: 20px;
+  font-size: 22px;
 }
 
-/* & ---- VIN and phone number errors ---- */
-/* ? This shows only when inputting an incorrect phone (vin) number (less than 9 (11) digits) so remember that when editing */
 .error-message {
   color: red;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* & ---- Save button ---- */
 .save-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #ff0099;
   border: none;
   border-radius: 4px;
-  padding: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
 }
 
 .save-icon {
-  height: 30px !important; /* ? !important overwrites changes that might be set in other CSS files (in this case index.css) */
-}
-
-/* & ---- Page not found error ---- */
-/* ? Shows up when inputting the incorrect VIN number in the permalink, e.g., http://localhost:5173/edit-details/incorrectVIN */
-.not-found-error {
-  color: red;
-  font-weight: bold;
+  height: 30px !important;
 }
 
 /* & ------------------ PHONES AND SMALLER SCREENS ------------------ */
-/* ^ https://www.w3schools.com/cssref/css3_pr_mediaquery.php */
 @media screen and (max-width: 1000px) {
 }
 @media screen and (max-width: 600px) {
