@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 import Icons from '../../../utils/icons';
 
-const Card = ({ repairID, model, owner, date }) => {
+const Card = ({ repairID, brand, model, owner, date }) => {
   const navigate = useNavigate();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -24,7 +24,7 @@ const Card = ({ repairID, model, owner, date }) => {
       <ul className="car-data">
         <li onClick={handleCardClick}>
           <Icons.Car className="icon pink-icon data-icon" />
-          {model}
+          {brand} {model}
         </li>
         <li>
           <Icons.Owner className="icon pink-icon data-icon" />

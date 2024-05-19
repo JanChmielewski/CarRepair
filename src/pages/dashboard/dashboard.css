@@ -63,6 +63,7 @@ nav {
 
 .card:hover {
   cursor: pointer;
+  background-color: #252525;
 }
 
 .car-data {
