@@ -84,7 +84,10 @@ function EditDetails() {
   return (
     <div>
       <div className="buttons">
-        <PreviousPageButton buttonColor="pink" />
+        <PreviousPageButton
+          buttonColor="pink"
+          arrowClassName="go-back-arrow"
+        />
       </div>
       <EditDetailsForm
         selectedRepair={selectedRepair}

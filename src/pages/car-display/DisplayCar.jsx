@@ -19,14 +19,12 @@ function DisplayCar() {
     return <div>Repair not found for id: {repairID}</div>;
   }
 
-  // Find the car associated with the repair
   const car = cars.find((car) => car.carID === repair.carID);
 
   if (!car) {
     return <div>Car not found for repair ID: {repairID}</div>;
   }
 
-  // Find the client associated with the car
   const client = clients.find(
     (client) => client.clientID === car.clientID
   );
