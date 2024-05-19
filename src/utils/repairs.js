@@ -32,7 +32,7 @@ const repairs = [
   {
     repairID: 4,
     dateOfArrival: '11-05-2024',
-    deadlineDate: '24-05-2024',
+    deadlineDate: '22-05-2024',
     carID: 4,
     mechanicInfo: 'Replaced worn-out tires',
     clientInfo: 'Tires losing traction in wet conditions',

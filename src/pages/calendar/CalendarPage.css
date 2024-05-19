@@ -1,0 +1,110 @@
+/* CalendarPage.css */
+.calendar-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.react-calendar {
+  width: 85vw;
+  margin: auto;
+  background-color: #111111;
+  border-radius: 10px;
+  border: 2px solid #ff0099;
+  font-family: 'Josefin Sans';
+  padding: 10px;
+}
+.react-calendar__navigation {
+  padding: 10px;
+  height: 100%;
+}
+.react-calendar__navigation button {
+  color: #ff0099;
+  background: none;
+  font-size: 30px;
+  margin-top: 8px;
+  font-family: 'Josefin Sans';
+  padding: 10px;
+  transition: color 0.25s, background-color 0.25s, border-radius 0.25s;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  color: #000000;
+  background-color: #ff0099;
+  border-radius: 10px;
+}
+
+.react-calendar__month-view__days__day {
+  color: #f6f6f6;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 15px;
+  transition: color 0.25s, background-color 0.25s, border-radius 0.25s;
+}
+
+.react-calendar__tile,
+.react-calendar__tile {
+  border-radius: 10px;
+  transition: background-color 0.25s, color 0.25s, border-radius 0.25s;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: #151515;
+}
+
+.react-calendar__tile--active {
+  font-weight: bold;
+  color: #ff0099;
+}
+
+.calendar {
+  background-color: #171717;
+  color: #202020;
+  margin-bottom: 20px;
+}
+
+.popup {
+  background-color: #171717;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.repair-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.repair-data {
+  margin-bottom: 10px;
+}
+
+.repair-data:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: #888;
+}
+
+.repair-count {
+  color: #ff0099;
+  font-size: 20px;
+  font-weight: normal;
+  transition: color 0.25s;
+}
+
+.grey-text {
+  color: #414141;
+}
+
+.pink-text {
+  color: #ff0099;
+  font-weight: bold;
+}
+
+/* Adding animation to repair count */
+.grey-text:hover,
+.pink-text:hover {
+  color: #ff0099;
+}
