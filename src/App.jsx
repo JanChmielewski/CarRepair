@@ -9,7 +9,7 @@ import Login from './pages/login/Login.jsx';
 import Dashboard from './pages/dashboard/Dashboard.jsx';
 import EditDetails from './pages/edit_details/EditDetails.jsx';
 import NotFound from './pages/not_found/NotFound.jsx';
-import Calendar from './pages/calendar/Calendar.jsx';
+import CalendarPage from './pages/calendar/CalendarPage.jsx';
 import DisplayCar from './pages/car-display/DisplayCar.jsx';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/not-found" />} />
-        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/calendar" element={<CalendarPage />} />
       </Routes>
     </Router>
   );

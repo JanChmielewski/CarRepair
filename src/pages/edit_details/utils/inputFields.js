@@ -67,7 +67,6 @@ const inputFields = [
     required: false,
   },
   { label: 'Przebieg', name: 'mileage', required: false },
-  { label: 'Status naprawy', name: 'repairStatus', required: true },
   {
     label: 'Data przyjęcia',
     name: 'dateOfArrival',

@@ -65,7 +65,7 @@ function EditDetails() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: selectedRepair.repairID,
+          id: selectedRepair?.repairID,
           ...editedRepair,
         }),
       };
@@ -84,7 +84,10 @@ function EditDetails() {
   return (
     <div>
       <div className="buttons">
-        <PreviousPageButton buttonColor="pink" />
+        <PreviousPageButton
+          buttonColor="pink"
+          arrowClassName="go-back-arrow"
+        />
       </div>
       <EditDetailsForm
         selectedRepair={selectedRepair}

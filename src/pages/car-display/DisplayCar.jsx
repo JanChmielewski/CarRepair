@@ -4,6 +4,7 @@ import PreviousPageButton from '../../components/PreviousPageButton';
 import { useParams } from 'react-router-dom';
 import Icons from '../../utils/icons';
 import { useNavigate } from 'react-router-dom';
+import './DisplayCar.css';
 
 function DisplayCar() {
   const navigate = useNavigate();
@@ -18,14 +19,12 @@ function DisplayCar() {
     return <div>Repair not found for id: {repairID}</div>;
   }
 
-  // Find the car associated with the repair
   const car = cars.find((car) => car.carID === repair.carID);
 
   if (!car) {
     return <div>Car not found for repair ID: {repairID}</div>;
   }
 
-  // Find the client associated with the car
   const client = clients.find(
     (client) => client.clientID === car.clientID
   );
@@ -47,24 +46,55 @@ function DisplayCar() {
           onClick={handleEditButton}
         >
           <Icons.Edit className="icon black-icon" />
+          Edit
         </button>
       </div>
       <h2 className="car-title">
         {car.brand} {car.model}
       </h2>
       <ul className="car-info-list">
-        <li>Number VIN: {car.vinNumber}</li>
-        <li>Number rejestracyjny: {car.registrationNumber}</li>
-        <li>Data produkcji: {car.productionDate}</li>
-        <li>Przebieg: {car.mileage}</li>
-        <li>Silnik: {car.engine}</li>
+        <li>
+          <span className="label">Number VIN:</span> {car.vinNumber}
+        </li>
+        <li>
+          <span className="label">Number rejestracyjny:</span>{' '}
+          {car.registrationNumber}
+        </li>
+        <li>
+          <span className="label">Data produkcji:</span>{' '}
+          {car.productionDate}
+        </li>
+        <li>
+          <span className="label">Przebieg:</span> {car.mileage}
+        </li>
+        <li>
+          <span className="label">Silnik:</span> {car.engine}
+        </li>
         <br />
-        <li>Właściciel: {client.ownerName}</li>
-        <li>Data przyjęcia: {repair.dateOfArrival}</li>
-        <li>Data wydania: {repair.deadlineDate}</li>
-        <li>Informacje od klienta: {repair.clientInfo}</li>
-        <li>Stan naprawy: {repair.repairStatus}</li>
-        <li>Naprawiane przez: {repair.repairedBy}</li>
+        <li>
+          <span className="label">Właściciel:</span>{' '}
+          {client.ownerName}
+        </li>
+        <li>
+          <span className="label">Data przyjęcia:</span>{' '}
+          {repair.dateOfArrival}
+        </li>
+        <li>
+          <span className="label">Data wydania:</span>{' '}
+          {repair.deadlineDate}
+        </li>
+        <li>
+          <span className="label">Informacje od klienta:</span>{' '}
+          {repair.clientInfo}
+        </li>
+        <li>
+          <span className="label">Stan naprawy:</span>{' '}
+          {repair.repairStatus}
+        </li>
+        <li>
+          <span className="label">Naprawiane przez:</span>{' '}
+          {repair.repairedBy}
+        </li>
       </ul>
     </div>
   );

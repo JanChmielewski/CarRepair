@@ -20,7 +20,7 @@ function CarList({ searchQuery }) {
     <div className="car-list">
       {filteredCars.map((car) => {
         const carRepairs = repairs.filter(
-          (repair) => repair.repairID === car.carID // Changed to search by repairID
+          (repair) => repair.repairID === car.carID
         );
         const client = carClient(car);
         const deadlineRepair =

@@ -1,12 +1,11 @@
-// setError.js
-
 const setError = (
   label,
   value,
   maxLength,
   minLength,
   isOnlyDigits,
-  isRequired
+  isRequired,
+  isEmail
 ) => {
   if (isRequired && !value.trim()) {
     return `Pole ${label} nie może być puste`;
@@ -26,6 +25,10 @@ const setError = (
 
   if (maxLength && value.length > maxLength) {
     return `${label} może mieć maksymalnie ${maxLength} znaków`;
+  }
+
+  if (isEmail && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    return `Wprowadź poprawny adres email`;
   }
 
   return null;

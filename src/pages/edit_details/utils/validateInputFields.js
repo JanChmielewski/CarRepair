@@ -1,13 +1,5 @@
 import setError from './setError';
 
-const handleInputChange = (e, editedCar, setEditedCar) => {
-  const { name, value } = e.target;
-
-  setEditedCar((prevCar) => ({ ...prevCar, [name]: value }));
-};
-
-export default handleInputChange;
-
 export const validateInputFields = (
   inputFields,
   editedRepairState
@@ -16,7 +8,7 @@ export const validateInputFields = (
 
   inputFields.forEach((field) => {
     const { name } = field;
-    const value = editedRepairState[name];
+    const value = editedRepairState[name]; // Use editedRepairState
     const isOnlyDigits = name === 'phone' || name === 'mileage';
     const isEmail = name === 'email';
     const errorMessage = setError(
