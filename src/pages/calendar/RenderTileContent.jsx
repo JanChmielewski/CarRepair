@@ -1,7 +1,7 @@
 import React from 'react';
 import { countRepairsForDate } from './utils';
 
-const RenderTileContent = ({ repairs, date }) => {
+const RenderTileContent = ({ repairs, date, onClickRepair }) => {
   const repairCount = countRepairsForDate(repairs, date);
   let repairString = 'napraw';
 
@@ -13,11 +13,16 @@ const RenderTileContent = ({ repairs, date }) => {
     repairString = 'naprawy';
   }
 
+  const handleClick = () => {
+    onClickRepair();
+  };
+
   return (
     <p
       className={`repair-count ${
         repairCount === 0 ? 'grey-text' : 'pink-text'
       }`}
+      onClick={handleClick}
     >
       {repairCount} {repairString}
     </p>
