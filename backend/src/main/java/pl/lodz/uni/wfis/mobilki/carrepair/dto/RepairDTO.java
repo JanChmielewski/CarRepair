@@ -1,5 +1,5 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.dto;
-import pl.lodz.uni.wfis.mobilki.carrepair.RepairStatus
+import pl.lodz.uni.wfis.mobilki.carrepair.model.RepairStatus
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
