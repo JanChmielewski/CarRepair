@@ -24,7 +24,7 @@ const clients = [
     email: 'emily.davis@example.com',
   },
   {
-    id: 5,
+    clientID: 5,
     ownerName: 'David Brown',
     phone: '5555557890',
     email: 'david.brown@example.com',

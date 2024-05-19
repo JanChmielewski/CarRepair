@@ -1,4 +1,3 @@
-/* CalendarPage.css */
 .calendar-page {
   display: flex;
   flex-direction: column;
@@ -37,6 +36,12 @@
   border-radius: 10px;
 }
 
+.react-calendar__month-view__weekdays__weekday {
+  color: #ff0099;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
 .react-calendar__month-view__days__day {
   color: #f6f6f6;
   font-size: 30px;
@@ -45,7 +50,6 @@
   transition: color 0.25s, background-color 0.25s, border-radius 0.25s;
 }
 
-.react-calendar__tile,
 .react-calendar__tile {
   border-radius: 10px;
   transition: background-color 0.25s, color 0.25s, border-radius 0.25s;
@@ -56,9 +60,22 @@
   background: #151515;
 }
 
-.react-calendar__tile--active {
-  font-weight: bold;
+.react-calendar__tile--now {
+  background: none;
+  outline: 1px solid #ff0099 !important;
   color: #ff0099;
+  font-weight: bold;
+}
+
+.react-calendar__tile--active {
+  .pink-text {
+    color: #7d004b;
+  }
+  .grey-text {
+    color: #7d004b;
+  }
+  background: none;
+  outline: 1px solid #7d004b !important;
 }
 
 .calendar {
@@ -67,71 +84,36 @@
   margin-bottom: 20px;
 }
 
-.popup {
-  background-color: #171717;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.repair-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.repair-data {
-  margin-bottom: 10px;
-}
-
-.repair-data:hover {
-  cursor: pointer;
-  text-decoration: none;
-  color: #888;
-}
-
-.repair-count {
-  color: #ff0099;
-  font-size: 20px;
-  font-weight: normal;
-  transition: color 0.25s;
-}
-
-.grey-text {
-  color: #414141;
-}
-
-.pink-text {
-  color: #ff0099;
-  font-weight: bold;
-}
-
-/* Adding animation to repair count */
-.grey-text:hover,
-.pink-text:hover {
-  color: #ff0099;
-}
-
 .popup-background {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Darken background */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .popup {
-  background-color: #171717;
-  color: #fff;
+  background-color: #131313;
+  color: #e9e9e9;
   padding: 20px;
   border-radius: 10px;
   width: 70%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
   font-size: 23px;
+  text-align: center;
+  border: 1px solid #ff0099;
+}
+
+.popup h3 {
+  font-size: 30px;
+  color: #ff0099;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px #000000;
 }
 
 .close-btn {
@@ -141,11 +123,12 @@
   background: none;
   border: none;
   color: #fff;
-  font-size: 20px;
+  font-size: 35px;
   cursor: pointer;
+  transition: color 0.15s;
 }
 
-.close-button:hover {
+.close-btn:hover {
   color: #ff0099;
 }
 
@@ -168,7 +151,6 @@
   color: #ff0099;
   font-size: 20px;
   font-weight: normal;
-  transition: color 0.25s;
 }
 
 .grey-text {

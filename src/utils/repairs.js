@@ -47,7 +47,7 @@ const repairs = [
     mechanicInfo: 'Repaired power window mechanism',
     clientInfo: 'Driver-side window not functioning properly',
     repairStatus: 'completed',
-    repairedBy: 'David Brown',
+    repairedBy: 'David',
   },
   {
     repairID: 6,

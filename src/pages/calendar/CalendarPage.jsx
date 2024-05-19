@@ -5,10 +5,9 @@ import RepairPopup from './RepairPopup';
 import { repairs, cars, clients } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { getCarInfo, formatDate, countRepairsForDate } from './utils';
-
+import PreviousPageButton from '../../components/PreviousPageButton';
 import 'react-calendar/dist/Calendar.css';
 import './CalendarPage.css';
-import PreviousPageButton from '../../components/PreviousPageButton';
 
 const CalendarPage = () => {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const CalendarPage = () => {
       (repair) => repair.deadlineDate === formattedDate
     );
     setSelectedRepairs(filteredRepairs);
-    setIsPopupOpen(filteredRepairs.length > 0); // Open the popup if there are repairs on the selected date
+    setIsPopupOpen(filteredRepairs.length > 0);
   };
 
   const handleOpenPopup = () => {
@@ -42,6 +41,7 @@ const CalendarPage = () => {
         <Calendar
           onChange={handleDateChange}
           value={selectedDate}
+          locale="pl-PL"
           tileContent={({ date }) => (
             <RenderTileContent
               repairs={repairs}
