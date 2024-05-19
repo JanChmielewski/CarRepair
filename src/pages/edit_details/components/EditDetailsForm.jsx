@@ -1,28 +1,55 @@
-// EditDetailsForm.jsx
 import React, { useState } from 'react';
 import InputField from './InputField/InputField';
 import SaveButton from './SaveButton';
 import inputFields from '../utils/inputFields';
 import { formatDate } from '../utils/formatDate';
-import setError from '../utils/setError';
+import { validateInputFields } from '../utils/handleInputChange';
 
-function EditDetailsForm({ editedRepair, onChange, onSave }) {
+function EditDetailsForm({
+  editedRepair,
+  onChange,
+  onSave,
+  isNewRepair,
+}) {
   const [errors, setErrors] = useState({});
+
+  const defaultValues = inputFields.reduce((acc, field) => {
+    acc[field.name] = field.defaultValue || '';
+    return acc;
+  }, {});
+
+  const [editedRepairState, setEditedRepairState] = useState(
+    isNewRepair ? defaultValues : editedRepair
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const updatedErrors = { ...errors };
-    delete updatedErrors[name];
-    setErrors(updatedErrors);
+    setEditedRepairState((prevEditedRepair) => ({
+      ...prevEditedRepair,
+      [name]: value,
+    }));
     onChange(e);
+  };
+
+  const handleSave = () => {
+    const formErrors = validateInputFields(
+      inputFields,
+      editedRepairState
+    );
+    setErrors(formErrors);
+    const isValid = Object.keys(formErrors).length === 0;
+
+    if (isValid) {
+      onSave();
+    }
   };
 
   const renderInputFields = () => {
     return inputFields.map((field) => {
       const value =
         field.name === 'date'
-          ? formatDate(editedRepair[field.name])
-          : editedRepair[field.name] || '';
+          ? formatDate(editedRepairState[field.name])
+          : editedRepairState[field.name] || '';
 
       return (
         <div key={field.name}>
@@ -31,7 +58,6 @@ function EditDetailsForm({ editedRepair, onChange, onSave }) {
             name={field.name}
             value={value}
             onChange={handleChange}
-            onBlur={() => {}}
             type={field.type === 'date' ? 'date' : 'text'}
             maxLength={field.maxLength}
             minLength={field.minLength}
@@ -42,49 +68,10 @@ function EditDetailsForm({ editedRepair, onChange, onSave }) {
           />
           {errors[field.name] && (
             <p className="error-message red">{errors[field.name]}</p>
-          )}{' '}
-          {/* Display error message if exists */}
+          )}
         </div>
       );
     });
-  };
-
-  const handleSave = () => {
-    const formErrors = {};
-    inputFields.forEach((field) => {
-      let isOnlyDigits =
-        field.name === 'phone' || field.name === 'mileage';
-      let isEmail = field.name === 'email';
-      let errorMessage = setError(
-        field.label,
-        editedRepair[field.name],
-        field.maxLength,
-        field.minLength,
-        isOnlyDigits,
-        field.required,
-        isEmail
-      );
-      if (
-        isEmail &&
-        editedRepair[field.name] &&
-        !validateEmail(editedRepair[field.name])
-      ) {
-        errorMessage = 'Wprowadź poprawny adres email';
-      }
-      if (errorMessage) {
-        formErrors[field.name] = errorMessage;
-      }
-    });
-    setErrors(formErrors);
-
-    if (Object.keys(formErrors).length === 0) {
-      onSave();
-    }
-  };
-
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(String(email).toLowerCase());
   };
 
   return (

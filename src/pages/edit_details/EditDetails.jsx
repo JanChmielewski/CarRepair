@@ -65,7 +65,7 @@ function EditDetails() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: selectedRepair.repairID,
+          id: selectedRepair?.repairID,
           ...editedRepair,
         }),
       };
