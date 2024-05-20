@@ -14,7 +14,7 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long carId;
 
     @Column
     private String brand;
@@ -36,4 +36,12 @@ public class Car {
 
     @Column
     private String engine;
+
+    @Enumerated(EnumType.STRING)
+    private CarStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "clientId")
+    private Client client;
+
 }

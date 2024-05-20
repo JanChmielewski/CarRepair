@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Car;
 
+import java.util.Optional;
+
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
-    // TODO: implement when needed
+    Optional<Car> findByStatus(String status);
 }

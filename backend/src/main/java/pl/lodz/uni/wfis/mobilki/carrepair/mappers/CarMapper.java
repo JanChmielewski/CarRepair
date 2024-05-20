@@ -7,10 +7,19 @@ import pl.lodz.uni.wfis.mobilki.carrepair.model.Car;
 @Component
 public class CarMapper {
 
-    private CarService carService; // TODO: implement this class
+//    private CarService carService; // TODO: implement this class
 
     public CarDTO toDTO(Car car) {
-        return new CarDTO(car.getId(), car.getBrand(), car.getModel(), car.getYear(), car.getVin(), car.getRegistrationNumber(), car.getOwner());
+        return new CarDTO(
+                car.getId(),
+                car.getBrand(),
+                car.getModel(),
+                car.getYearOfProduction(),
+                car.getRegistrationNumber(),
+                car.getVin(),
+                car.getMileage(),
+                car.getEngine()
+        );
     }
 
     public Car toEntity(CarDTO carDTO) {

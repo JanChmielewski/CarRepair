@@ -46,7 +46,7 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request) {
-        System.out.println("Recived login request with worker code: " + loginRequest.getWorkerCode() + " and password: " + loginRequest.getPassword());
+        System.out.println("Received login request with worker code: " + loginRequest.getWorkerCode() + " and password: " + loginRequest.getPassword());
         Authentication authentication = customAuthenticationProvider.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getWorkerCode(),

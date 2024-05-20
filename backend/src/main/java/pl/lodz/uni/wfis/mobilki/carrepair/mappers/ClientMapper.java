@@ -7,7 +7,7 @@ import pl.lodz.uni.wfis.mobilki.carrepair.model.Client;
 @Component
 public class ClientMapper {
 
-    private ClientService clientService; // TODO: Implement this class
+//    private ClientService clientService; // TODO: Implement this class
 
     public ClientDTO toDTO(Client client) {
         return new ClientDTO(client.getId(), client.getName(), client.getSurname(), client.getEmail(), client.getPhoneNumber());

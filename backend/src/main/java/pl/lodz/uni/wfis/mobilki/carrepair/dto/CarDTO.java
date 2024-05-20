@@ -9,12 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarDTO {
 
-        private Long id;
-        private String brand;
-        private String model;
-        private int yearOfProduction;
-        private String registrationNumber;
-        private String vin;
-        private String mileage;
-        private String engine;
+    private Long id;
+    private String brand;
+    private String model;
+    private int yearOfProduction;
+    private String registrationNumber;
+    private String vin;
+    private String mileage;
+    private String engine;
+    private String status;
+
+    // Client information
+    private Long clientId;
+    private String clientName;
+    private String clientSurname;
+    private String clientEmail;
+    private String clientPhoneNumber;
 }
