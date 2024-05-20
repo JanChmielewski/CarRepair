@@ -1,0 +1,33 @@
+/* Icon button styles */
+.icons-btn {
+  background: none;
+  border: none;
+}
+
+.icons-btn:hover,
+.icons-btn:focus {
+  .pink-icon {
+    fill: var(--primary-color-hover);
+  }
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.pink-icon {
+  fill: var(--primary-color);
+}
+
+.black-icon {
+  fill: #000000;
+}
+
+/* Responsive adjustments for icons */
+@media screen and (max-width: 600px) {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+}

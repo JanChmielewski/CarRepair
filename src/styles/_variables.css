@@ -1,0 +1,12 @@
+:root {
+  /* Color Variables */
+  --primary-color: #ff0099;
+  --secondary-color: #151515;
+  --primary-color-hover: #7d004b;
+  --secondary-color-hover: #151515;
+  --text-color: #efefef;
+  --background-color: #101010;
+
+  /* Font Variables */
+  --primary-font: 'Josefin Sans', sans-serif;
+}
