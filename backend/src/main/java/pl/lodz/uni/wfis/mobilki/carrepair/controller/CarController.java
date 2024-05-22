@@ -1,16 +1,14 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.CarDTO;
-import pl.lodz.uni.wfis.mobilki.carrepair.mappers.CarMapper;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Car;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Client;
 import pl.lodz.uni.wfis.mobilki.carrepair.service.CarService;
 import pl.lodz.uni.wfis.mobilki.carrepair.service.ClientService;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,38 +18,55 @@ public class CarController {
     private final CarService carService;
     private final ClientService clientService;
 
-
-    public CarController(CarService carService, ClientService clientService, CarMapper carMapper) {
+    public CarController(CarService carService, ClientService clientService) {
         this.carService = carService;
         this.clientService = clientService;
     }
 
-    @PostMapping("/addCarForRepair")
-    public Car addCarForRepair(CarDTO carDTO) {
-        Client client = new Client(
-                carDTO.getClientId(),
-                carDTO.getClientName(),
-                carDTO.getClientSurname(),
-                carDTO.getClientEmail(),
-                carDTO.getClientPhoneNumber()
-        );
+    /* TODO: Think about separating adding the client to the DB
+     *  from adding the car to the DB an f.e choose the client from the list
+     */
 
-        /* TODO: Think about separating adding the client to the DB
-                *  from adding the car to the DB an f.e choose the client from the list
-         */
-        return carService.addCarForRepair(carDTO, client);
+    @PostMapping("/addCarForRepair/{clientId}")
+    public ResponseEntity<?> addCarForRepair(@PathVariable Long clientId, @RequestBody CarDTO carDTO) {
+        Client client = clientService.getOwnerOfCar(clientId).orElse(null);
+
+        if (client == null) {
+            return ResponseEntity.badRequest().body("Client not found");
+        }
+
+        Car carToAdd = carService.addCarForRepair(carDTO, client);
+
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("message: ", "Car with id: " + carToAdd.getId()
+                + " and which belongs to Client with id: " + client.getClientId()
+                + " added to the database");
+        response.put("carID", carToAdd);
+
+
+        return ResponseEntity.ok(response);
     }
 
+    // TODO: Implement when needed
+//    @GetMapping("/carsForDashboard")
+//    public Map<List<Car>, List<Client>> getCarsForDashboard() {
+//        List<Car> carsForDashboard = carService.getCarsInRepair();
+//        List<Client> clientsForDashboard = clientService.getClientsForDashboard();
+//
+//        for (Car car : carsForDashboard) {
+//            car.
+//        }
+//        return new HashMap<>(Map.of(carsForDashboard, clientsForDashboard));
+//    }
 
-    @GetMapping("/carsForDashboard")
-    public Map<List<Car>, List<Client>> getCarsForDashboard() {
-        List<Car> carsForDashboard = carService.getCarsInRepair();
-        List<Client> clientsForDashboard = clientService.getClientsForDashboard();
+    @GetMapping("/cars")
+    public ResponseEntity<?> getCars() {
+        List<Car> cars = carService.getExistingCars();
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("message: ", "List of cars retrieved successfully");
+        response.put("cars", cars);
 
-        for (Car car : carsForDashboard) {
-            car.
-        }
-        return new HashMap<>(Map.of(carsForDashboard, clientsForDashboard));
+        return ResponseEntity.ok(response);
     }
 
 

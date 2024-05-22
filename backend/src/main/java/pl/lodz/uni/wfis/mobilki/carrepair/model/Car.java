@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
@@ -12,9 +13,10 @@ import lombok.NoArgsConstructor;
 @Entity(name = "car")
 public class Car {
 
+    @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long carId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column
     private String brand;
@@ -40,8 +42,20 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "clientId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
     private Client client;
 
+    public Car(String brand, String model, int yearOfProduction, String registrationNumber,
+               String vin, String mileage, String engine, CarStatus status, Client client) {
+        this.brand = brand;
+        this.model = model;
+        this.yearOfProduction = yearOfProduction;
+        this.registrationNumber = registrationNumber;
+        this.vin = vin;
+        this.mileage = mileage;
+        this.engine = engine;
+        this.status = status;
+        this.client = client;
+    }
 }

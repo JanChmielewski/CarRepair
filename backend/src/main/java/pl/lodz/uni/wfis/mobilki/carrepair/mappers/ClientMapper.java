@@ -3,19 +3,20 @@ package pl.lodz.uni.wfis.mobilki.carrepair.mappers;
 import org.springframework.stereotype.Component;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.ClientDTO;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Client;
+import pl.lodz.uni.wfis.mobilki.carrepair.service.ClientService;
 
 @Component
 public class ClientMapper {
 
-//    private ClientService clientService; // TODO: Implement this class
+    private ClientService clientService;
 
     public ClientDTO toDTO(Client client) {
-        return new ClientDTO(client.getId(), client.getName(), client.getSurname(), client.getEmail(), client.getPhoneNumber());
+        return new ClientDTO(client.getClientId(), client.getName(), client.getSurname(), client.getEmail(), client.getPhoneNumber());
     }
 
     public Client toEntity(ClientDTO clientDTO) {
         Client client = new Client();
-        client.setId(clientDTO.getId());
+        client.setClientId(clientDTO.getId());
         client.setName(clientDTO.getName());
         client.setSurname(clientDTO.getSurname());
         client.setEmail(clientDTO.getEmail());

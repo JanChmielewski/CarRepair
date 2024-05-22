@@ -1,16 +1,22 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.ClientDTO;
+import pl.lodz.uni.wfis.mobilki.carrepair.model.Client;
 import pl.lodz.uni.wfis.mobilki.carrepair.service.ClientService;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ClientController {
 
-    private ClientService clientService;
+    private final ClientService clientService;
 
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
@@ -23,5 +29,14 @@ public class ClientController {
         }
         clientService.addClient(clientToAdd);
         return ResponseEntity.ok("Client added to the database");
+    }
+
+    @GetMapping("/clients")
+    public ResponseEntity<?> getClients() {
+        List<Client> clients = clientService.getExistingClients();
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("message: ", "List of clients retrieved successfully");
+        response.put("clients", clients);
+        return ResponseEntity.ok(response);
     }
 }

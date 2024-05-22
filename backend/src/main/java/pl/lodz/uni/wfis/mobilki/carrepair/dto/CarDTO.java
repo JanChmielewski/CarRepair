@@ -3,13 +3,13 @@ package pl.lodz.uni.wfis.mobilki.carrepair.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.lodz.uni.wfis.mobilki.carrepair.model.CarStatus;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarDTO {
 
-    private Long id;
     private String brand;
     private String model;
     private int yearOfProduction;
@@ -17,12 +17,5 @@ public class CarDTO {
     private String vin;
     private String mileage;
     private String engine;
-    private String status;
-
-    // Client information
-    private Long clientId;
-    private String clientName;
-    private String clientSurname;
-    private String clientEmail;
-    private String clientPhoneNumber;
+    private CarStatus status;
 }

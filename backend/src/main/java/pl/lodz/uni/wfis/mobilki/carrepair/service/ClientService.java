@@ -6,6 +6,7 @@ import pl.lodz.uni.wfis.mobilki.carrepair.model.Client;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.ClientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -30,4 +31,11 @@ public class ClientService {
         clientRepository.save(client);
     }
 
+    public List<Client> getExistingClients() {
+        return clientRepository.findAll();
+    }
+
+    public Optional<Client> getOwnerOfCar(Long clientId) {
+        return clientRepository.findById(clientId);
+    }
 }

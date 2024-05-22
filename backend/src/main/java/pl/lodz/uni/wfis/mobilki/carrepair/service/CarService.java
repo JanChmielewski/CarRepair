@@ -28,7 +28,6 @@ public class CarService {
 
     public Car addCarForRepair(CarDTO carDTO, Client client) {
         Car car = new Car(
-                carDTO.getId(),
                 carDTO.getBrand(),
                 carDTO.getModel(),
                 carDTO.getYearOfProduction(),
@@ -41,6 +40,10 @@ public class CarService {
         );
 
         return carRepository.save(car);
+    }
+
+    public List<Car> getExistingCars() {
+        return carRepository.findAll();
     }
 
     // TODO : Implement when needed
