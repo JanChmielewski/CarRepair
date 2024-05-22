@@ -21,8 +21,10 @@ public class CarService {
 
     public List<Car> getCarsInRepair() {
         List<Car> carsForDashboard = new ArrayList<>();
-        carRepository.findByStatus("IN_REPAIR").ifPresent(carsForDashboard::add);
-        carRepository.findByStatus("READY_TO_PICK_UP").ifPresent(carsForDashboard::add);
+        carRepository.findByStatus(CarStatus.IN_REPAIR).ifPresent(carsForDashboard::add);
+        carRepository.findByStatus(CarStatus.WAITING_FOR_DIAGNOSIS).ifPresent(carsForDashboard::add);
+        carRepository.findByStatus(CarStatus.READY_TO_PICK_UP).ifPresent(carsForDashboard::add);
+        carRepository.findByStatus(CarStatus.WAITING_FOR_PARTS).ifPresent(carsForDashboard::add);
         return carsForDashboard;
     }
 
@@ -44,6 +46,10 @@ public class CarService {
 
     public List<Car> getExistingCars() {
         return carRepository.findAll();
+    }
+
+    public void deleteAllCars() {
+        carRepository.deleteAll();
     }
 
     // TODO : Implement when needed

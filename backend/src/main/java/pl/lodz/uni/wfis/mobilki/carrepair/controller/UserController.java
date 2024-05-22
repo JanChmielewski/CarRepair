@@ -67,6 +67,11 @@ public class UserController {
         return ResponseEntity.ok("Logged in!");
     }
 
+    @GetMapping("users")
+    public ResponseEntity<?> getUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
     @GetMapping("/test")
     public String test(Authentication authentication) {
         System.out.println(authentication);

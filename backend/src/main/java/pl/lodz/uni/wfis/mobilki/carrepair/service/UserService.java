@@ -8,6 +8,7 @@ import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.UserRepository;
 import pl.lodz.uni.wfis.mobilki.carrepair.request.RegistrationRequest;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -49,5 +50,9 @@ public class UserService {
         } catch (Exception e) {
             throw new RegistrationException("Error occurred while registering user");
         }
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

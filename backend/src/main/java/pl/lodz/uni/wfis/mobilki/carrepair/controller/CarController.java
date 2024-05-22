@@ -69,6 +69,11 @@ public class CarController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/deleteAllCars")
+    public ResponseEntity<?> deleteAllCars() {
+        carService.deleteAllCars();
+        return ResponseEntity.ok("All cars deleted successfully");
+    }
 
 
 }
