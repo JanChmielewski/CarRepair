@@ -1,3 +1,5 @@
+# Components
+
 ## `/login`
 
 `Login`: A component that renders the login form. It uses the `useInput` hook for input state and validation, and `handleSubmit` for form submission.

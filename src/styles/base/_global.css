@@ -1,4 +1,8 @@
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -14,7 +18,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(../../src/images/login-page-bg-blurred-1920.jpg);
+  background: url('/images/login-page-bg-blurred-1920.jpg');
   background-size: cover;
 }
 
