@@ -1,0 +1,66 @@
+/* Define CSS variables */
+:root {
+  --button-width: 15rem;
+  --button-padding: 0.5rem 1rem;
+  --button-font-size: 1rem;
+  --button-font-weight: 800;
+  --button-text-transform: uppercase;
+  --button-border-radius: 8px;
+  --button-bg-color: var(--primary-color);
+  --button-text-color: #000000;
+  --button-hover-bg-color: var(--primary-color-hover);
+  --flex-center: display: flex; justify-content: center; align-items: center;
+  --flex-column: display: flex; flex-direction: column;
+  --flex-row: display: flex; flex-direction: row;
+  --box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  --transition: all 0.25s ease-in-out;
+  --border-radius: 8px;
+}
+
+/* Utility classes */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.box-shadow {
+  box-shadow: var(--box-shadow);
+}
+
+.border-radius {
+  border-radius: var(--border-radius);
+}
+
+.transition {
+  transition: var(--transition);
+}
+
+.button-base {
+  width: var(--button-width);
+  padding: var(--button-padding);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  text-transform: var(--button-text-transform);
+  border-radius: var(--button-border-radius);
+  border: none;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  align-self: center;
+}
+
+.button-base:hover,
+.button-base:focus {
+  background-color: var(--button-hover-bg-color);
+}
