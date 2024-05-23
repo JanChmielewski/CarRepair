@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   useParams,
   useLocation,
   useNavigate,
 } from 'react-router-dom';
 import EditDetailsForm from './EditDetailsForm';
+import ErrorMessage from '../common/InputField/ErrorMessage';
 import PreviousPageButton from '../common/PreviousPageButton';
 import handleInputChange from '../../utils/handleInputChange';
+import { handleSave as handleSaveFunction } from './handleSave';
 import { cars, clients, repairs } from '../../utils/api';
 
 function EditDetails() {
@@ -46,39 +48,25 @@ function EditDetails() {
       !repairs.some((item) => item.repairID === parseInt(repairID))
     )
       navigate('/not-found');
-  }, [isNewRepair, repairs, repairID, navigate]);
+  }, [isNewRepair, repairID, navigate]);
 
   const [editedRepair, setEditedRepair] = useState(
     isNewRepair ? {} : selectedRepair || {}
   );
 
-  const handleSave = async () => {
-    try {
-      const url = isNewRepair
-        ? '/api/add-new-repair'
-        : '/api/update-repair-details';
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: selectedRepair?.repairID,
-          ...editedRepair,
-        }),
-      };
-      const response = await fetch(url, requestOptions);
+  const [error, setError] = useState(null);
 
-      if (response.ok) {
-        console.log('Repair details saved successfully');
-      } else {
-        console.error('Failed to save repair details');
-      }
-    } catch (error) {
-      console.error('Error saving repair details:', error);
-    }
-  };
-
+  const handleSave = useCallback(async () => {
+    const error = await handleSaveFunction(
+      isNewRepair,
+      selectedRepair,
+      editedRepair
+    );
+    setError(error);
+  }, [isNewRepair, selectedRepair, editedRepair]);
+  {
+    error && <ErrorMessage message={error} />;
+  }
   return (
     <div>
       <div className="buttons">
@@ -87,6 +75,7 @@ function EditDetails() {
           arrowClassName="go-back-arrow"
         />
       </div>
+      {error && <ErrorMessage message={error} />}
       <EditDetailsForm
         selectedRepair={selectedRepair}
         editedRepair={editedRepair}

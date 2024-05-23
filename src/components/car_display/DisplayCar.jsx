@@ -1,5 +1,6 @@
-import React from 'react';
-import { cars, clients, repairs } from '../../utils/api';
+// DisplayCar.jsx
+import React, { useEffect } from 'react';
+import { useCarDetails } from '../../hooks/useCarDetails';
 import PreviousPageButton from '../common/PreviousPageButton';
 import { useParams } from 'react-router-dom';
 import Icons from '../../utils/icons';
@@ -8,28 +9,26 @@ import { useNavigate } from 'react-router-dom';
 function DisplayCar() {
   const navigate = useNavigate();
   const { repairID } = useParams();
+  const { car, client, repair, error, isLoading } =
+    useCarDetails(repairID);
 
-  console.log('Repair id:', repairID);
-  const repair = repairs.find(
-    (repair) => repair.repairID === parseInt(repairID)
-  );
+  useEffect(() => {
+    if (error) {
+      navigate('/not-found', {
+        state: {
+          message:
+            'Przepraszamy, samochód o podanym numerze VIN nie istnieje. Prosimy sprawdzić poprawność adresu VIN.',
+        },
+      });
+    }
+  }, [error, navigate]);
 
-  if (!repair) {
-    return <div>Repair not found for id: {repairID}</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-
-  const car = cars.find((car) => car.carID === repair.carID);
 
   if (!car) {
-    return <div>Car not found for repair ID: {repairID}</div>;
-  }
-
-  const client = clients.find(
-    (client) => client.clientID === car.clientID
-  );
-
-  if (!client) {
-    return <div>Client not found for car ID: {car.carID}</div>;
+    return null;
   }
 
   const handleEditButton = () => {

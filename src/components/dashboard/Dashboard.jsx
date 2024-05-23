@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from './components/Navbar';
 import CarList from './components/CarList';
+import useSearchQuery from '../../hooks/useSearchQuery';
 
 function Dashboard() {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearchInputChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
+  const [searchQuery, handleSearchInputChange] = useSearchQuery();
 
   return (
     <div>
