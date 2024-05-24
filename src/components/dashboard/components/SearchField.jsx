@@ -1,13 +1,17 @@
 import React from 'react';
+import Icons from '../../../utils/icons';
 
 function SearchField({ handleSearchInputChange }) {
   return (
-    <input
-      className="navbar-search"
-      type="text"
-      placeholder="Search"
-      onChange={handleSearchInputChange}
-    />
+    <div className="search-field">
+      <Icons.Search className="search-icon" />
+      <input
+        className="navbar-search"
+        type="text"
+        placeholder="Szukaj..."
+        onChange={handleSearchInputChange}
+      />
+    </div>
   );
 }
 

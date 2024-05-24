@@ -43,18 +43,7 @@ button.cancel-btn {
 
 /* Phones */
 @media screen and (max-width: 600px) {
-  .navbar-search {
-    width: 80vw;
-    height: 30px;
-  }
   .car-data li {
     font-size: 1.3em;
-  }
-  .navbar-container {
-    justify-content: center;
-    gap: 5px;
-  }
-  .navbar-icons {
-    gap: 15px;
   }
 }

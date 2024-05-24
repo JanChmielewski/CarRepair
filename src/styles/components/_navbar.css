@@ -23,17 +23,68 @@ nav {
 
 .navbar-search {
   background-color: var(--background-color);
-  color: #e1e1e1;
-  width: 20vw;
+  color: var(--text-color);
+  width: 100%;
   height: 40px;
   border-radius: 8px;
   border: none;
   padding: 10px;
+  padding-left: 40px;
   font-family: var(--primary-font);
   font-size: 18px;
 }
 
 .navbar-icons {
   display: flex;
-  gap: 10px;
+  gap: 30px;
+}
+
+.search-field {
+  position: relative;
+  width: 30vw;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: var(--primary-color);
+}
+
+/* ------------------ @media ------------------ */
+/* Smaller screens */
+@media screen and (max-width: 1000px) {
+  nav {
+    height: 80px;
+  }
+  .navbar-search {
+    width: 100%; /* Full width */
+  }
+}
+
+/* Phones */
+/* Phones */
+@media screen and (max-width: 600px) {
+  nav {
+    padding: 50px;
+  }
+  .navbar-search {
+    width: 100%;
+    order: -1;
+  }
+
+  .search-field {
+    width: auto;
+  }
+  .navbar-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .navbar-icons {
+    gap: 15px;
+    order: 1;
+  }
 }

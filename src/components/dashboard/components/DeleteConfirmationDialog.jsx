@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const DeleteConfirmationDialog = ({
   isOpen,
   onCancel,
   onConfirm,
 }) => {
-  if (!isOpen) return null;
+  const [isClosing, setIsClosing] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setIsClosing(true);
+    }
+  }, [isOpen]);
 
   const handleConfirmDelete = () => {
     console.log('Delete action confirmed');
@@ -18,21 +24,17 @@ const DeleteConfirmationDialog = ({
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>Czy na pewno chcesz usunąć?</h2>
+    <div className={`modal ${isOpen ? 'show' : ''}`}>
+      <div className={`modal-content ${isClosing ? 'slide-up' : ''}`}>
+        <h2>Czy na pewno chcesz usunąć tę pozycję?</h2>
         <div className="modal-buttons">
           <button
             className="confirm-btn"
             onClick={handleConfirmDelete}
           >
-            Tak
+            Tak, usuń
           </button>
-          <button
-            className="cancel-btn"
-            onClick={handleCancelDelete}
-            style={{ backgroundColor: '#ff0099', color: '#151515' }}
-          >
+          <button className="cancel-btn" onClick={handleCancelDelete}>
             Anuluj
           </button>
         </div>

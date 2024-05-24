@@ -35,11 +35,11 @@ const Card = ({ repairID, brand, model, owner, date }) => {
           {date}
         </li>
         <div className="card-btns card-icons">
-          <button className="edit-btn icons-btn">
-            <Icons.Edit
-              className="icon pink-icon"
-              onClick={handleEditButton}
-            />
+          <button
+            className="edit-btn icons-btn"
+            onClick={handleEditButton}
+          >
+            <Icons.Edit className="icon pink-icon" />
           </button>
           <button
             className="trash-btn icons-btn"
