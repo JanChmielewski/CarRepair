@@ -1,0 +1,31 @@
+.button {
+  width: var(--button-width);
+  padding: var(--button-padding);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  text-transform: var(--button-text-transform);
+  border-radius: var(--button-border-radius);
+  border: none;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  align-self: center;
+  transition: var(--transition);
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--button-hover-bg-color);
+}
+
+.button-flat {
+  background-color: transparent;
+  color: #9cbaba;
+  transition: var(--transition);
+}
+
+.button-flat:hover,
+.button-flat:focus {
+  background-color: transparent;
+  color: #869999;
+}
