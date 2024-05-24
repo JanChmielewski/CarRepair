@@ -37,6 +37,7 @@ http://localhost:8080
     * [```GET /cars```](#get-cars)
     * [```POST /addCarForRepair/{clientId}```](#post-addcarforrepairclientid)
     * [```DELETE /deleteAllCars```](#delete-deleteallcars)
+    * [```GET /carsForDashboard```](#get-carsfordashboard)
 
 [//]: # (* [Repair]&#40;&#41;)
 
@@ -270,6 +271,62 @@ DELETE /deleteAllCars
 ```text
 All cars deleted successfully
 ```
+
+#### GET /carsForDashboard
+
+Returns a list of all cars in the system.
+
+##### Request:
+
+``` http request
+GET /carsForDashboard
+```
+
+#### Response:
+
+````json
+{
+    "message: ": "List of cars for dashboard retrieved successfully",
+    "cars": [
+        {
+            "id": 102,
+            "brand": "Honda",
+            "model": "Civic",
+            "yearOfProduction": 2015,
+            "registrationNumber": "XYZ-789",
+            "vin": "2HGFG11816H300001",
+            "mileage": "80000",
+            "engine": "2.0L",
+            "status": "WAITING_FOR_DIAGNOSIS",
+            "client": {
+                "clientId": 1,
+                "name": "Jane",
+                "surname": "Doe",
+                "email": "123456789",
+                "phoneNumber": "janeDoe@test.com"
+            }
+        },
+        {
+            "id": 103,
+            "brand": "Toyota",
+            "model": "Corolla",
+            "yearOfProduction": 2018,
+            "registrationNumber": "ABC-123",
+            "vin": "1HGCM82633A123456",
+            "mileage": "60000",
+            "engine": "1.8L",
+            "status": "WAITING_FOR_DIAGNOSIS",
+            "client": {
+                "clientId": 1,
+                "name": "Jane",
+                "surname": "Doe",
+                "email": "123456789",
+                "phoneNumber": "janeDoe@test.com"
+            }
+        }
+    ]
+}
+````
 
 [//]: # (### Repair)
 

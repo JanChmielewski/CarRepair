@@ -48,16 +48,13 @@ public class CarController {
     }
 
     // TODO: Implement when needed
-//    @GetMapping("/carsForDashboard")
-//    public Map<List<Car>, List<Client>> getCarsForDashboard() {
-//        List<Car> carsForDashboard = carService.getCarsInRepair();
-//        List<Client> clientsForDashboard = clientService.getClientsForDashboard();
-//
-//        for (Car car : carsForDashboard) {
-//            car.
-//        }
-//        return new HashMap<>(Map.of(carsForDashboard, clientsForDashboard));
-//    }
+    @GetMapping("/carsForDashboard")
+    public ResponseEntity<?> getCarsForDashboard() {
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("message: ", "List of cars for dashboard retrieved successfully");
+        response.put("cars", carService.getExistingCars());
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/cars")
     public ResponseEntity<?> getCars() {
