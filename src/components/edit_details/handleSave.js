@@ -29,6 +29,6 @@ export async function handleSave(
     }
   } catch (error) {
     console.error('Error saving repair details:', error);
-    return 'Error saving repair details'; // Return error message
+    return 'Wystąpił błąd podczas zapisu. Spróbuj ponownie.';
   }
 }

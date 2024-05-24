@@ -10,6 +10,8 @@ function EditDetailsForm({
   onChange,
   onSave,
   isNewRepair,
+  error,
+  setError,
 }) {
   const [errors, setErrors] = useState({});
 
@@ -41,6 +43,8 @@ function EditDetailsForm({
 
     if (isValid) {
       onSave();
+    } else {
+      setError('Wystąpił błąd podczas zapisu. Spróbuj ponownie.');
     }
   };
 
@@ -52,7 +56,7 @@ function EditDetailsForm({
           : editedRepairState[field.name] || '';
 
       return (
-        <div key={field.name}>
+        <div key={field.name} className="input">
           <InputField
             label={field.label}
             name={field.name}
@@ -76,7 +80,11 @@ function EditDetailsForm({
 
   return (
     <div className="details-form">
+      <h2 className="form-title">Edytuj naprawę</h2>
       {renderInputFields()}
+      {error && (
+        <p className="error-message red saving-error-msg">{error}</p>
+      )}
       <SaveButton onClick={handleSave} />
     </div>
   );

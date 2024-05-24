@@ -68,24 +68,28 @@ function EditDetails() {
     error && <ErrorMessage message={error} />;
   }
   return (
-    <div>
+    <div className="content">
       <div className="buttons">
         <PreviousPageButton
           buttonColor="pink"
           arrowClassName="go-back-arrow"
         />
       </div>
-      {error && <ErrorMessage message={error} />}
-      <EditDetailsForm
-        selectedRepair={selectedRepair}
-        editedRepair={editedRepair}
-        onChange={(e) =>
-          handleInputChange(e, editedRepair, setEditedRepair)
-        }
-        onSave={handleSave}
-        isNewRepair={isNewRepair}
-        allData={allData}
-      />
+
+      <div className="edit-form">
+        <EditDetailsForm
+          selectedRepair={selectedRepair}
+          editedRepair={editedRepair}
+          onChange={(e) =>
+            handleInputChange(e, editedRepair, setEditedRepair)
+          }
+          onSave={handleSave}
+          isNewRepair={isNewRepair}
+          allData={allData}
+          error={error}
+          setError={setError}
+        />
+      </div>
     </div>
   );
 }

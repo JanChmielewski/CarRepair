@@ -6,7 +6,7 @@ const SaveButton = ({ onClick }) => {
   return (
     <button className="save-btn" onClick={onClick}>
       <Icons.Save className="icon black-icon save-icon" />
-      Save
+      Zapisz
     </button>
   );
 };

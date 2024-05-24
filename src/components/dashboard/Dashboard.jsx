@@ -7,7 +7,7 @@ function Dashboard() {
   const [searchQuery, handleSearchInputChange] = useSearchQuery();
 
   return (
-    <div>
+    <div className="dashboard-container">
       <Navbar handleSearchInputChange={handleSearchInputChange} />
       <CarList searchQuery={searchQuery} />
     </div>

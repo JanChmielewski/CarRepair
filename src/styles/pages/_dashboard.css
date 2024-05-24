@@ -1,5 +1,6 @@
-body {
-  background: none;
+.dashboard-container {
+  min-height: 100vh;
+  min-width: 100vw;
   background-color: var(--background-color);
 }
 
