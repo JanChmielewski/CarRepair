@@ -54,10 +54,10 @@ function DisplayCar() {
       </h2>
       <ul className="car-info-list">
         <li>
-          <span className="label">Number VIN:</span> {car.vinNumber}
+          <span className="label">Numer VIN:</span> {car.vinNumber}
         </li>
         <li>
-          <span className="label">Number rejestracyjny:</span>{' '}
+          <span className="label">Numer rejestracyjny:</span>{' '}
           {car.registrationNumber}
         </li>
         <li>
