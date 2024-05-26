@@ -87,4 +87,4 @@ Car Repair Management System.
 ### Documentation for Backend and Frontend
 
 - For Backend Documentation, click [here](docs/Backend/Backend-Documentation.md).
-- For Frontend Documentation, click [here](docs/Frontend/README.md). (to add later)
+- For Frontend Documentation, click [here](docs/Frontend/Fronted-Documentation.md).
