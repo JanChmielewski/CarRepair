@@ -1,0 +1,6 @@
+- [ ] Add modal animation in calendar.
+- [ ] Improve calendar's responsiveness.
+- [ ] Improve calendar's height.
+- [ ] Fix the calendar's buttons (border-radius).
+- [ ] Improve modal's styling.
+- [ ] Change arrow's styling.

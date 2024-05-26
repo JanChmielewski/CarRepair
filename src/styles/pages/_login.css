@@ -1,0 +1,34 @@
+.login-error {
+  text-transform: uppercase;
+  text-shadow: var(--small-shadow);
+  padding: 10px;
+}
+
+/* Responsive styles for phones and computers */
+@media screen and (max-width: 600px) {
+  body,
+  form {
+    margin: 0;
+    padding: 0;
+  }
+
+  form {
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .control input,
+  .control select {
+    max-width: 100%;
+  }
+  .button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,49 @@
+.dashboard-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: var(--background-color);
+}
+
+.car-list {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
+.cancel-btn {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+button.cancel-btn {
+  color: var(--secondary-color);
+}
+
+/* ------------------ @media ------------------ */
+/* Smaller screens */
+@media screen and (max-width: 1000px) {
+  .car-data {
+    padding: 0;
+    gap: 0.5vh;
+  }
+  nav {
+    height: 80px;
+  }
+  .navbar-search {
+    width: 60vw;
+  }
+  .car-data li {
+    width: 100vw;
+    justify-content: center;
+  }
+}
+
+/* Phones */
+@media screen and (max-width: 600px) {
+  .car-data li {
+    font-size: 1.3em;
+  }
+}
