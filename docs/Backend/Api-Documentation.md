@@ -29,7 +29,7 @@ http://localhost:8080
 1. [User](#user)
     * [```GET /users```](#get-users)
     * [```POST /register```](#post-register)
-    * [```POST /login ```](#post-login)
+    * [```POST api/login ```](#post-login)
 * [Client](#client)
     * [```GET /clients```](#get-clients)
     * [```POST /addClient```](#post-addclient)
@@ -108,22 +108,26 @@ Logs in a user and returns an authentication token.
 ##### Request:
 
 ``` http request
-POST /login
+POST api/login
 ```
 
 ##### Request Body:
 
 ```json
 {
-  "workerCode": "W001",
+  "workerCode": "123456",
   "password": "password"
 }
 ```
 
 ##### Response:
 
-```text
-Logged in!
+```json
+{
+  "message": "User logged in successfully",
+  "workerCode": "123456",
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MTE4NTAiLCJpYXQiOjE3MTY3NDM4NjUsImV4cCI6MTcxNjc3OTg2NX0.6-dL74kBUC-X5dwMByA34W2LVls0ShJpHWMlM_gsQtc"
+}
 ```
 
 ### Client

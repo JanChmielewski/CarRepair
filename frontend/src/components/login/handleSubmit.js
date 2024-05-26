@@ -14,10 +14,9 @@ async function handleSubmit(
       return;
     }
 
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch('http://localhost:8080/api/login', {
       method: 'POST',
       mode: 'cors',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -28,6 +27,8 @@ async function handleSubmit(
     });
 
     if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
       navigate('/dashboard');
     } else {
       setLoginError('Niepoprawne ID lub hasło.');
