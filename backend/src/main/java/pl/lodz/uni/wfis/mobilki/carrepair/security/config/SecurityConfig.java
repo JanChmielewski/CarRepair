@@ -1,4 +1,4 @@
-package pl.lodz.uni.wfis.mobilki.carrepair.security;
+package pl.lodz.uni.wfis.mobilki.carrepair.security.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import pl.lodz.uni.wfis.mobilki.carrepair.security.jwt.JwtRequestFilter;
 import pl.lodz.uni.wfis.mobilki.carrepair.service.CustomUserDetailsService;
 
 import java.util.List;

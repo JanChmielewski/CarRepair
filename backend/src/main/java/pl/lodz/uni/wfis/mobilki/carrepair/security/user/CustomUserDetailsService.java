@@ -1,4 +1,4 @@
-package pl.lodz.uni.wfis.mobilki.carrepair.security;
+package pl.lodz.uni.wfis.mobilki.carrepair.security.user;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

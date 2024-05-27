@@ -1,4 +1,4 @@
-package pl.lodz.uni.wfis.mobilki.carrepair.security;
+package pl.lodz.uni.wfis.mobilki.carrepair.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

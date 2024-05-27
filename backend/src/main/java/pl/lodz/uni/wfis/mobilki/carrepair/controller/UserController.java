@@ -14,7 +14,7 @@ import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.request.LoginRequest;
 import pl.lodz.uni.wfis.mobilki.carrepair.request.RegistrationRequest;
 import pl.lodz.uni.wfis.mobilki.carrepair.security.CustomAuthenticationProvider;
-import pl.lodz.uni.wfis.mobilki.carrepair.security.JwtUtil;
+import pl.lodz.uni.wfis.mobilki.carrepair.security.jwt.JwtUtil;
 import pl.lodz.uni.wfis.mobilki.carrepair.service.UserService;
 
 import java.util.Map;

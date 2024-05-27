@@ -1,4 +1,4 @@
-package pl.lodz.uni.wfis.mobilki.carrepair.security;
+package pl.lodz.uni.wfis.mobilki.carrepair.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

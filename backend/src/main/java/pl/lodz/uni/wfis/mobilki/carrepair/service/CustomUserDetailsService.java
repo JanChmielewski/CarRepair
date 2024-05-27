@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.lodz.uni.wfis.mobilki.carrepair.mappers.UserMapper;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.UserRepository;
-import pl.lodz.uni.wfis.mobilki.carrepair.security.CustomUserDetails;
+import pl.lodz.uni.wfis.mobilki.carrepair.security.user.CustomUserDetails;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

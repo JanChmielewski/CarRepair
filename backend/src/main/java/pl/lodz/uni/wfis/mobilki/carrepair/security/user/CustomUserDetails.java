@@ -1,4 +1,4 @@
-package pl.lodz.uni.wfis.mobilki.carrepair.security;
+package pl.lodz.uni.wfis.mobilki.carrepair.security.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
