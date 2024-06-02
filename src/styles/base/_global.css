@@ -37,6 +37,7 @@ body {
   align-items: center;
   background-image: url('../../assets/images/login-page-bg-blurred-1920.jpg');
   background-size: cover;
+  background-attachment: fixed;
 }
 
 button:hover,

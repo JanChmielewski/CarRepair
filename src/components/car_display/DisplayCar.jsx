@@ -36,9 +36,12 @@ function DisplayCar() {
   };
 
   return (
-    <div>
+    <div className="car-display">
       <div className="buttons">
-        <PreviousPageButton buttonColor={'pink'} />
+        <PreviousPageButton
+          buttonColor={'pink'}
+          arrowClassName="arrow-car-display"
+        />
         <button
           className="button edit-btn"
           onClick={handleEditButton}
@@ -52,46 +55,51 @@ function DisplayCar() {
       </h2>
       <ul className="car-info-list">
         <li>
-          <span className="label">Number VIN:</span> {car.vinNumber}
+          <span className="label">Numer VIN:</span>
+          <span className="info-content">{car.vinNumber}</span>
         </li>
         <li>
-          <span className="label">Number rejestracyjny:</span>{' '}
-          {car.registrationNumber}
+          <span className="label">Numer rejestracyjny:</span>
+          <span className="info-content">
+            {car.registrationNumber}
+          </span>
         </li>
         <li>
-          <span className="label">Data produkcji:</span>{' '}
-          {car.productionDate}
+          <span className="label">Data produkcji:</span>
+          <span className="info-content">{car.productionDate}</span>
         </li>
         <li>
-          <span className="label">Przebieg:</span> {car.mileage}
+          <span className="label">Przebieg:</span>
+          <span className="info-content">{car.mileage}</span>
         </li>
         <li>
-          <span className="label">Silnik:</span> {car.engine}
+          <span className="label">Silnik:</span>
+          <span className="info-content">{car.engine}</span>
         </li>
         <br />
         <li>
-          <span className="label">Właściciel:</span>{' '}
-          {client.ownerName}
+          <span className="label">Właściciel:</span>
+          <span className="info-content">{client.ownerName}</span>
         </li>
         <li>
-          <span className="label">Data przyjęcia:</span>{' '}
-          {repair.dateOfArrival}
+          <span className="label">Data przyjęcia:</span>
+          <span className="info-content">{repair.dateOfArrival}</span>
         </li>
         <li>
-          <span className="label">Data wydania:</span>{' '}
-          {repair.deadlineDate}
+          <span className="label">Data wydania:</span>
+          <span className="info-content">{repair.deadlineDate}</span>
+        </li>
+        <li className="info-from-client">
+          <span className="label ">Informacje od klienta:</span>
+          <span className="info-content">{repair.clientInfo}</span>
         </li>
         <li>
-          <span className="label">Informacje od klienta:</span>{' '}
-          {repair.clientInfo}
+          <span className="label">Stan naprawy:</span>
+          <span className="info-content">{repair.repairStatus}</span>
         </li>
         <li>
-          <span className="label">Stan naprawy:</span>{' '}
-          {repair.repairStatus}
-        </li>
-        <li>
-          <span className="label">Naprawiane przez:</span>{' '}
-          {repair.repairedBy}
+          <span className="label">Naprawiane przez:</span>
+          <span className="info-content">{repair.repairedBy}</span>
         </li>
       </ul>
     </div>
