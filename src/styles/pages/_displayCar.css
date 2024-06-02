@@ -28,9 +28,11 @@
   padding: 0;
   list-style-type: none;
   font-size: 20px;
+  overflow: visible;
 }
 
 .car-info-list li {
+  position: relative;
   background-color: rgb(10, 10, 10);
   border: 1px solid #ff0099;
   border-radius: 8px;
@@ -43,6 +45,27 @@
   overflow-y: auto;
   max-height: 150px;
   box-shadow: var(--box-shadow);
+  overflow: visible;
+}
+
+.copy-content {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  width: 25px;
+  height: 25px;
+}
+
+.copy-icon {
+  width: 25px !important;
+  height: 25px !important;
+  padding: 0 !important;
 }
 
 .edit-btn {

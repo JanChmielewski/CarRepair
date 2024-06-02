@@ -49,7 +49,11 @@ This file styles the navigation bar, including the main bar, container, search i
 
 This file styles the modal components, including the overlay, content, buttons, and cancel button.
 
+### `_copyButton.css`
+
 ## `/styles/pages`
+
+This file contains the styles for the `CopyButton` component, including the succesfully copied information popup.
 
 ### `_dashboard.css`
 

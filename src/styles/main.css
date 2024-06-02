@@ -6,6 +6,7 @@
 @import 'components/_button.css';
 @import 'components/_modal.css';
 @import 'components/_card.css';
+@import 'components/_copyButton.css';
 @import 'components/_calendar.css';
 @import 'pages/_login.css';
 @import 'pages/_dashboard.css';

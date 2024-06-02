@@ -1,16 +1,20 @@
-// DisplayCar.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useCarDetails } from '../../hooks/useCarDetails';
 import PreviousPageButton from '../common/PreviousPageButton';
 import { useParams } from 'react-router-dom';
 import Icons from '../../utils/icons';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/pages/_displayCar.css';
+import CopyButton from '../common/CopyButton';
 
 function DisplayCar() {
   const navigate = useNavigate();
   const { repairID } = useParams();
   const { car, client, repair, error, isLoading } =
     useCarDetails(repairID);
+
+  const vinRef = useRef(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -56,12 +60,16 @@ function DisplayCar() {
       <ul className="car-info-list">
         <li>
           <span className="label">Numer VIN:</span>
-          <span className="info-content">{car.vinNumber}</span>
+          <span className="info-content copy-content" ref={vinRef}>
+            {car.vinNumber}
+            <CopyButton content={car.vinNumber} />{' '}
+          </span>
         </li>
         <li>
           <span className="label">Numer rejestracyjny:</span>
-          <span className="info-content">
+          <span className="info-content copy-content">
             {car.registrationNumber}
+            <CopyButton content={car.registrationNumber} />{' '}
           </span>
         </li>
         <li>

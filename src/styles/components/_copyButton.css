@@ -1,0 +1,48 @@
+.copy-popup {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+}
+
+.copy-popup .copy-popuptext {
+  width: 160px;
+  background-color: rgb(91, 91, 91);
+  color: white;
+  font-size: 18px;
+  text-shadow: var(--small-shadow);
+  text-align: center;
+  border-radius: 5px;
+  padding: 8px 15px;
+  position: absolute;
+  z-index: 1;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.copy-popup .copy-popuptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: rgb(91, 91, 91) transparent transparent transparent;
+}
+
+.copy-popup .copy-popuptext {
+  visibility: visible;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SearchField from './SearchField';
-import IconButton from './IconButton';
+import IconButton from '../../common/IconButton';
 import Icons from '../../../utils/icons';
 
 function Navbar({ handleSearchInputChange }) {
