@@ -12,27 +12,52 @@
 
 .car-data {
   margin: 0;
-  padding: 20px;
+  padding: 5px 20px;
   list-style-type: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 5vw;
   align-content: center;
+  max-height: 1000px;
 }
 
 .car-data li {
   width: 20vw;
-  min-height: 60px;
   display: flex;
   align-items: center;
   font-size: 1.5em;
 }
 
+.card-btns {
+  width: auto !important;
+}
+
 .card-icons {
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .data-icon {
   margin-right: 15px;
+}
+
+@media screen and (max-width: 1000px) {
+  .car-data {
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .car-data li {
+    width: 100% !important;
+  }
+
+  .card-btns {
+    text-align: center;
+    padding: 0;
+  }
 }

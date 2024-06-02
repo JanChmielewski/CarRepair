@@ -34,9 +34,9 @@ const Card = ({ repairID, brand, model, owner, date }) => {
           <Icons.Clock className="icon pink-icon data-icon" />
           {date}
         </li>
-        <div className="card-btns card-icons">
+        <li className="card-btns card-icons">
           <button
-            className="edit-btn icons-btn"
+            className="dashboard-edit-btn icons-btn"
             onClick={handleEditButton}
           >
             <Icons.Edit className="icon pink-icon" />
@@ -47,7 +47,7 @@ const Card = ({ repairID, brand, model, owner, date }) => {
           >
             <Icons.Remove className="icon pink-icon" />
           </button>
-        </div>
+        </li>
       </ul>
       <DeleteConfirmationDialog
         isOpen={isDeleteDialogOpen}
