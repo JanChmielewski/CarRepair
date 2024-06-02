@@ -31,6 +31,10 @@
   transform: scale(1.08);
 }
 
+button .black-icon:hover {
+  transform: none;
+}
+
 /* Responsive adjustments for icons */
 @media screen and (max-width: 600px) {
   .icon {
