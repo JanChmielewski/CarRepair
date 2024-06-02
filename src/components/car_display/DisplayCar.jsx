@@ -44,21 +44,20 @@ function DisplayCar() {
       <div className="flex-container">
         <div className="car-display">
           <div className="buttons">
-            <PreviousPageButton
-              buttonColor={'pink'}
-              arrowClassName="arrow-car-display"
-            />
-            <button
-              className="button edit-btn"
-              onClick={handleEditButton}
-            >
-              <Icons.Edit className="icon black-icon" />
-              Edit
-            </button>
+            <div className="display-navbar">
+              <PreviousPageButton
+                buttonColor={'black'}
+                arrowClassName="arrow-car-display"
+              />
+              <h2 className="car-title">
+                {car.brand} {car.model}
+              </h2>
+              <button className="edit-btn" onClick={handleEditButton}>
+                <Icons.Edit className="icon black-icon" />
+              </button>
+            </div>
           </div>
-          <h2 className="car-title header-title">
-            {car.brand} {car.model}
-          </h2>
+
           <ul className="car-info-list">
             <li>
               <span className="label">Numer VIN:</span>
@@ -128,7 +127,7 @@ function DisplayCar() {
               </span>
             </li>
             <li className="info-from-client">
-              <span className="label ">Informacje od klienta:</span>
+              <span className="label">Informacje od klienta:</span>
               <span className="info-content">
                 {repair.clientInfo}
               </span>

@@ -1,13 +1,64 @@
 .card {
+  position: relative;
   width: 100vw;
   background-color: var(--background-color);
+  background-image: linear-gradient(
+    to bottom,
+    var(--bg-color-darker),
+    var(--secondary-color),
+    var(--bg-color-darker)
+  );
   border-bottom: var(--primary-color) solid 1px;
   padding: 10px;
+  overflow: hidden;
+  transition: background-image 0.3s ease-in;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to bottom,
+    var(--bg-color-darker),
+    var(--background-color),
+    var(--bg-color-darker)
+  );
+  transition: opacity 0.3s ease;
+  opacity: 0;
 }
 
 .card:hover {
   cursor: pointer;
-  background-color: var(--secondary-color);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: linear-gradient(
+    to bottom,
+    var(--background-color),
+    var(--secondary-color-hover),
+    var(--background-color)
+  );
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.card:hover::after {
+  opacity: 1;
 }
 
 .car-data {
@@ -20,6 +71,8 @@
   gap: 5vw;
   align-content: center;
   max-height: 1000px;
+  position: relative;
+  z-index: 1; /* Ensure the text appears above the pseudo-element */
 }
 
 .car-data li {

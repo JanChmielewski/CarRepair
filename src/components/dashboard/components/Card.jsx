@@ -7,7 +7,8 @@ const Card = ({ repairID, brand, model, owner, date }) => {
   const navigate = useNavigate();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  const handleEditButton = () => {
+  const handleEditButton = (e) => {
+    e.stopPropagation();
     navigate(`/edit-details/${repairID}`);
   };
 
@@ -15,14 +16,15 @@ const Card = ({ repairID, brand, model, owner, date }) => {
     navigate(`/car/${repairID}`);
   };
 
-  const handleDeleteButton = () => {
+  const handleDeleteButton = (e) => {
+    e.stopPropagation();
     setDeleteDialogOpen(true);
   };
 
   return (
     <div className="card">
-      <ul className="car-data">
-        <li onClick={handleCardClick}>
+      <ul className="car-data" onClick={handleCardClick}>
+        <li>
           <Icons.Car className="icon pink-icon data-icon" />
           {brand} {model}
         </li>

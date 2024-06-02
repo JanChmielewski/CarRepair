@@ -2,6 +2,7 @@
   position: relative;
   display: inline-block;
   overflow: visible;
+  z-index: 999;
 }
 
 .copy-popup .copy-popuptext {

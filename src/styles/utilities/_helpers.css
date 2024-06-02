@@ -18,10 +18,17 @@
 
 .pink-icon {
   fill: var(--primary-color);
+  filter: drop-shadow(2px 2px 2px black);
 }
 
 .black-icon {
   fill: #000000;
+  transition: transform 0.1s ease-in-out;
+  filter: drop-shadow(2px 2px 2px var(--primary-color-hover));
+}
+
+.black-icon:hover {
+  transform: scale(1.08);
 }
 
 /* Responsive adjustments for icons */
