@@ -8,13 +8,13 @@ import {
 import { cars, clients, repairs } from '../../utils/api';
 import EditDetailsForm from './EditDetailsForm';
 import ErrorComponent from './ErrorComponent';
+import { ROUTES } from '../../utils/routes';
 
 function DataFetching() {
   const navigate = useNavigate();
   const { repairID } = useParams();
   const location = useLocation();
-  const isNewRepair =
-    location.pathname === '/edit-details/add-new-car';
+  const isNewRepair = location.pathname === `${ROUTES.ADD_NEW_CAR}`;
 
   const [selectedRepair, setSelectedRepair] = useState(null);
   const [error, setError] = useState(null);
@@ -38,7 +38,7 @@ function DataFetching() {
           ...clientData,
         });
       } else {
-        navigate('/not-found');
+        navigate(`${ROUTES.NOT_FOUND}`);
       }
     }
   }, [isNewRepair, repairID, navigate]);

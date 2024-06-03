@@ -2,6 +2,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PreviousPageButton from '../common/PreviousPageButton';
+import { ROUTES } from '../../utils/routes';
 
 const NotFound = () => {
   const location = useLocation();
@@ -18,7 +19,7 @@ const NotFound = () => {
       </div>
       <PreviousPageButton
         buttonColor={'pink'}
-        pageDestination={'/dashboard'}
+        pageDestination={ROUTES.DASHBOARD}
         iconClassName="prev-page-icon"
       />
     </div>

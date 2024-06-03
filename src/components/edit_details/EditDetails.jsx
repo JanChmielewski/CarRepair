@@ -11,13 +11,13 @@ import handleInputChange from '../../utils/handleInputChange';
 import { handleSave as handleSaveFunction } from './handleSave';
 import { cars, clients, repairs } from '../../utils/api';
 import Navbar from '../common/Navbar';
+import { ROUTES } from '../../utils/routes';
 
 function EditDetails() {
   const navigate = useNavigate();
   const { repairID } = useParams();
   const location = useLocation();
-  const isNewRepair =
-    location.pathname === '/edit-details/add-new-car';
+  const isNewRepair = location.pathname === `${ROUTES.ADD_NEW_CAR}`;
 
   const allData = [...cars, ...clients, ...repairs];
 
@@ -48,7 +48,7 @@ function EditDetails() {
       !isNewRepair &&
       !repairs.some((item) => item.repairID === parseInt(repairID))
     )
-      navigate('/not-found');
+      navigate(`${ROUTES.NOT_FOUND}`);
   }, [isNewRepair, repairID, navigate]);
 
   const [editedRepair, setEditedRepair] = useState(

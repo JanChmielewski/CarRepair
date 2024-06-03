@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Icons from '../../../utils/icons';
 import ConfirmationDialog from '../../common/ConfirmationDialog';
+import { ROUTES } from '../../../utils/routes';
 
 const Card = ({ repairID, brand, model, owner, date }) => {
   const navigate = useNavigate();
@@ -9,11 +10,11 @@ const Card = ({ repairID, brand, model, owner, date }) => {
 
   const handleEditButton = (e) => {
     e.stopPropagation();
-    navigate(`/edit-details/${repairID}`);
+    navigate(`${ROUTES.EDIT_DETAILS}/${repairID}`);
   };
 
   const handleCardClick = () => {
-    navigate(`/car/${repairID}`);
+    navigate(`${ROUTES.CAR}/${repairID}`);
   };
 
   const handleDeleteButton = (e) => {

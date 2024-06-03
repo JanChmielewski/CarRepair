@@ -21,3 +21,26 @@ This is the entry point of the application.
 - `main.css`: This is the main CSS file for the application.
 
 The `ReactDOM.createRoot` method is used to create a root container where the whole React application will live. The `.render` method then renders the `App` component into this root container. The `App` component is wrapped in `React.StrictMode` which checks for potential problems in the application during development.
+
+## `routes.js`
+
+This file exports two objects: `PARAMS` and `ROUTES`.
+
+- `PARAMS`: This object contains parameters that are used in the routes. Currently, it only contains `DYNAMIC_ID` which is set to 'repairID'.
+- `ROUTES`: This object contains the paths for the different routes in the application. Each property in the object represents a route and its value is the path for that route.
+
+```javascript
+export const PARAMS = {
+  DYNAMIC_ID: 'repairID',
+};
+
+export const ROUTES = {
+  DASHBOARD: '/dashboard',
+  CALENDAR: '/calendar',
+  CAR: '/car',
+  EDIT_DETAILS: '/edit-details',
+  ADD_NEW_CAR: '/edit-details/add-new-car',
+  LOGIN: '/',
+  NOT_FOUND: '/not-found',
+};
+```

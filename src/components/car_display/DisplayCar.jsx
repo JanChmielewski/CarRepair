@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/pages/_displayCar.css';
 import CopyButton from '../common/CopyButton';
 import Navbar from '../common/Navbar';
+import { ROUTES } from '../../utils/routes';
 
 function DisplayCar() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function DisplayCar() {
 
   useEffect(() => {
     if (error) {
-      navigate('/not-found', {
+      navigate(`${ROUTES.NOT_FOUND}`, {
         state: {
           message:
             'Przepraszamy, samochód o podanym numerze VIN nie istnieje. Prosimy sprawdzić poprawność adresu VIN.',
@@ -36,7 +37,7 @@ function DisplayCar() {
   }
 
   const handleEditButton = () => {
-    navigate(`/edit-details/${repairID}`);
+    navigate(`${ROUTES.EDIT_DETAILS}/${repairID}`);
   };
 
   return (

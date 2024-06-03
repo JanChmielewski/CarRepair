@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import RenderTileContent from './RenderTileContent';
 import RepairPopup from './RepairPopup';
@@ -22,7 +22,7 @@ const CalendarPage = () => {
       (repair) => repair.deadlineDate === formattedDate
     );
     setSelectedRepairs(filteredRepairs);
-    setIsPopupOpen(filteredRepairs.length > 0);
+    setIsPopupOpen(true);
   };
 
   const handleOpenPopup = () => {
@@ -32,6 +32,12 @@ const CalendarPage = () => {
   const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
+
+  useEffect(() => {
+    if (selectedRepairs.length > 0) {
+      setIsPopupOpen(true);
+    }
+  }, [selectedRepairs]);
 
   return (
     <div className="calendar-page">

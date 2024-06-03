@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { cars, clients, repairs } from '../utils';
+import { API_ENDPOINTS } from '../utils/api/api_endpoints';
 
 export function useRepairDetails(repairID, isNewRepair) {
   const [repairDetails, setRepairDetails] = useState(null);
@@ -28,8 +29,8 @@ export function useRepairDetails(repairID, isNewRepair) {
   const saveRepairDetails = async (editedRepair) => {
     try {
       const url = isNewRepair
-        ? '/api/add-new-repair'
-        : '/api/update-repair-details';
+        ? API_ENDPOINTS.ADD_CAR_FOR_REPAIR(repairDetails?.repairID)
+        : API_ENDPOINTS.GET_CARS;
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

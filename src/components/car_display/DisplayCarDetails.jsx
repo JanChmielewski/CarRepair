@@ -1,15 +1,15 @@
-// DisplayCarDetails.jsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import DisplayCar from './DisplayCar';
+import { PARAMS } from '../../utils/routes';
 
 function DisplayCarDetails() {
-  const { repairID } = useParams();
+  const params = useParams();
+  const dynamicId = params[PARAMS.DYNAMIC_ID];
 
   return (
     <div>
-      {/* Pass the vinNumber to the DisplayCar component */}
-      <DisplayCar repairID={repairID} />
+      <DisplayCar repairID={dynamicId} />
     </div>
   );
 }
