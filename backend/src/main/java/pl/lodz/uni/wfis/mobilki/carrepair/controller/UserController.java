@@ -70,7 +70,7 @@ public class UserController {
                     "token", jwt,
                     "workerCode", loginRequest.getWorkerCode()
             );
-
+            System.out.println(jwt);
             return ResponseEntity.ok(response);
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");

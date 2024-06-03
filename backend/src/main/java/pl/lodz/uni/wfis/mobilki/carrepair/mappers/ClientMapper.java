@@ -11,12 +11,11 @@ public class ClientMapper {
     private ClientService clientService;
 
     public ClientDTO toDTO(Client client) {
-        return new ClientDTO(client.getClientId(), client.getName(), client.getSurname(), client.getEmail(), client.getPhoneNumber());
+        return new ClientDTO(client.getName(), client.getSurname(), client.getEmail(), client.getPhoneNumber());
     }
 
     public Client toEntity(ClientDTO clientDTO) {
         Client client = new Client();
-        client.setClientId(clientDTO.getId());
         client.setName(clientDTO.getName());
         client.setSurname(clientDTO.getSurname());
         client.setEmail(clientDTO.getEmail());

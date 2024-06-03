@@ -1,11 +1,13 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.CarDTO;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Car;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.CarStatus;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Client;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.CarRepository;
+import pl.lodz.uni.wfis.mobilki.carrepair.repository.ClientRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,11 @@ import java.util.List;
 public class CarService {
 
     private final CarRepository carRepository;
+    private final ClientRepository clientRepository;
 
-    public CarService(CarRepository carRepository) {
+    public CarService(CarRepository carRepository, ClientRepository clientRepository) {
         this.carRepository = carRepository;
+        this.clientRepository = clientRepository;
     }
 
     public List<Car> getCarsInRepair() {
@@ -28,7 +32,11 @@ public class CarService {
         return carsForDashboard;
     }
 
-    public Car addCarForRepair(CarDTO carDTO, Client client) {
+    @Transactional
+    public Car addCarForRepair(CarDTO carDTO, Long clientId) {
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new IllegalArgumentException("Client with id: " + clientId + " not found"));
+
         Car car = new Car(
                 carDTO.getBrand(),
                 carDTO.getModel(),
@@ -52,5 +60,4 @@ public class CarService {
         carRepository.deleteAll();
     }
 
-    // TODO : Implement when needed
 }

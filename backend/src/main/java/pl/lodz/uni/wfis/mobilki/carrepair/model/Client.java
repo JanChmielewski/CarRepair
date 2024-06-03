@@ -26,7 +26,7 @@ public class Client {
     @Column
     private String surname;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column

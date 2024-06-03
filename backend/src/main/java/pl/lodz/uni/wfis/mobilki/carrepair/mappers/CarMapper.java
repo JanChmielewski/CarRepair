@@ -3,10 +3,11 @@ package pl.lodz.uni.wfis.mobilki.carrepair.mappers;
 import org.springframework.stereotype.Component;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.CarDTO;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Car;
-import pl.lodz.uni.wfis.mobilki.carrepair.model.CarStatus;
 
 @Component
 public class CarMapper {
+    public CarMapper() {
+    }
 
 //    private CarService carService; // TODO: implement this class
 
@@ -18,8 +19,7 @@ public class CarMapper {
                 car.getRegistrationNumber(),
                 car.getVin(),
                 car.getMileage(),
-                car.getEngine(),
-                car.getStatus()
+                car.getEngine()
         );
     }
 
