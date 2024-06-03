@@ -11,7 +11,6 @@
   border-bottom: var(--primary-color) solid 1px;
   padding: 10px;
   overflow: hidden;
-  transition: background-image 0.3s ease-in;
 }
 
 .card::before {
@@ -72,7 +71,11 @@
   align-content: center;
   max-height: 1000px;
   position: relative;
-  z-index: 1; /* Ensure the text appears above the pseudo-element */
+  z-index: 1;
+}
+
+.data-icon:hover {
+  transform: none !important;
 }
 
 .car-data li {
@@ -80,6 +83,7 @@
   display: flex;
   align-items: center;
   font-size: 1.5em;
+  text-shadow: var(--text-border);
 }
 
 .card-btns {

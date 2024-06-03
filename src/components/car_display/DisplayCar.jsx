@@ -1,11 +1,11 @@
+// DisplayCar.js
 import React, { useEffect, useRef, useState } from 'react';
 import { useCarDetails } from '../../hooks/useCarDetails';
-import PreviousPageButton from '../common/PreviousPageButton';
 import { useParams } from 'react-router-dom';
-import Icons from '../../utils/icons';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/pages/_displayCar.css';
 import CopyButton from '../common/CopyButton';
+import Navbar from '../common/Navbar';
 
 function DisplayCar() {
   const navigate = useNavigate();
@@ -44,21 +44,24 @@ function DisplayCar() {
       <div className="flex-container">
         <div className="car-display">
           <div className="buttons">
-            <div className="display-navbar">
-              <PreviousPageButton
-                buttonColor={'black'}
-                arrowClassName="arrow-car-display"
-              />
-              <h2 className="car-title">
-                {car.brand} {car.model}
-              </h2>
-              <button className="edit-btn" onClick={handleEditButton}>
-                <Icons.Edit className="icon black-icon" />
-              </button>
-            </div>
+            <Navbar
+              page={'Szczegóły samochodu'}
+              handleEditButton={handleEditButton}
+              car={car}
+            />
           </div>
 
           <ul className="car-info-list">
+            <h3 className="section-title header-title car-title">
+              Informacje o samochodzie
+            </h3>
+            <li>
+              <span className="label">Marka i model:</span>
+              <span className="info-content">
+                {car.brand} {car.model}
+              </span>
+            </li>
+
             <li>
               <span className="label">Numer VIN:</span>
               <span

@@ -10,6 +10,7 @@
   color: var(--button-text-color);
   cursor: pointer;
   align-self: center;
+  transition: var(--transition);
 }
 
 .button:hover,

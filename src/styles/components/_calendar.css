@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 60px;
 }
 
 .react-calendar {
@@ -104,7 +105,7 @@
   padding: 20px;
   border-radius: 10px;
   width: 70%;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--popup-shadow);
   position: relative;
   font-size: 23px;
   text-align: center;

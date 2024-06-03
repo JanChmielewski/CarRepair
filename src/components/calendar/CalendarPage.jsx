@@ -5,7 +5,7 @@ import RepairPopup from './RepairPopup';
 import { repairs, cars, clients } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { getCarInfo, formatDate, countRepairsForDate } from './utils';
-import PreviousPageButton from '../common/PreviousPageButton';
+import Navbar from '../common/Navbar';
 import 'react-calendar/dist/Calendar.css';
 
 const CalendarPage = () => {
@@ -35,7 +35,7 @@ const CalendarPage = () => {
 
   return (
     <div className="calendar-page">
-      <PreviousPageButton buttonColor={'pink'} />
+      <Navbar page={'Kalendarz'} />
       <div className="calendar">
         <Calendar
           onChange={handleDateChange}

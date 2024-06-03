@@ -4,13 +4,6 @@
   border: none;
 }
 
-.icons-btn:hover,
-.icons-btn:focus {
-  .pink-icon {
-    fill: var(--primary-color-hover);
-  }
-}
-
 .icon {
   width: 40px;
   height: 40px;
@@ -18,7 +11,12 @@
 
 .pink-icon {
   fill: var(--primary-color);
+  transition: transform 0.1s ease-in-out;
   filter: drop-shadow(2px 2px 2px black);
+}
+
+.pink-icon:hover {
+  transform: scale(1.08);
 }
 
 .black-icon {
@@ -31,8 +29,10 @@
   transform: scale(1.08);
 }
 
-button .black-icon:hover {
-  transform: none;
+.save-btn {
+  .black-icon:hover {
+    transform: none;
+  }
 }
 
 /* Responsive adjustments for icons */

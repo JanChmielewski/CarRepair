@@ -3,12 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 export default function IconButton({
   icon: IconComponent,
-  destination,
+  destination = '/calendar',
+  onClick,
 }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(destination);
+    if (onClick) {
+      onClick();
+    } else {
+      navigate(destination);
+    }
   };
 
   return (

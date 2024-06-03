@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 import Icons from '../../../utils/icons';
+import ConfirmationDialog from '../../common/ConfirmationDialog';
 
 const Card = ({ repairID, brand, model, owner, date }) => {
   const navigate = useNavigate();
-  const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const handleEditButton = (e) => {
     e.stopPropagation();
@@ -18,7 +18,7 @@ const Card = ({ repairID, brand, model, owner, date }) => {
 
   const handleDeleteButton = (e) => {
     e.stopPropagation();
-    setDeleteDialogOpen(true);
+    setDialogOpen(true);
   };
 
   return (
@@ -51,13 +51,16 @@ const Card = ({ repairID, brand, model, owner, date }) => {
           </button>
         </li>
       </ul>
-      <DeleteConfirmationDialog
-        isOpen={isDeleteDialogOpen}
-        onClose={() => setDeleteDialogOpen(false)}
+      <ConfirmationDialog
+        isOpen={isDialogOpen}
+        onClose={() => setDialogOpen(false)}
         onConfirm={() => {
-          setDeleteDialogOpen(false);
+          setDialogOpen(false);
+          // Add delete logic here
         }}
-        onCancel={() => setDeleteDialogOpen(false)}
+        onCancel={() => setDialogOpen(false)}
+        title="Czy na pewno chcesz usunąć tę pozycję?"
+        confirmButtonText="Tak, usuń"
       />
     </div>
   );

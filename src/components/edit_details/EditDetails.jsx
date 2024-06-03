@@ -1,3 +1,4 @@
+// EditDetails.js
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   useParams,
@@ -6,10 +7,10 @@ import {
 } from 'react-router-dom';
 import EditDetailsForm from './EditDetailsForm';
 import ErrorMessage from '../common/InputField/ErrorMessage';
-import PreviousPageButton from '../common/PreviousPageButton';
 import handleInputChange from '../../utils/handleInputChange';
 import { handleSave as handleSaveFunction } from './handleSave';
 import { cars, clients, repairs } from '../../utils/api';
+import Navbar from '../common/Navbar';
 
 function EditDetails() {
   const navigate = useNavigate();
@@ -70,9 +71,13 @@ function EditDetails() {
   return (
     <div className="content">
       <div className="buttons">
-        <PreviousPageButton
-          buttonColor="pink"
-          arrowClassName="go-back-arrow"
+        <Navbar
+          page={
+            isNewRepair
+              ? 'Dodawanie nowego pojazdu'
+              : 'Edycja naprawy'
+          }
+          car={selectedRepair || {}}
         />
       </div>
 
