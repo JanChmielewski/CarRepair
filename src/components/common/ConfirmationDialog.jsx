@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-const DeleteConfirmationDialog = ({
+const ConfirmationDialog = ({
   isOpen,
   onCancel,
   onConfirm,
+  title,
+  confirmButtonText,
 }) => {
   const [isClosing, setIsClosing] = useState(false);
 
@@ -13,28 +15,25 @@ const DeleteConfirmationDialog = ({
     }
   }, [isOpen]);
 
-  const handleConfirmDelete = () => {
-    console.log('Delete action confirmed');
+  const handleConfirm = () => {
+    console.log('Action confirmed');
     onConfirm();
   };
 
-  const handleCancelDelete = () => {
-    console.log('Delete action canceled');
+  const handleCancel = () => {
+    console.log('Action canceled');
     onCancel();
   };
 
   return (
     <div className={`modal ${isOpen ? 'show' : ''}`}>
       <div className={`modal-content ${isClosing ? 'slide-up' : ''}`}>
-        <h2>Czy na pewno chcesz usunąć tę pozycję?</h2>
+        <h2>{title}</h2>
         <div className="modal-buttons">
-          <button
-            className="confirm-btn"
-            onClick={handleConfirmDelete}
-          >
-            Tak, usuń
+          <button className="confirm-btn" onClick={handleConfirm}>
+            {confirmButtonText}
           </button>
-          <button className="cancel-btn" onClick={handleCancelDelete}>
+          <button className="cancel-btn" onClick={handleCancel}>
             Anuluj
           </button>
         </div>
@@ -43,4 +42,4 @@ const DeleteConfirmationDialog = ({
   );
 };
 
-export default DeleteConfirmationDialog;
+export default ConfirmationDialog;

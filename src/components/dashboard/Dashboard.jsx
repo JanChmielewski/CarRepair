@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from '../common/Navbar';
 import CarList from './components/CarList';
 import useSearchQuery from '../../hooks/useSearchQuery';
 

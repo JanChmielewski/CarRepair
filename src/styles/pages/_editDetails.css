@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0;
+  top: 60px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -22,25 +22,15 @@
   width: 100%;
 }
 
-.form-title {
-  color: var(--primary-color);
-  font-size: 30px;
-  text-align: center;
-  text-transform: uppercase;
-  padding-bottom: 20px;
-  text-shadow: 2px 2px 5px black;
-  letter-spacing: 1px;
-}
-
 .details-form {
   max-height: 90%;
   width: 60%;
   overflow: auto;
-  padding: 50px 100px;
+  padding: 20px 80px;
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
   border: 1px solid var(--primary-color);
-  box-shadow: 5px 5px 20px black;
+  box-shadow: var(--popup-shadow);
   scrollbar-color: var(--primary-color-hover) black;
 }
 
@@ -67,7 +57,7 @@
   padding: 15px 0 0 0;
   text-transform: uppercase;
   font-weight: bold;
-  text-shadow: 1px 1px 5px black;
+  text-shadow: var(--primary-col-shadow);
   font-size: 22px;
 }
 
@@ -102,6 +92,8 @@
   font-size: 18px;
   text-align: center;
   padding-top: 5px;
+  text-shadow: var(--light-shadow);
+  font-weight: bold;
 }
 
 .saving-error-msg {
@@ -123,6 +115,8 @@
   font-weight: bold;
   margin-top: 30px;
   text-transform: uppercase;
+  text-shadow: var(--light-shadow);
+  transition: 0.15s ease;
 }
 
 .save-btn:hover {

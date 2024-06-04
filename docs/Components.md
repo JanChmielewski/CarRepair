@@ -99,14 +99,6 @@ Usage:
 />
 ```
 
-`IconButton`: Button component that navigates to a specified destination when clicked.
-
-Usage:
-
-```js
-<IconButton icon={IconComponent} destination={destination} />
-```
-
 `Navbar`: A component that displays a navigation bar. It includes a search field and icon buttons for calendar, add new car, and logout.
 
 Usage:
@@ -255,6 +247,22 @@ Usage:
 
 ```js
 <PreviousPageButton buttonColor="pink" pageDestination="/home" />
+```
+
+`CopyButton`: A component that copies content to the clipboard and displays a notification when the content is successfully copied. It uses the `navigator.clipboard` API to copy the content and local state to manage the visibility of the notification.
+
+Usage:
+
+```js
+<CopyButton content={content} />
+```
+
+`IconButton`: Button component that navigates to a specified destination when clicked.
+
+Usage:
+
+```js
+<IconButton icon={IconComponent} destination={destination} />
 ```
 
 ### `/common/InputField`

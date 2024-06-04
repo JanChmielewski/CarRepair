@@ -1,3 +1,6 @@
+import { ROUTES } from '../../utils/routes';
+import { API_ENDPOINTS } from '../../utils/api/api_endpoints';
+
 async function handleSubmit(
   event,
   idValue,
@@ -14,7 +17,7 @@ async function handleSubmit(
       return;
     }
 
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch(API_ENDPOINTS.LOGIN, {
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
@@ -28,7 +31,7 @@ async function handleSubmit(
     });
 
     if (response.ok) {
-      navigate('/dashboard');
+      navigate(`${ROUTES.DASHBOARD}`);
     } else {
       setLoginError('Niepoprawne ID lub hasło.');
     }

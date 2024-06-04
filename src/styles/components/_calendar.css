@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 60px;
 }
 
 .react-calendar {
@@ -104,7 +105,7 @@
   padding: 20px;
   border-radius: 10px;
   width: 70%;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--popup-shadow);
   position: relative;
   font-size: 23px;
   text-align: center;
@@ -115,7 +116,11 @@
   font-size: 30px;
   color: var(--primary-color);
   margin-bottom: 20px;
-  text-shadow: var(--small-shadow);
+  text-shadow: var(--header-shadow);
+}
+
+.add-repair-btn {
+  margin-top: 15px;
 }
 
 .close-btn {
@@ -140,13 +145,76 @@
 }
 
 .repair-data {
-  margin-bottom: 10px;
+  position: relative;
+  background-color: var(--bg-color-darker);
+  background-image: linear-gradient(
+    to bottom,
+    var(--bg-color-darker),
+    var(--secondary-color),
+    var(--bg-color-darker)
+  );
+  margin-bottom: 20px;
+  padding: 20px 50px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  text-shadow: var(--small-shadow);
+  transition: ease 0.1s;
+  overflow: hidden;
+}
+
+.repair-data::before,
+.repair-data::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0; /* Ensure pseudo-elements stay below the content */
+}
+
+.repair-data::before {
+  background-image: linear-gradient(
+    to bottom,
+    var(--bg-color-darker),
+    var(--background-color),
+    var(--bg-color-darker)
+  );
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.repair-data:hover::before {
+  opacity: 1;
+}
+
+.repair-data::after {
+  background-image: linear-gradient(
+    to bottom,
+    var(--background-color),
+    var(--secondary-color-hover),
+    var(--background-color)
+  );
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.repair-data:hover::after {
+  opacity: 1;
 }
 
 .repair-data:hover {
   cursor: pointer;
-  text-decoration: none;
-  color: #888;
+}
+
+.repair-data-content {
+  position: relative;
+  z-index: 1; /* Ensure it stays above the pseudo-elements */
+}
+
+.calendar-dialog-label {
+  font-weight: bold;
+  color: var(--primary-color);
 }
 
 .repair-count {

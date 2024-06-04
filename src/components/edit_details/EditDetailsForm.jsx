@@ -80,7 +80,6 @@ function EditDetailsForm({
 
   return (
     <div className="details-form">
-      <h2 className="form-title">Edytuj naprawę</h2>
       {renderInputFields()}
       {error && (
         <p className="error-message red saving-error-msg">{error}</p>
