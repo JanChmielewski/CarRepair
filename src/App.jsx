@@ -12,8 +12,10 @@ import EditDetails from './components/edit_details/EditDetails.jsx';
 import NotFound from './components/not_found/NotFound.jsx';
 import CalendarPage from './components/calendar/CalendarPage.jsx';
 import DisplayCar from './components/car_display/DisplayCar.jsx';
+import CarParts from './components/car_parts/CarParts.jsx';
 
 import './styles/main.css';
+import CarPart from './components/car_parts/CarParts.jsx';
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
           element={<Navigate to={ROUTES.NOT_FOUND} />}
         />
         <Route path={ROUTES.CALENDAR} element={<CalendarPage />} />
+        <Route path={ROUTES.CAR_PARTS} element={<CarParts />} />
       </Routes>
     </Router>
   );
