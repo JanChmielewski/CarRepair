@@ -1,0 +1,121 @@
+/* Modal.css */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-color-darker);
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+    width: 50vw;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal-content h2 {
+    margin-bottom: 30px;
+    font-size: 32px; /* Zwiększenie rozmiaru czcionki */
+    color: var(--text-color);
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 20px; /* Zwiększona czcionka */
+    line-height: 2; /* Zwiększona wysokość wiersza */
+    color: var(--text-color);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.modal-buttons button {
+    width: 45%;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    padding: 20px 30px; /* Zwiększenie rozmiaru przycisku */
+    font-family: var(--primary-font);
+    font-size: 20px; /* Zwiększenie rozmiaru czcionki */
+    font-weight: 700;
+    box-shadow: var(--box-shadow);
+    text-shadow: var(--text-shadow);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cancel-btn {
+    background-color: var(--primary-color);
+}
+
+.cancel-btn:hover {
+    background-color: var(--primary-color-hover);
+}
+
+button.cancel-btn {
+    color: var(--secondary-color);
+}
+
+.confirm-btn {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.confirm-btn:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+/* Responsive design */
+@media screen and (max-width: 1000px) {
+    .modal-content {
+        width: 80vw;
+        padding: 40px;
+    }
+
+    .modal-buttons button {
+        width: 45%;
+        padding: 15px 20px;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .modal-content {
+        width: 90vw;
+        padding: 30px;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .modal-buttons button {
+        width: 100%;
+        padding: 15px 0;
+    }
+}

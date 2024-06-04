@@ -11,6 +11,8 @@ import EditDetails from './components/edit_details/EditDetails.jsx';
 import NotFound from './components/not_found/NotFound.jsx';
 import CalendarPage from './components/calendar/CalendarPage.jsx';
 import DisplayCar from './components/car_display/DisplayCar.jsx';
+import CarPart from './components/car_parts/Car_parts';
+
 
 import './styles/main.css';
 
@@ -32,6 +34,8 @@ function App() {
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/not-found" />} />
         <Route path="/calendar" element={<CalendarPage />} />
+
+        <Route path='/car-parts' element={<CarPart />} />
       </Routes>
     </Router>
   );
