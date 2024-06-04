@@ -5,6 +5,7 @@ import Icons from '../../utils/icons';
 import SearchField from '../dashboard/components/SearchField';
 import IconButton from './IconButton';
 import ConfirmationDialog from './ConfirmationDialog';
+import { ROUTES } from '../../utils/routes';
 
 const Navbar = ({
   page,
@@ -16,22 +17,23 @@ const Navbar = ({
   const navigate = useNavigate();
   const [isLogoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
-  const isDashboardPage = location.pathname === '/dashboard';
-  const isCalendarPage = location.pathname === '/calendar';
-  const isCarPage = location.pathname.includes('/car/');
-  const isEditDetailsPage =
-    location.pathname.includes('/edit-details/');
+  const isDashboardPage = location.pathname === `${ROUTES.DASHBOARD}`;
+  const isCalendarPage = location.pathname === `${ROUTES.CALENDAR}`;
+  const isCarPage = location.pathname.includes(`${ROUTES.CAR}`);
+  const isEditDetailsPage = location.pathname.includes(
+    `${ROUTES.EDIT_DETAILS}`
+  );
 
   let title = page;
   if (isEditDetailsPage) {
     title =
-      location.pathname === '/edit-details/add-new-car'
+      location.pathname === `${ROUTES.ADD_NEW_CAR}`
         ? 'Dodawanie nowego pojazdu'
         : `Edycja naprawy - ${car?.brand || ''} ${car?.model || ''}`;
   }
 
   const handleLogout = () => {
-    navigate('/');
+    navigate(`${ROUTES.LOGIN}`);
   };
 
   if (isDashboardPage) {
@@ -44,11 +46,15 @@ const Navbar = ({
           <div className="navbar-icons">
             <IconButton
               icon={Icons.Calendar}
-              destination="/calendar"
+              destination={ROUTES.CALENDAR}
             />
             <IconButton
               icon={Icons.AddNew}
-              destination="/edit-details/add-new-car"
+              destination={ROUTES.ADD_NEW_CAR}
+            />
+            <IconButton
+              icon={Icons.Handyman}
+              destination={ROUTES.CAR_PARTS}
             />
             <IconButton
               icon={Icons.Logout}
@@ -80,10 +86,15 @@ const Navbar = ({
           <Icons.Edit className="icon black-icon" />
         </button>
       )}
+      <IconButton
+        icon={Icons.Handyman}
+        destination={ROUTES.CAR_PARTS}
+      />
+
       {isCalendarPage && (
         <IconButton
           icon={Icons.AddNew}
-          destination="/edit-details/add-new-car"
+          destination={ROUTES.ADD_NEW_CAR}
         />
       )}
     </div>
