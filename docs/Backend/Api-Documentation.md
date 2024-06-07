@@ -72,7 +72,8 @@ GET /users
 
 #### POST /register
 
-Registers a new user in the system.
+This task needs to be performed by an admin user, who must be manually inserted into the database. The admin user can then
+register a new user in the system using this endpoint.
 
 ##### Request:
 
@@ -86,7 +87,8 @@ POST /register
 {
   "name": "John",
   "surname": "Doe",
-  "password": "password123"
+  "password": "password123",
+  "authority": "USER"
 }
 ```
 
