@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.lodz.uni.wfis.mobilki.carrepair.exception.RegistrationException;
+import pl.lodz.uni.wfis.mobilki.carrepair.model.Authority;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.UserRepository;
 import pl.lodz.uni.wfis.mobilki.carrepair.request.RegistrationRequest;
@@ -43,7 +44,7 @@ public class UserService {
         user.setSurname(request.getSurname());
         String encodedPassword = passwordEncoder.encode(request.getPassword());
         user.setPassword(encodedPassword);
-        user.setAuthority("USER");
+        user.setAuthority(Authority.valueOf(request.getAuthority()));
 
         try {
             return userRepository.save(user);

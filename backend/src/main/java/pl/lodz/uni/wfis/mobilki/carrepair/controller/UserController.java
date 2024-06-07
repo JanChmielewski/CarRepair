@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.uni.wfis.mobilki.carrepair.exception.RegistrationException;
+import pl.lodz.uni.wfis.mobilki.carrepair.model.Authority;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.request.LoginRequest;
 import pl.lodz.uni.wfis.mobilki.carrepair.request.RegistrationRequest;
@@ -38,6 +39,7 @@ public class UserController {
     public ResponseEntity<?> register(@RequestBody RegistrationRequest request) {
         try {
             User user = userService.registerUser(request);
+            user.setAuthority(Authority.valueOf(request.getAuthority()));
             return ResponseEntity.ok("User registered! \nWorker code: " +
                     user.getWorkerCode() +
                     "\nName: " + user.getName() +

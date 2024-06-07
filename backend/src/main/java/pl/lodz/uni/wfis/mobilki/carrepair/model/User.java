@@ -28,5 +28,6 @@ public class User {
     @Column
     private String password;
 
-    private String authority;
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
 }

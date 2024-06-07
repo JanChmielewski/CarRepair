@@ -38,7 +38,7 @@ public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFil
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(customUserDetailsService)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/addCarForRepair/{clientId}").hasAuthority("USER").requestMatchers(HttpMethod.GET, "/carsForDashboard").hasAuthority("USER")
                         .anyRequest().authenticated());
