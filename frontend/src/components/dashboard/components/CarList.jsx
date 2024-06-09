@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Card from './Card';
 import { ROUTES } from '../../../utils/routes';
 
@@ -23,18 +22,14 @@ function CarList({ searchQuery, cars }) {
 
         return (
           <li key={car.id}>
-            <Link to={`${ROUTES.EDIT_DETAILS}/${car.id}`}>
-              <Card
-                repairID={car.id}
-                model={car.model}
-                brand={car.brand}
-                owner={
-                  client ? `${client.name} ${client.surname}` : ''
-                }
-                date={car.status}
-                repairs={[]}
-              />
-            </Link>
+            <Card
+              repairID={car.id}
+              model={car.model}
+              brand={car.brand}
+              owner={client ? `${client.name} ${client.surname}` : ''}
+              date={car.status}
+              repairs={[]}
+            />
           </li>
         );
       })}

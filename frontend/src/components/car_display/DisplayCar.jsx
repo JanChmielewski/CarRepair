@@ -1,4 +1,3 @@
-// DisplayCar.js
 import React, { useEffect, useRef, useState } from 'react';
 import { useCarDetails } from '../../hooks/useCarDetails';
 import { useParams } from 'react-router-dom';
@@ -69,8 +68,8 @@ function DisplayCar() {
                 className="info-content copy-content"
                 ref={vinRef}
               >
-                {car.vinNumber}
-                <CopyButton content={car.vinNumber} />{' '}
+                {car.vin}
+                <CopyButton content={car.vin} />{' '}
               </span>
             </li>
             <li>

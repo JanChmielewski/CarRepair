@@ -23,8 +23,8 @@ const Card = ({ repairID, brand, model, owner, date }) => {
   };
 
   return (
-    <div className="card">
-      <ul className="car-data" onClick={handleCardClick}>
+    <div className="card" onClick={handleCardClick}>
+      <ul className="car-data">
         <li>
           <Icons.Car className="icon pink-icon data-icon" />
           {brand} {model}
