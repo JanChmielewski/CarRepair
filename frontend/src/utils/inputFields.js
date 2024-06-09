@@ -30,7 +30,7 @@ const inputFields = [
   },
   {
     label: 'Właściciel',
-    name: 'ownerName',
+    name: 'clientName',
     maxLength: 40,
     minLength: 1,
     required: true,

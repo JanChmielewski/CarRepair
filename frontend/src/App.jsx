@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
 } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 import { ROUTES, PARAMS } from './utils/routes';
 import Login from './components/login/Login.jsx';
 import Dashboard from './components/dashboard/Dashboard.jsx';
@@ -15,7 +15,6 @@ import DisplayCar from './components/car_display/DisplayCar.jsx';
 import CarParts from './components/car_parts/CarParts.jsx';
 
 import './styles/main.css';
-import CarPart from './components/car_parts/CarParts.jsx';
 
 function App() {
   return (

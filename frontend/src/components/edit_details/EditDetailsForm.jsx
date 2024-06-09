@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputField from '../common/InputField/InputField';
 import SaveButton from './SaveButton';
 import inputFields from '../../utils/inputFields';
-import { formatDate } from '../../utils/formatDate';
 import { validateInputFields } from '../../utils/handleInputChange';
 
 function EditDetailsForm({
@@ -15,14 +14,11 @@ function EditDetailsForm({
 }) {
   const [errors, setErrors] = useState({});
 
-  const defaultValues = inputFields.reduce((acc, field) => {
-    acc[field.name] = field.defaultValue || '';
-    return acc;
-  }, {});
+  const [editedRepairState, setEditedRepairState] = useState({});
 
-  const [editedRepairState, setEditedRepairState] = useState(
-    isNewRepair ? defaultValues : editedRepair
-  );
+  useEffect(() => {
+    setEditedRepairState(editedRepair);
+  }, [editedRepair]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,13 +58,14 @@ function EditDetailsForm({
             name={field.name}
             value={value}
             onChange={handleChange}
-            type={field.type === 'date' ? 'date' : 'text'}
+            type={field.type || 'text'}
             maxLength={field.maxLength}
             minLength={field.minLength}
             isRequired={field.required}
             isOnlyDigits={
               field.name === 'phone' || field.name === 'mileage'
             }
+            error={errors[field.name]} // Pass the error message
           />
           {errors[field.name] && (
             <p className="error-message red">{errors[field.name]}</p>

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputLabel from './InputLabel';
 import Input from './Input';
-import ErrorMessage from './ErrorMessage';
 
 const InputField = ({
   label,
@@ -13,11 +12,7 @@ const InputField = ({
   labelClassName = 'details-input-label',
   minLength = null,
   maxLength = null,
-  isRequired = false,
-  isOnlyDigits = false,
 }) => {
-  const [error, setErrorState] = useState(null);
-
   return (
     <div>
       <InputLabel label={label} className={labelClassName} />
@@ -29,9 +24,8 @@ const InputField = ({
         className={className}
         maxLength={maxLength}
         minLength={minLength}
-        isRequired={isRequired}
+        placeholder={label}
       />
-      {error && <ErrorMessage message={error} />}
     </div>
   );
 };

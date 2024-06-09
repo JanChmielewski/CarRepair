@@ -1,96 +1,100 @@
-// EditDetails.js
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  useParams,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import EditDetailsForm from './EditDetailsForm';
 import ErrorMessage from '../common/InputField/ErrorMessage';
-import handleInputChange from '../../utils/handleInputChange';
 import { handleSave as handleSaveFunction } from './handleSave';
-import { cars, clients, repairs } from '../../utils/api';
 import Navbar from '../common/Navbar';
+import { API_ENDPOINTS } from '../../utils/api/api_endpoints';
 import { ROUTES } from '../../utils/routes';
+import handleInputChange from '../../utils/handleInputChange';
 
 function EditDetails() {
   const navigate = useNavigate();
   const { repairID } = useParams();
-  const location = useLocation();
-  const isNewRepair = location.pathname === `${ROUTES.ADD_NEW_CAR}`;
-
-  const allData = [...cars, ...clients, ...repairs];
-
-  let selectedRepair = null;
-
-  if (!isNewRepair) {
-    selectedRepair = repairs.find(
-      (item) => item.repairID === parseInt(repairID)
-    );
-
-    if (selectedRepair) {
-      const carData = cars.find(
-        (car) => car.carID === selectedRepair.carID
-      );
-      const clientData = clients.find(
-        (client) => client.clientID === carData.clientID
-      );
-      selectedRepair = {
-        ...selectedRepair,
-        ...carData,
-        ...clientData,
-      };
-    }
-  }
+  const [selectedRepair, setSelectedRepair] = useState(null);
+  const [editedRepair, setEditedRepair] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (
-      !isNewRepair &&
-      !repairs.some((item) => item.repairID === parseInt(repairID))
-    )
-      navigate(`${ROUTES.NOT_FOUND}`);
-  }, [isNewRepair, repairID, navigate]);
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('No token found');
+        }
 
-  const [editedRepair, setEditedRepair] = useState(
-    isNewRepair ? {} : selectedRepair || {}
-  );
+        const response = await fetch(
+          `${API_ENDPOINTS.GET_CARS_FOR_DASHBOARD}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + token,
+            },
+          }
+        );
 
-  const [error, setError] = useState(null);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const car = data.cars.find(
+          (car) => car.id === parseInt(repairID)
+        );
+        if (car) {
+          setSelectedRepair(car);
+          setEditedRepair({
+            brand: car.brand,
+            model: car.model,
+            vinNumber: car.vin,
+            engine: car.engine,
+            clientName: car.client.name,
+            phone: car.client.phoneNumber,
+            email: car.client.email,
+            registrationNumber: car.registrationNumber,
+            mechanicInfo: car.mechanicInfo || '',
+            clientInfo: car.clientInfo || '',
+            productionDate: car.yearOfProduction,
+            mileage: car.mileage,
+            dateOfArrival: car.dateOfArrival,
+            deadlineDate: car.deadlineDate,
+          });
+        } else {
+          navigate(`${ROUTES.NOT_FOUND}`);
+        }
+      } catch (error) {
+        console.error('Fetching data failed: ', error);
+        setError('An error occurred while fetching data.');
+      }
+    };
+
+    fetchData();
+  }, [repairID, navigate]);
 
   const handleSave = useCallback(async () => {
     const error = await handleSaveFunction(
-      isNewRepair,
+      false, // Not a new repair
       selectedRepair,
       editedRepair
     );
     setError(error);
-  }, [isNewRepair, selectedRepair, editedRepair]);
-  {
-    error && <ErrorMessage message={error} />;
-  }
+  }, [selectedRepair, editedRepair]);
+
   return (
     <div className="content">
       <div className="buttons">
-        <Navbar
-          page={
-            isNewRepair
-              ? 'Dodawanie nowego pojazdu'
-              : 'Edycja naprawy'
-          }
-          car={selectedRepair || {}}
-        />
+        <Navbar page="Edycja naprawy" car={selectedRepair || {}} />
       </div>
 
       <div className="edit-form">
         <EditDetailsForm
-          selectedRepair={selectedRepair}
           editedRepair={editedRepair}
           onChange={(e) =>
             handleInputChange(e, editedRepair, setEditedRepair)
           }
           onSave={handleSave}
-          isNewRepair={isNewRepair}
-          allData={allData}
+          isNewRepair={false}
           error={error}
           setError={setError}
         />

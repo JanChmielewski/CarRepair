@@ -22,7 +22,10 @@ function Dashboard() {
         }
         return response.json();
       })
-      .then((data) => console.log(data) || setCars(data.cars))
+      .then((data) => {
+        console.log(data);
+        setCars(data.cars);
+      })
       .catch((error) => {
         console.log('Fetching cars failed: ', error);
       });

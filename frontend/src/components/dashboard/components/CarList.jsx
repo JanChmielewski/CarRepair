@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from './Card';
+import { ROUTES } from '../../../utils/routes';
 
 function CarList({ searchQuery, cars }) {
   const filteredCars = cars.filter((car) => {
@@ -21,14 +23,18 @@ function CarList({ searchQuery, cars }) {
 
         return (
           <li key={car.id}>
-            <Card
-              repairID={car.id} // Assuming repairID is same as car.id
-              model={car.model}
-              brand={car.brand}
-              owner={client ? `${client.name} ${client.surname}` : ''}
-              date={car.status} // Assuming status here for simplicity
-              repairs={[]} // No repair data provided in the given API response
-            />
+            <Link to={`${ROUTES.EDIT_DETAILS}/${car.id}`}>
+              <Card
+                repairID={car.id}
+                model={car.model}
+                brand={car.brand}
+                owner={
+                  client ? `${client.name} ${client.surname}` : ''
+                }
+                date={car.status}
+                repairs={[]}
+              />
+            </Link>
           </li>
         );
       })}

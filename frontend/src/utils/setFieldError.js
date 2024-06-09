@@ -10,7 +10,7 @@ const setError = (
   const lowercasedFirstCharLabel =
     label.charAt(0).toLowerCase() + label.slice(1);
 
-  if (isRequired && !value.trim()) {
+  if (isRequired && (!value || !value.trim())) {
     return `Pole ${lowercasedFirstCharLabel} nie może być puste.`;
   }
 

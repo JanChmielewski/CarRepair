@@ -3,7 +3,7 @@ import InputField from './InputField/InputField';
 import inputFields from '../utils/inputFields';
 
 const formatDate = (dateString) => {
-  const [day, month, year] = dateString.split('-');
+  const [year, month, day] = dateString.split('-');
   return `${year}-${month}-${day}`;
 };
 
