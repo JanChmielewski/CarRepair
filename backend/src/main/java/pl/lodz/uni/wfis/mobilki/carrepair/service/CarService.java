@@ -25,10 +25,10 @@ public class CarService {
 
     public List<Car> getCarsInRepair() {
         List<Car> carsForDashboard = new ArrayList<>();
-        carRepository.findByStatus(CarStatus.IN_REPAIR).ifPresent(carsForDashboard::add);
-        carRepository.findByStatus(CarStatus.WAITING_FOR_DIAGNOSIS).ifPresent(carsForDashboard::add);
-        carRepository.findByStatus(CarStatus.READY_TO_PICK_UP).ifPresent(carsForDashboard::add);
-        carRepository.findByStatus(CarStatus.WAITING_FOR_PARTS).ifPresent(carsForDashboard::add);
+        carsForDashboard.addAll(carRepository.findByStatus(CarStatus.IN_REPAIR));
+        carsForDashboard.addAll(carRepository.findByStatus(CarStatus.WAITING_FOR_DIAGNOSIS));
+        carsForDashboard.addAll(carRepository.findByStatus(CarStatus.READY_TO_PICK_UP));
+        carsForDashboard.addAll(carRepository.findByStatus(CarStatus.WAITING_FOR_PARTS));
         return carsForDashboard;
     }
 
