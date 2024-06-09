@@ -7,6 +7,7 @@ import Navbar from '../common/Navbar';
 import { API_ENDPOINTS } from '../../utils/api/api_endpoints';
 import { ROUTES } from '../../utils/routes';
 import handleInputChange from '../../utils/handleInputChange';
+import { handleLogout } from '../common/handleLogout';
 
 function EditDetails() {
   const navigate = useNavigate();

@@ -33,6 +33,7 @@ const Navbar = ({
   }
 
   const handleLogout = () => {
+    localStorage.removeItem('token');
     navigate(`${ROUTES.LOGIN}`);
   };
 
