@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+// EditDetails.js
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   useParams,
   useLocation,
   useNavigate,
 } from 'react-router-dom';
 import EditDetailsForm from './EditDetailsForm';
-import PreviousPageButton from '../common/PreviousPageButton';
+import ErrorMessage from '../common/InputField/ErrorMessage';
 import handleInputChange from '../../utils/handleInputChange';
+import { handleSave as handleSaveFunction } from './handleSave';
 import { cars, clients, repairs } from '../../utils/api';
+import Navbar from '../common/Navbar';
+import { ROUTES } from '../../utils/routes';
 
 function EditDetails() {
   const navigate = useNavigate();
   const { repairID } = useParams();
   const location = useLocation();
-  const isNewRepair =
-    location.pathname === '/edit-details/add-new-car';
+  const isNewRepair = location.pathname === `${ROUTES.ADD_NEW_CAR}`;
 
   const allData = [...cars, ...clients, ...repairs];
 
@@ -45,58 +48,53 @@ function EditDetails() {
       !isNewRepair &&
       !repairs.some((item) => item.repairID === parseInt(repairID))
     )
-      navigate('/not-found');
-  }, [isNewRepair, repairs, repairID, navigate]);
+      navigate(`${ROUTES.NOT_FOUND}`);
+  }, [isNewRepair, repairID, navigate]);
 
   const [editedRepair, setEditedRepair] = useState(
     isNewRepair ? {} : selectedRepair || {}
   );
 
-  const handleSave = async () => {
-    try {
-      const url = isNewRepair
-        ? '/api/add-new-repair'
-        : '/api/update-repair-details';
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: selectedRepair?.repairID,
-          ...editedRepair,
-        }),
-      };
-      const response = await fetch(url, requestOptions);
+  const [error, setError] = useState(null);
 
-      if (response.ok) {
-        console.log('Repair details saved successfully');
-      } else {
-        console.error('Failed to save repair details');
-      }
-    } catch (error) {
-      console.error('Error saving repair details:', error);
-    }
-  };
-
+  const handleSave = useCallback(async () => {
+    const error = await handleSaveFunction(
+      isNewRepair,
+      selectedRepair,
+      editedRepair
+    );
+    setError(error);
+  }, [isNewRepair, selectedRepair, editedRepair]);
+  {
+    error && <ErrorMessage message={error} />;
+  }
   return (
-    <div>
+    <div className="content">
       <div className="buttons">
-        <PreviousPageButton
-          buttonColor="pink"
-          arrowClassName="go-back-arrow"
+        <Navbar
+          page={
+            isNewRepair
+              ? 'Dodawanie nowego pojazdu'
+              : 'Edycja naprawy'
+          }
+          car={selectedRepair || {}}
         />
       </div>
-      <EditDetailsForm
-        selectedRepair={selectedRepair}
-        editedRepair={editedRepair}
-        onChange={(e) =>
-          handleInputChange(e, editedRepair, setEditedRepair)
-        }
-        onSave={handleSave}
-        isNewRepair={isNewRepair}
-        allData={allData}
-      />
+
+      <div className="edit-form">
+        <EditDetailsForm
+          selectedRepair={selectedRepair}
+          editedRepair={editedRepair}
+          onChange={(e) =>
+            handleInputChange(e, editedRepair, setEditedRepair)
+          }
+          onSave={handleSave}
+          isNewRepair={isNewRepair}
+          allData={allData}
+          error={error}
+          setError={setError}
+        />
+      </div>
     </div>
   );
 }

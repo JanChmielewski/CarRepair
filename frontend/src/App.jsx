@@ -5,33 +5,40 @@ import {
   Route,
 } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import { ROUTES, PARAMS } from './utils/routes';
 import Login from './components/login/Login.jsx';
 import Dashboard from './components/dashboard/Dashboard.jsx';
 import EditDetails from './components/edit_details/EditDetails.jsx';
 import NotFound from './components/not_found/NotFound.jsx';
 import CalendarPage from './components/calendar/CalendarPage.jsx';
 import DisplayCar from './components/car_display/DisplayCar.jsx';
+import CarParts from './components/car_parts/CarParts.jsx';
 
 import './styles/main.css';
+import CarPart from './components/car_parts/CarParts.jsx';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/" element={<Login />} />
-        <Route path="/car/:repairID" element={<DisplayCar />} />
+        <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+        <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route
-          path="/edit-details/:repairID"
-          element={<EditDetails />}
+          path={`${ROUTES.CAR}/:${PARAMS.DYNAMIC_ID}`}
+          element={<DisplayCar />}
         />
         <Route
-          path="/edit-details/add-new-car"
+          path={`${ROUTES.EDIT_DETAILS}/:${PARAMS.DYNAMIC_ID}`}
           element={<EditDetails />}
         />
-        <Route path="/not-found" element={<NotFound />} />
-        <Route path="*" element={<Navigate to="/not-found" />} />
-        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path={ROUTES.ADD_NEW_CAR} element={<EditDetails />} />
+        <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+        <Route
+          path="*"
+          element={<Navigate to={ROUTES.NOT_FOUND} />}
+        />
+        <Route path={ROUTES.CALENDAR} element={<CalendarPage />} />
+        <Route path={ROUTES.CAR_PARTS} element={<CarParts />} />
       </Routes>
     </Router>
   );

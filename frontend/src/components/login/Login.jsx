@@ -39,7 +39,7 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmitForm}>
-      <h2>Logowanie</h2>
+      <h2 className="form-title login-title">Logowanie</h2>
       <div className="control-row">
         <Input
           label="ID pracownika"
@@ -59,10 +59,12 @@ export default function Login() {
           error={passwordHasError && 'Wprowadź poprawne hasło.'}
         />
       </div>
-      {loginError && <p className="error-message">{loginError}</p>}{' '}
+      {loginError && (
+        <p className="error-message login-error">{loginError}</p>
+      )}{' '}
       {/* Display login error message if exists */}
       <p className="form-actions">
-        <button className="button">Zaloguj</button>
+        <button className="button login-btn">Zaloguj</button>
       </p>
     </form>
   );

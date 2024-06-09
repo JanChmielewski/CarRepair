@@ -1,31 +1,15 @@
-import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import DisplayCar from './DisplayCar';
-import { cars, clients, repairs } from '../../utils';
+import { PARAMS } from '../../utils/routes';
 
 function DisplayCarDetails() {
-  const navigate = useNavigate();
-  const { repairID } = useParams();
-
-  console.log('vinNumber:', repairID);
-
-  useEffect(() => {
-    const carExists = [...cars, ...clients, ...repairs].some((item) =>
-      ['vinNumber', 'id', 'repairID'].some(
-        (key) => key in item && item[key] === repairID
-      )
-    );
-
-    // If the car does not exist, navigate to not-found page
-    if (!carExists) {
-      navigate('/not-found');
-    }
-  }, [repairID, navigate]);
+  const params = useParams();
+  const dynamicId = params[PARAMS.DYNAMIC_ID];
 
   return (
     <div>
-      {/* Pass the vinNumber to the DisplayCar component */}
-      <DisplayCar repairID={repairID} />
+      <DisplayCar repairID={dynamicId} />
     </div>
   );
 }

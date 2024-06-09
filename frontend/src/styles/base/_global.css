@@ -1,4 +1,8 @@
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -8,14 +12,32 @@ body {
   margin: 0;
   font-family: 'Josefin Sans', sans-serif;
   color: var(--text-color);
+  scroll-behavior: smooth;
+  scrollbar-color: var(--primary-color-hover) black;
+}
+
+:-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color-hover);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(../../src/images/login-page-bg-blurred-1920.jpg);
+  background-image: url('../../assets/images/login-page-bg-blurred-1920.jpg');
   background-size: cover;
+  background-attachment: fixed;
 }
 
 button:hover,

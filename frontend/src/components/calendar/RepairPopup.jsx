@@ -1,18 +1,26 @@
 import React from 'react';
 import { formatDate } from './utils';
+import { useNavigate } from 'react-router-dom';
+import { repairs, cars, clients } from '../../utils/api';
+import { ROUTES } from '../../utils/routes';
 
 const RepairPopup = ({
   isOpen,
   selectedDate,
   selectedRepairs,
-  navigate,
   getCarInfo,
   onClose,
 }) => {
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
 
   const handleClose = () => {
     onClose();
+  };
+
+  const handleAddNewRepair = () => {
+    navigate(`${ROUTES.ADD_NEW_CAR}`);
   };
 
   return (
@@ -22,20 +30,43 @@ const RepairPopup = ({
           &times;
         </button>
         <h3>Naprawy na {formatDate(selectedDate)}:</h3>
-        <ul className="repair-list">
-          {selectedRepairs.map((repair) => (
-            <li
-              className="repair-data"
-              key={repair.repairID}
-              onClick={() => navigate(`/car/${repair.repairID}`)}
-            >
-              <strong>Samochód:</strong> {getCarInfo(repair.carID)}{' '}
-              <br />
-              <strong>Mechanik:</strong> {repair.repairedBy} <br />
-              <strong>Status:</strong> {repair.repairStatus}
-            </li>
-          ))}
-        </ul>
+        {selectedRepairs.length > 0 ? (
+          <ul className="repair-list">
+            {selectedRepairs.map((repair, index) => (
+              <li key={repair.repairID}>
+                <div
+                  className="repair-data"
+                  onClick={() =>
+                    navigate(`${ROUTES.CAR}/${repair.repairID}`)
+                  }
+                >
+                  <div className="repair-data-content">
+                    <span className="calendar-dialog-label">
+                      Samochód:
+                    </span>{' '}
+                    {getCarInfo(repair.carID, cars, clients)} <br />
+                    <span className="calendar-dialog-label">
+                      Mechanik:
+                    </span>{' '}
+                    {repair.repairedBy} <br />
+                    <span className="calendar-dialog-label">
+                      Status:
+                    </span>{' '}
+                    {repair.repairStatus}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Brak</p>
+        )}
+        <button
+          className="add-repair-btn button"
+          onClick={handleAddNewRepair}
+        >
+          Dodaj nową naprawę
+        </button>
       </div>
     </div>
   );

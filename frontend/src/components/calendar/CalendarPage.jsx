@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import RenderTileContent from './RenderTileContent';
 import RepairPopup from './RepairPopup';
 import { repairs, cars, clients } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { getCarInfo, formatDate, countRepairsForDate } from './utils';
-import PreviousPageButton from '../common/PreviousPageButton';
+import Navbar from '../common/Navbar';
 import 'react-calendar/dist/Calendar.css';
 
 const CalendarPage = () => {
@@ -22,7 +22,7 @@ const CalendarPage = () => {
       (repair) => repair.deadlineDate === formattedDate
     );
     setSelectedRepairs(filteredRepairs);
-    setIsPopupOpen(filteredRepairs.length > 0);
+    setIsPopupOpen(true);
   };
 
   const handleOpenPopup = () => {
@@ -33,9 +33,15 @@ const CalendarPage = () => {
     setIsPopupOpen(false);
   };
 
+  useEffect(() => {
+    if (selectedRepairs.length > 0) {
+      setIsPopupOpen(true);
+    }
+  }, [selectedRepairs]);
+
   return (
     <div className="calendar-page">
-      <PreviousPageButton buttonColor={'pink'} />
+      <Navbar page={'Kalendarz'} />
       <div className="calendar">
         <Calendar
           onChange={handleDateChange}

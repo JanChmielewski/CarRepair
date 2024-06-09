@@ -1,9 +1,38 @@
+/* Combined CSS */
+
+/* General Styles */
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.arrow-car-display {
+  display: flex;
+  justify-content: center;
+}
+
+.arrow-car-display .icon {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+/* Navbar Styles */
 nav {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 80px;
-  background-color: var(--primary-color);
+  height: 60px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--primary-color-hover)
+  );
   box-shadow: var(--box-shadow);
   position: fixed;
   top: 0;
@@ -22,18 +51,212 @@ nav {
 }
 
 .navbar-search {
-  background-color: var(--background-color);
-  color: #e1e1e1;
-  width: 20vw;
-  height: 40px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--secondary-color-hover),
+    var(--bg-color-darker)
+  );
+  color: var(--text-color);
+  width: 100%;
+  height: 35px;
   border-radius: 8px;
   border: none;
   padding: 10px;
+  padding-left: 40px;
   font-family: var(--primary-font);
   font-size: 18px;
 }
 
 .navbar-icons {
   display: flex;
+  gap: 30px;
+}
+
+.search-field {
+  position: relative;
+  width: 30vw;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: var(--primary-color);
+}
+
+/* Display Navbar */
+.display-navbar {
+  position: fixed;
+  background-image: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--primary-color-hover)
+  );
+  display: flex;
+  justify-content: space-between;
+  box-shadow: var(--popup-shadow);
+  align-items: center;
+  height: 60px;
+  padding: 5px 20px;
+  width: 100vw;
+  z-index: 999;
+  top: 0;
+}
+
+.navbar-header {
+  flex-grow: 1;
+  margin: 0;
+  letter-spacing: 2px;
+  font-size: 1.8em;
+  color: black;
+  text-shadow: var(--popup-shadow);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+/* Car Display Styles */
+.flex-container {
+  margin: auto;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.car-display {
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-title {
+  margin: auto;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  text-shadow: var(--header-shadow);
+  margin-top: 30px;
+}
+
+.car-info-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  padding: 0;
+  list-style-type: none;
+  font-size: 20px;
+  overflow: visible;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.car-info-list li {
+  position: relative;
+  background-color: rgb(10, 10, 10);
+  border: 1px solid #ff0099;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 50vw;
+  overflow-y: auto;
+  max-height: 150px;
+  box-shadow: var(--popup-shadow);
+  overflow: visible;
+}
+
+.copy-content {
+  display: flex;
+  justify-content: center;
   gap: 10px;
+  align-items: center;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  width: 25px;
+  height: 25px;
+  z-index: 0;
+}
+
+.copy-icon {
+  width: 25px !important;
+  height: 25px !important;
+  padding: 0 !important;
+}
+
+.edit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: auto;
+  width: auto !important;
+  font-size: 16px;
+  background: none;
+}
+
+.label {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-shadow: 1px 1px 2px #be0072;
+}
+
+/* Responsive Styles */
+@media (max-width: 1000px) {
+  .car-info-list {
+    justify-content: center;
+    align-items: center;
+  }
+  .car-info-list li {
+    flex-direction: column;
+    padding: 10px;
+    max-width: 100%;
+    width: 90vw !important;
+  }
+
+  .label {
+    margin-bottom: 15px;
+  }
+
+  .navbar-search {
+    width: 100%; /* Full width */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  nav {
+    padding: 50px;
+  }
+  .navbar-search {
+    width: 100%;
+    order: -1;
+  }
+  .search-field {
+    width: auto;
+  }
+  .navbar-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .navbar-icons {
+    gap: 15px;
+    order: 1;
+  }
 }

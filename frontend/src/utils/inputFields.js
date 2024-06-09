@@ -1,9 +1,9 @@
 const inputFields = [
   {
-    label: 'Numer VIN',
-    name: 'vinNumber',
-    maxLength: 17,
-    minLength: 17,
+    label: 'Marka',
+    name: 'brand',
+    maxLength: 40,
+    minLength: 1,
     required: true,
   },
   {
@@ -13,6 +13,14 @@ const inputFields = [
     minLength: 1,
     required: true,
   },
+  {
+    label: 'Numer VIN',
+    name: 'vinNumber',
+    maxLength: 17,
+    minLength: 17,
+    required: true,
+  },
+
   {
     label: 'Silnik',
     name: 'engine',

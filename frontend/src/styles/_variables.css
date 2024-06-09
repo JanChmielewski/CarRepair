@@ -1,12 +1,41 @@
 :root {
   /* Color Variables */
   --primary-color: #ff0099;
+  --primary-color-transparent: rgba(255, 0, 153, 0.3);
+  --primary-color-light: #ffafd7;
   --secondary-color: #151515;
   --primary-color-hover: #7d004b;
-  --secondary-color-hover: #151515;
+  --secondary-color-hover: #252525;
   --text-color: #efefef;
   --background-color: #101010;
+  --bg-color-darker: #0b0b0b;
+
+  /* Shadow variables */
+  --small-shadow: 1px 1px 2px black;
+
+  --popup-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+  --header-shadow: -1px 0 black, 0 1px black, 1px 0 black,
+    0 -1px black, -1px 0 var(--primary-color-transparent),
+    0 1px var(--primary-color-transparent),
+    1px 0 var(--primary-color-transparent),
+    0 -1px var(--primary-color-transparent),
+    0px 2px 15px var(--primary-color-transparent);
+
+  --light-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+
+  --primary-col-shadow: 1px 1px 2px black,
+    0 0 10px var(--primary-color-transparent),
+    0 0 5px var(--primary-color-hover);
+
+  --text-border: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+  /* Border variables */
+  --box-border: 1px solid var(--primary-color-transparent);
 
   /* Font Variables */
-  --primary-font: 'Josefin Sans', sans-serif;
+  --primary-font: 'Josefin Sans', Arial, sans-serif;
 }

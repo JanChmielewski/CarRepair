@@ -1,14 +1,12 @@
 import React from 'react';
-import { cars, clients, repairs } from '../../../utils/api';
 import Card from './Card';
 
-function CarList({ searchQuery }) {
-  const carClient = (car) =>
-    clients.find((client) => client.clientID === car.clientID);
-
+function CarList({ searchQuery, cars }) {
   const filteredCars = cars.filter((car) => {
-    const client = carClient(car);
-    const ownerName = client ? client.ownerName.toLowerCase() : '';
+    const client = car.client;
+    const ownerName = client
+      ? `${client.name.toLowerCase()} ${client.surname.toLowerCase()}`
+      : '';
     const modelName =
       car.model.toLowerCase() + car.brand.toLowerCase();
     const query = searchQuery.toLowerCase();
@@ -19,30 +17,17 @@ function CarList({ searchQuery }) {
   return (
     <div className="car-list">
       {filteredCars.map((car) => {
-        const carRepairs = repairs.filter(
-          (repair) => repair.repairID === car.carID
-        );
-        const client = carClient(car);
-        const deadlineRepair =
-          carRepairs.length > 0
-            ? carRepairs.reduce((prev, current) =>
-                prev.deadlineDate < current.deadlineDate
-                  ? prev
-                  : current
-              )
-            : null;
+        const client = car.client;
 
         return (
-          <li key={car.carID}>
+          <li key={car.id}>
             <Card
-              repairID={
-                carRepairs.length > 0 ? carRepairs[0].repairID : null
-              }
+              repairID={car.id} // Assuming repairID is same as car.id
               model={car.model}
               brand={car.brand}
-              owner={client ? client.ownerName : ''}
-              date={deadlineRepair ? deadlineRepair.deadlineDate : ''}
-              repairs={carRepairs}
+              owner={client ? `${client.name} ${client.surname}` : ''}
+              date={car.status} // Assuming status here for simplicity
+              repairs={[]} // No repair data provided in the given API response
             />
           </li>
         );
