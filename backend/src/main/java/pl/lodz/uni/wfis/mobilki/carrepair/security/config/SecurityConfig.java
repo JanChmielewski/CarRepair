@@ -40,7 +40,10 @@ public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFil
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/register").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/addCarForRepair/{clientId}").hasAuthority("USER").requestMatchers(HttpMethod.GET, "/carsForDashboard").hasAuthority("USER")
+                        // CAR REQUESTS
+                        .requestMatchers(HttpMethod.POST, "/addCarForRepair/{clientId}").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.GET, "/carsForDashboard").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.POST, "/editCarInfo/{carID}").hasAuthority("USER")
                         .anyRequest().authenticated());
         return http.build();
     }

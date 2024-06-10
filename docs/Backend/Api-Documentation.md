@@ -38,6 +38,7 @@ http://localhost:8080
     * [```POST /addCarForRepair/{clientId}```](#post-addcarforrepairclientid)
     * [```DELETE /deleteAllCars```](#delete-deleteallcars)
     * [```GET /carsForDashboard```](#get-carsfordashboard)
+    * [```POST /editCarInfo/{carId}```](#post-editcarinfocarid)
 
 [//]: # (* [Repair]&#40;&#41;)
 
@@ -255,8 +256,8 @@ POST /addCarForRepair/1
       "clientId": 1,
       "name": "Jane",
       "surname": "Doe",
-      "email": "123456789",
-      "phoneNumber": "janeDoe@test.com"
+      "email": "janeDoe@test.com",
+      "phoneNumber": "123456789"
     }
   }
 }
@@ -292,51 +293,177 @@ GET /carsForDashboard
 
 ````json
 {
-    "message: ": "List of cars for dashboard retrieved successfully",
-    "cars": [
-        {
-            "id": 102,
-            "brand": "Honda",
-            "model": "Civic",
-            "yearOfProduction": 2015,
-            "registrationNumber": "XYZ-789",
-            "vin": "2HGFG11816H300001",
-            "mileage": "80000",
-            "engine": "2.0L",
-            "status": "WAITING_FOR_DIAGNOSIS",
-            "client": {
-                "clientId": 1,
-                "name": "Jane",
-                "surname": "Doe",
-                "email": "123456789",
-                "phoneNumber": "janeDoe@test.com"
-            }
-        },
-        {
-            "id": 103,
-            "brand": "Toyota",
-            "model": "Corolla",
-            "yearOfProduction": 2018,
-            "registrationNumber": "ABC-123",
-            "vin": "1HGCM82633A123456",
-            "mileage": "60000",
-            "engine": "1.8L",
-            "status": "WAITING_FOR_DIAGNOSIS",
-            "client": {
-                "clientId": 1,
-                "name": "Jane",
-                "surname": "Doe",
-                "email": "123456789",
-                "phoneNumber": "janeDoe@test.com"
-            }
-        }
-    ]
+  "message: ": "List of cars for dashboard retrieved successfully",
+  "cars": [
+    {
+      "id": 102,
+      "brand": "Honda",
+      "model": "Civic",
+      "yearOfProduction": 2015,
+      "registrationNumber": "XYZ-789",
+      "vin": "2HGFG11816H300001",
+      "mileage": "80000",
+      "engine": "2.0L",
+      "status": "WAITING_FOR_DIAGNOSIS",
+      "client": {
+        "clientId": 1,
+        "name": "Jane",
+        "surname": "Doe",
+        "email": "janeDoe@test.com",
+        "phoneNumber": "123456789"
+      }
+    },
+    {
+      "id": 103,
+      "brand": "Toyota",
+      "model": "Corolla",
+      "yearOfProduction": 2018,
+      "registrationNumber": "ABC-123",
+      "vin": "1HGCM82633A123456",
+      "mileage": "60000",
+      "engine": "1.8L",
+      "status": "WAITING_FOR_DIAGNOSIS",
+      "client": {
+        "clientId": 1,
+        "name": "Jane",
+        "surname": "Doe",
+        "email": "janeDoe@test.com",
+        "phoneNumber": "123456789"
+      }
+    }
+  ]
 }
 ````
 
-[//]: # (### Repair)
+#### POST /editCarInfo/{carId}
 
-[//]: # ()
+Endpoint for editing information about car like mileage or registration number. 
 
-[//]: # (The `Repair` endpoint provides APIs for managing repair information in the system.)
+##### Request:
+
+``` http request
+POST /editCarInfo/1
+```
+
+##### Request Body:
+
+```json
+{
+  "mileage": "245500"
+}
+```
+
+##### Response:
+
+```json
+ {
+  "message: ": "Car with id: 102 updated successfully",
+  "updated fields ": {
+    "mileage": "245500",
+    "lastUpdated": "2024-06-10 23:50"
+  }
+}
+```
+
+## TO IMPLEMENT: Repair
+
+### Repair
+
+The `Repair` endpoint provides APIs for managing repair information in the system.
+
+#### GET /repairs
+
+Returns a list of all repairs in the system.
+
+##### Request:
+
+``` http request
+GET /repairs
+```
+
+##### Response:
+
+```json
+{
+  "message: ": "List of repairs retrieved successfully",
+  "repairs": [
+    {
+      "repairId": 1,
+      "carId": 1,
+      "repairDescription": "Engine replacement",
+      "repairCost": 2000,
+      "repairStatus": "IN_REPAIR"
+    },
+    "..."
+  ]
+}
+```
+
+#### POST /addRepair/{carId}
+
+Adds a new repair to the system.
+
+##### Request:
+
+``` http request
+POST /addRepair/1
+```
+
+##### Request Body:
+
+```json
+{
+  "repairDescription": "Engine replacement",
+  "repairCost": 2000,
+  "repairStatus": "IN_REPAIR"
+}
+```
+
+##### Response:
+
+```json
+{
+  "message: ": "Repair added to the database",
+  "repair": {
+    "repairId": 1,
+    "carId": 1,
+    "repairDescription": "Engine replacement",
+    "repairCost": 2000,
+    "repairStatus": "IN_REPAIR"
+  }
+}
+```
+
+#### POST /editRepair/{repairId}
+
+Endpoint for editing information about repair (f.e. repair status, repair cost).
+
+##### Request:
+
+``` http request
+POST /editRepair/1
+```
+
+##### Request Body:
+
+```json
+{
+  "repairStatus": "REPAIRED",
+  "repairCost": 2500
+}
+```
+
+##### Response:
+
+```json
+{
+  "message: ": "Repair with id: 1 updated successfully",
+  "updated fields": {
+    "repairStatus": "REPAIRED",
+    "repairCost": 2500
+  }
+}
+```
+
+
 

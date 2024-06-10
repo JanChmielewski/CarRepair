@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.CarDTO;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Car;
+import pl.lodz.uni.wfis.mobilki.carrepair.request.carRequests.EditCarInfoRequest;
 import pl.lodz.uni.wfis.mobilki.carrepair.service.CarService;
 
 import java.util.LinkedHashMap;
@@ -32,7 +33,6 @@ public class CarController {
         return ResponseEntity.ok(response);
     }
 
-    // TODO: Implement when needed
     @GetMapping("/carsForDashboard")
     public ResponseEntity<?> getCarsForDashboard() {
         Map<String, Object> response = new LinkedHashMap<>();
@@ -57,5 +57,14 @@ public class CarController {
         return ResponseEntity.ok("All cars deleted successfully");
     }
 
+
+    @PostMapping("editCarInfo/{carID}")
+    public ResponseEntity<?> editCarInfo(@RequestBody EditCarInfoRequest editCarInfoRequest, @PathVariable("carID") Long carID) {
+        Map<String, Object> updatedFields = carService.editCarInfo(editCarInfoRequest, carID);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("message: ", "Car with id: " + carID + " updated successfully");
+        response.put("updated fields ", updatedFields);
+        return ResponseEntity.ok(response);
+    }
 
 }

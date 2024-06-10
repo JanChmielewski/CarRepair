@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -45,6 +48,10 @@ public class Car {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
+
+    @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:")
+    LocalDateTime lastUpdated;
 
     public Car(String brand, String model, int yearOfProduction, String registrationNumber,
                String vin, String mileage, String engine, CarStatus status, Client client) {
