@@ -14,7 +14,7 @@ const setError = (
     return `Pole ${lowercasedFirstCharLabel} nie może być puste.`;
   }
 
-  if (minLength && value.length < minLength) {
+  if (minLength && value && value.length < minLength) {
     if (minLength === 1) {
       return `Pole ${lowercasedFirstCharLabel} powinno mieć co najmniej ${minLength} znak.`;
     }
@@ -24,15 +24,20 @@ const setError = (
     return `Pole ${lowercasedFirstCharLabel} powinno mieć co najmniej ${minLength} znaków.`;
   }
 
-  if (isOnlyDigits && !/^\d+$/.test(value)) {
+  if (isOnlyDigits && value && !/^\d+$/.test(value)) {
     return `Pole ${lowercasedFirstCharLabel} powinno zawierać tylko cyfry.`;
   }
 
-  if (isOnlyDigits && minLength && value.length < minLength) {
+  if (
+    isOnlyDigits &&
+    minLength &&
+    value &&
+    value.length < minLength
+  ) {
     return `Pole ${lowercasedFirstCharLabel} powinno składać się z samych cyfr i mieć co najmniej ${minLength} znaków.`;
   }
 
-  if (maxLength && value.length > maxLength) {
+  if (maxLength && value && value.length > maxLength) {
     return `Pole ${lowercasedFirstCharLabel} może mieć maksymalnie ${maxLength} znaków.`;
   }
 

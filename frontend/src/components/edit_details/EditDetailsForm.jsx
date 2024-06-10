@@ -3,6 +3,7 @@ import InputField from '../common/InputField/InputField';
 import SaveButton from './SaveButton';
 import inputFields from '../../utils/inputFields';
 import { validateInputFields } from '../../utils/handleInputChange';
+import { checkClientExists } from './handleSave'; // Import the checkClientExists function
 
 function EditDetailsForm({
   editedRepair,
@@ -13,11 +14,17 @@ function EditDetailsForm({
   setError,
 }) {
   const [errors, setErrors] = useState({});
-
   const [editedRepairState, setEditedRepairState] = useState({});
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [clientExistsMessage, setClientExistsMessage] = useState('');
 
   useEffect(() => {
     setEditedRepairState(editedRepair);
+    setEmail(editedRepair.email || '');
+    setPhone(editedRepair.phone || '');
   }, [editedRepair]);
 
   const handleChange = (e) => {
@@ -27,6 +34,14 @@ function EditDetailsForm({
       [name]: value,
     }));
     onChange(e);
+
+    if (name === 'email') {
+      setEmail(value);
+      setIsEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+    } else if (name === 'phone') {
+      setPhone(value);
+      setIsPhoneValid(/^\d{9,15}$/.test(value)); // Adjust the regex based on your phone number validation requirements
+    }
   };
 
   const handleSave = () => {
@@ -44,12 +59,18 @@ function EditDetailsForm({
     }
   };
 
+  const handleCheckClient = async () => {
+    const clientExists = await checkClientExists(editedRepairState);
+    if (clientExists) {
+      setClientExistsMessage('Client already exists');
+    } else {
+      setClientExistsMessage('Client does not exist');
+    }
+  };
+
   const renderInputFields = () => {
     return inputFields.map((field) => {
-      const value =
-        field.name === 'date'
-          ? formatDate(editedRepairState[field.name])
-          : editedRepairState[field.name] || '';
+      const value = editedRepairState[field.name] || '';
 
       return (
         <div key={field.name} className="input">
@@ -69,6 +90,18 @@ function EditDetailsForm({
           />
           {errors[field.name] && (
             <p className="error-message red">{errors[field.name]}</p>
+          )}
+          {field.name === 'email' && (
+            <>
+              <button
+                className="check-client-btn"
+                onClick={handleCheckClient}
+                disabled={!isEmailValid || !isPhoneValid}
+              >
+                Sprawdź czy klient istnieje
+              </button>
+              {clientExistsMessage && <p>{clientExistsMessage}</p>}
+            </>
           )}
         </div>
       );

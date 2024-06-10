@@ -1,5 +1,35 @@
 const inputFields = [
   {
+    label: 'Imię',
+    name: 'clientFirstName',
+    maxLength: 40,
+    minLength: 1,
+    required: true,
+  },
+  {
+    label: 'Nazwisko',
+    name: 'clientLastName',
+    maxLength: 40,
+    minLength: 1,
+    required: true,
+  },
+  {
+    label: 'Numer telefonu',
+    name: 'phone',
+    type: 'tel',
+    maxLength: 15,
+    minLength: 9,
+    required: true,
+  },
+  {
+    label: 'E-mail właściciela',
+    name: 'email',
+    type: 'email',
+    maxLength: 40,
+    minLength: 6,
+    required: true,
+  },
+  {
     label: 'Marka',
     name: 'brand',
     maxLength: 40,
@@ -20,36 +50,12 @@ const inputFields = [
     minLength: 17,
     required: true,
   },
-
   {
     label: 'Silnik',
     name: 'engine',
     maxLength: 50,
     minLength: 1,
     required: false,
-  },
-  {
-    label: 'Właściciel',
-    name: 'clientName',
-    maxLength: 40,
-    minLength: 1,
-    required: true,
-  },
-  {
-    label: 'Numer telefonu',
-    name: 'phone',
-    type: 'tel',
-    maxLength: 11,
-    minLength: 9,
-    required: true,
-  },
-  {
-    label: 'E-mail właściciela',
-    name: 'email',
-    type: 'email',
-    maxLength: 40,
-    minLength: 6,
-    required: true,
   },
   {
     label: 'Numer rejestracyjny',
@@ -88,4 +94,5 @@ const inputFields = [
     required: true,
   },
 ];
+
 export default inputFields;
