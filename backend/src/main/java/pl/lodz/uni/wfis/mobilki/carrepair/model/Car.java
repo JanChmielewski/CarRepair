@@ -19,7 +19,7 @@ public class Car {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long carId;
 
     @Column
     private String brand;
@@ -42,11 +42,12 @@ public class Car {
     @Column
     private String engine;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private CarStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "clientId")
     private Client client;
 
     @Column

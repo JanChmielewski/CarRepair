@@ -16,7 +16,7 @@ public class CarMapper {
         return new CarDTO(
                 car.getBrand(),
                 car.getModel(),
-            -    car.getYearOfProduction(),
+                car.getYearOfProduction(),
                 car.getRegistrationNumber(),
                 car.getVin(),
                 car.getMileage(),
