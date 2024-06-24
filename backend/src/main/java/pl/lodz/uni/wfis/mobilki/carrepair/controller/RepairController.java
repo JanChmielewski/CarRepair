@@ -29,6 +29,15 @@ public class RepairController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/repairs/{repairID}")
+    public ResponseEntity<?> getRepair(@PathVariable Long repairID) {
+        Repair repair = repairService.getRepair(repairID);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("message: ", "Repair with id: " + repairID + " retrieved successfully");
+        response.put("repair", repair);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/addRepair/{carID}")
     public ResponseEntity<?> addRepair(@RequestBody AddRepairRequest repairRequest, @PathVariable Long carID) {
         if (repairRequest == null) {

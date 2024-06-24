@@ -3,6 +3,7 @@ package pl.lodz.uni.wfis.mobilki.carrepair.service;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import pl.lodz.uni.wfis.mobilki.carrepair.model.CarStatus;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Repair;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.CarRepository;
@@ -34,6 +35,11 @@ public class RepairService {
         return repairRepository.findAll();
     }
 
+    public Repair getRepair(Long repairID) {
+        return repairRepository.findById(repairID)
+                .orElseThrow(() -> new IllegalArgumentException("Repair with id: " + repairID + " not found"));
+    }
+
     public void addRepair(AddRepairRequest repairRequest, Long carID) {
         if (repairRequest == null) {
             throw new IllegalArgumentException("Repair data is empty");
@@ -42,11 +48,13 @@ public class RepairService {
             throw new IllegalArgumentException("Car with given ID does not exist");
         }
         Repair repair = new Repair();
-        repair.setDateOfAdmission(repairRequest.getRepair().getDateOfAdmission());
-        repair.setDateOFHandingOver(repairRequest.getRepair().getDateOFHandingOver());
-        repair.setInfoFromClient(repairRequest.getRepair().getInfoFromClient());
-        repair.setInfoFromWorker(repairRequest.getRepair().getInfoFromWorker());
-        repair.setStatus(repairRequest.getCarStatus());
+        repair.setDateOfAdmission(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+//        repair.setDateOFHandingOver(repairRequest.getRepair().getDateOFHandingOver());
+        repair.setInfoFromClient(repairRequest.getInfoFromClient());
+        if (repairRequest.getInfoFromWorker() != null) {
+            repair.setInfoFromWorker(repairRequest.getInfoFromWorker());
+        }
+        repair.setStatus(CarStatus.WAITING_FOR_DIAGNOSIS);
         repair.setCar(carRepository.findById(carID).get());
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -56,7 +64,7 @@ public class RepairService {
             repair.setRepairedBy(user);
         }
 
-        repairRepository.save(repairRequest.getRepair());
+        repairRepository.save(repair);
     }
 
     public Map<String, Object> editRepair(EditRepairInfoRequest editRepairInfoRequest, Long repairID) {

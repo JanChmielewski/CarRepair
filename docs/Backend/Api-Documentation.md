@@ -365,8 +365,6 @@ POST /editCarInfo/1
 }
 ```
 
-## TO IMPLEMENT: Repair
-
 ### Repair
 
 The `Repair` endpoint provides APIs for managing repair information in the system.

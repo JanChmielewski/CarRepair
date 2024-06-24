@@ -1,5 +1,6 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,12 +15,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table
 @Entity(name = "car")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Car {
 
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long carId;
+    private Long id;
 
     @Column
     private String brand;

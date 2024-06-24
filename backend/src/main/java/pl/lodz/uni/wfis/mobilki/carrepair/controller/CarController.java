@@ -25,7 +25,7 @@ public class CarController {
         Car carToAdd = carService.addCarForRepair(carDTO, carID);
 
         Map<String, Object> response = new LinkedHashMap<>();
-        response.put("message: ", "Car with id: " + carToAdd.getCarId()
+        response.put("message: ", "Car with id: " + carToAdd.getId()
                 + " which belong to: " + carToAdd.getClient().getName() + " " + carToAdd.getClient().getSurname()
                 + " added to the database");
         response.put("carID", carToAdd);
