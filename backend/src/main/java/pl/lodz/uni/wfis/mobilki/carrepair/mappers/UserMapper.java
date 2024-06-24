@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.UserDTO;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
-import pl.lodz.uni.wfis.mobilki.carrepair.request.RegistrationRequest;
+import pl.lodz.uni.wfis.mobilki.carrepair.request.userRequests.RegistrationRequest;
 import pl.lodz.uni.wfis.mobilki.carrepair.service.UserService;
 
 

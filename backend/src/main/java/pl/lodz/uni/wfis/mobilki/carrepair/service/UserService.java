@@ -1,13 +1,14 @@
 package pl.lodz.uni.wfis.mobilki.carrepair.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.lodz.uni.wfis.mobilki.carrepair.exception.RegistrationException;
+import pl.lodz.uni.wfis.mobilki.carrepair.exceptions.RegistrationException;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Authority;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.UserRepository;
-import pl.lodz.uni.wfis.mobilki.carrepair.request.RegistrationRequest;
+import pl.lodz.uni.wfis.mobilki.carrepair.request.userRequests.RegistrationRequest;
 
 import java.util.List;
 import java.util.Random;
@@ -55,5 +56,10 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public User findByWorkerCode(String workerCode) {
+        return userRepository.findByWorkerCode(workerCode)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

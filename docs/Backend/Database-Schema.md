@@ -51,6 +51,7 @@ The `Repair` table represents the repair records of the cars.
 
 | Field             | Type    | Description                                              |
 |-------------------|---------|----------------------------------------------------------|
+| repair_Id         | BIGINT  | id of the repair record                                  |
 | dateOfAdmission   | DATE    | The date when the car was admitted for repair            |
 | dateOfHandingOver | DATE    | The date when the repaired car was returned to the owner |
 | infoFromClient    | TEXT    | Information about the repair from the client             |

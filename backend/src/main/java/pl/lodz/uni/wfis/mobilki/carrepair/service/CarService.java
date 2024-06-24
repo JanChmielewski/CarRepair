@@ -3,14 +3,21 @@ package pl.lodz.uni.wfis.mobilki.carrepair.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.uni.wfis.mobilki.carrepair.dto.CarDTO;
+import pl.lodz.uni.wfis.mobilki.carrepair.exceptions.ResourceNotFoundException;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Car;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.CarStatus;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Client;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.CarRepository;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.ClientRepository;
+import pl.lodz.uni.wfis.mobilki.carrepair.request.carRequests.EditCarInfoRequest;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CarService {
@@ -60,4 +67,47 @@ public class CarService {
         carRepository.deleteAll();
     }
 
+    public Map<String, Object> editCarInfo(EditCarInfoRequest editCarInfoRequest, Long carID) {
+        Car car = carRepository.findById(carID)
+                .orElseThrow(() -> new ResourceNotFoundException("Car", "id", carID));
+
+        Map<String, Object> updatedFields = new LinkedHashMap<>();
+
+        if (editCarInfoRequest.getBrand() != null) {
+            car.setBrand(editCarInfoRequest.getBrand());
+            updatedFields.put("brand", editCarInfoRequest.getBrand());
+        }
+        if (editCarInfoRequest.getModel() != null) {
+            car.setModel(editCarInfoRequest.getModel());
+            updatedFields.put("model", editCarInfoRequest.getModel());
+        }
+        if (editCarInfoRequest.getYearOfProduction() != null) {
+            car.setYearOfProduction(Integer.parseInt(editCarInfoRequest.getYearOfProduction()));
+            updatedFields.put("yearOfProduction", editCarInfoRequest.getYearOfProduction());
+        }
+        if (editCarInfoRequest.getRegistrationNumber() != null) {
+            car.setRegistrationNumber(editCarInfoRequest.getRegistrationNumber());
+            updatedFields.put("registrationNumber", editCarInfoRequest.getRegistrationNumber());
+        }
+        if (editCarInfoRequest.getVin() != null) {
+            car.setVin(editCarInfoRequest.getVin());
+            updatedFields.put("vin", editCarInfoRequest.getVin());
+        }
+        if (editCarInfoRequest.getMileage() != null) {
+            car.setMileage(editCarInfoRequest.getMileage());
+            updatedFields.put("mileage", editCarInfoRequest.getMileage());
+        }
+        if (editCarInfoRequest.getEngine() != null) {
+            car.setEngine(editCarInfoRequest.getEngine());
+            updatedFields.put("engine", editCarInfoRequest.getEngine());
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime updateDate = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+        car.setLastUpdated(updateDate);
+        updatedFields.put("lastUpdated", updateDate.format(formatter));
+
+        carRepository.save(car);
+        return updatedFields;
+    }
 }
