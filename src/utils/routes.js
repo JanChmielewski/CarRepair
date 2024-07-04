@@ -10,4 +10,5 @@ export const ROUTES = {
   ADD_NEW_CAR: '/edit-details/add-new-car',
   LOGIN: '/',
   NOT_FOUND: '/not-found',
+  CAR_PARTS: '/car-parts',
 };
