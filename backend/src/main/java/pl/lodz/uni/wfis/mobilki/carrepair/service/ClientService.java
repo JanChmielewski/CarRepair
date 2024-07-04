@@ -20,7 +20,7 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public void addClient(ClientDTO clientToAdd) {
+    public Client addClient(ClientDTO clientToAdd) {
         Client client = new Client(
                 clientToAdd.getName(),
                 clientToAdd.getSurname(),
@@ -28,7 +28,7 @@ public class ClientService {
                 clientToAdd.getEmail()
         );
 
-        clientRepository.save(client);
+        return clientRepository.save(client);
     }
 
     public List<Client> getExistingClients() {

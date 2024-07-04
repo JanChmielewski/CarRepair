@@ -27,8 +27,11 @@ public class ClientController {
         if (clientToAdd == null) {
             return ResponseEntity.badRequest().body("Client data is empty");
         }
-        clientService.addClient(clientToAdd);
-        return ResponseEntity.ok("Client added to the database");
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("message: ", "Client added to the database");
+        Client newClient = clientService.addClient(clientToAdd);
+        response.put("clientId", newClient.getId());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/clients")
