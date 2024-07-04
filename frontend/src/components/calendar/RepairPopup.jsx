@@ -31,23 +31,24 @@ const RepairPopup = ({
         <h3>Naprawy na {formatDate(selectedDate)}:</h3>
         {selectedRepairs.length > 0 ? (
           <ul className="repair-list">
-            {selectedRepairs.map((repair, index) => (
-              <li key={repair.repairID}>
+            {selectedRepairs.map((repair) => (
+              <li key={repair.id}>
                 <div
                   className="repair-data"
                   onClick={() =>
-                    navigate(`${ROUTES.CAR}/${repair.repairID}`)
+                    navigate(`${ROUTES.CAR}/${repair.id}`)
                   }
                 >
                   <div className="repair-data-content">
                     <span className="calendar-dialog-label">
                       Samochód:
                     </span>{' '}
-                    {getCarInfo(repair.carID, cars, clients)} <br />
+                    {getCarInfo(repair.car.id)} <br />
                     <span className="calendar-dialog-label">
                       Mechanik:
                     </span>{' '}
-                    {repair.repairedBy} <br />
+                    {repair.repairedBy.name}{' '}
+                    {repair.repairedBy.surname} <br />
                     <span className="calendar-dialog-label">
                       Status:
                     </span>{' '}
