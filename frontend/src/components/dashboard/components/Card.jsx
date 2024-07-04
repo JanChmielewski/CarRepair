@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Icons from '../../../utils/icons';
 import ConfirmationDialog from '../../common/ConfirmationDialog';
 import { ROUTES } from '../../../utils/routes';
+import { statusMap } from '../../../utils/statusMap';
 
-const Card = ({ repairID, brand, model, owner, date }) => {
+const Card = ({ repairID, brand, model, owner, status }) => {
   const navigate = useNavigate();
   const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -35,7 +36,7 @@ const Card = ({ repairID, brand, model, owner, date }) => {
         </li>
         <li>
           <Icons.Clock className="icon pink-icon data-icon" />
-          {date}
+          {statusMap[status]}
         </li>
         <li className="card-btns card-icons">
           <button

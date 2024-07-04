@@ -1,7 +1,6 @@
 import React from 'react';
 import { formatDate } from './utils';
 import { useNavigate } from 'react-router-dom';
-import { repairs, cars, clients } from '../../utils/api';
 import { ROUTES } from '../../utils/routes';
 
 const RepairPopup = ({

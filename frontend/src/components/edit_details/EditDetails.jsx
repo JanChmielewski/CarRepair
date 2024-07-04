@@ -5,15 +5,14 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import EditDetailsForm from './EditDetailsForm';
-import ErrorMessage from '../common/InputField/ErrorMessage';
-import {
-  handleSave as handleSaveFunction,
-  checkClientExists,
-} from './handleSave';
 import Navbar from '../common/Navbar';
 import { API_ENDPOINTS } from '../../utils/api/api_endpoints';
 import { ROUTES } from '../../utils/routes';
 import handleInputChange from '../../utils/handleInputChange';
+import {
+  handleSave as handleSaveFunction,
+  checkClientExists,
+} from './handleSave';
 
 function EditDetails() {
   const navigate = useNavigate();
@@ -22,7 +21,23 @@ function EditDetails() {
   const isNewRepair = location.pathname === `${ROUTES.ADD_NEW_CAR}`;
 
   const [selectedRepair, setSelectedRepair] = useState(null);
-  const [editedRepair, setEditedRepair] = useState({});
+  const [editedRepair, setEditedRepair] = useState({
+    brand: '',
+    model: '',
+    vinNumber: '',
+    engine: '',
+    clientFirstName: '',
+    clientLastName: '',
+    phone: '',
+    email: '',
+    registrationNumber: '',
+    mechanicInfo: '',
+    clientInfo: '',
+    productionDate: '',
+    mileage: '',
+    dateOfAdmission: '',
+    dateOfHandingOver: '',
+  });
   const [error, setError] = useState(null);
   const [clientExists, setClientExists] = useState(null);
 
@@ -55,6 +70,28 @@ function EditDetails() {
             (car) => car.id === parseInt(repairID)
           );
           if (car) {
+            const repairResponse = await fetch(
+              `${API_ENDPOINTS.GET_REPAIRS}`,
+              {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: 'Bearer ' + token,
+                },
+              }
+            );
+
+            if (!repairResponse.ok) {
+              throw new Error(
+                `HTTP error! status: ${repairResponse.status}`
+              );
+            }
+
+            const repairData = await repairResponse.json();
+            const repair = repairData.repairs.find(
+              (r) => r.car.id === car.id
+            );
+
             setSelectedRepair(car);
             setEditedRepair({
               brand: car.brand,
@@ -66,24 +103,30 @@ function EditDetails() {
               phone: car.client.phoneNumber,
               email: car.client.email,
               registrationNumber: car.registrationNumber,
-              mechanicInfo: car.mechanicInfo || '',
-              clientInfo: car.clientInfo || '',
+              mechanicInfo: repair ? repair.infoFromWorker : '',
+              clientInfo: repair ? repair.infoFromClient : '',
               productionDate: car.yearOfProduction,
               mileage: car.mileage,
-              dateOfArrival: car.dateOfArrival,
-              deadlineDate: car.deadlineDate,
+              dateOfAdmission: repair
+                ? repair.dateOfAdmission.split('T')[0]
+                : '',
+              dateOfHandingOver: repair
+                ? repair.dateOFHandingOver.split('T')[0]
+                : '',
             });
           } else {
             navigate(`${ROUTES.NOT_FOUND}`);
           }
         }
       } catch (error) {
-        console.error('Fetching data failed: ', error);
+        console.error('Fetching data failed:', error);
         setError('An error occurred while fetching data.');
       }
     };
 
-    fetchData();
+    if (!isNewRepair) {
+      fetchData();
+    }
   }, [isNewRepair, repairID, navigate]);
 
   const handleSave = useCallback(async () => {

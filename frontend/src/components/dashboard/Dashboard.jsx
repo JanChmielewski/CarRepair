@@ -9,6 +9,8 @@ function Dashboard() {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+
     fetch(`${API_ENDPOINTS.GET_CARS_FOR_DASHBOARD}`, {
       method: 'GET',
       headers: {
@@ -23,7 +25,6 @@ function Dashboard() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setCars(data.cars);
       })
       .catch((error) => {

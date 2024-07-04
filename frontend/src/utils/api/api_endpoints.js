@@ -1,4 +1,3 @@
-// api_endpoints.js
 const BASE_URL = 'http://localhost:8080';
 
 export const API_ENDPOINTS = {
@@ -17,4 +16,7 @@ export const API_ENDPOINTS = {
     `${BASE_URL}/addCarForRepair/${clientId}`,
   DELETE_ALL_CARS: `${BASE_URL}/deleteAllCars`,
   GET_CARS_FOR_DASHBOARD: `${BASE_URL}/carsForDashboard`,
+
+  // Repair endpoints
+  GET_REPAIRS: `${BASE_URL}/repairs`,
 };

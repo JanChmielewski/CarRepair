@@ -48,15 +48,8 @@ export async function handleSave(
           );
         }
 
-        if (newClientData.raw) {
-          // Handle non-JSON response
-          const clientCheck = await checkClientExists(editedRepair);
-          clientId = clientCheck.clientId;
-        } else {
-          clientId = newClientData.clientId;
-        }
-
-        console.log('Client successfully added');
+        clientId = newClientData.clientId || newClientData.id;
+        console.log('Client successfully added', clientId);
       }
 
       const addCarResponse = await fetch(
@@ -87,7 +80,7 @@ export async function handleSave(
         );
       }
 
-      console.log('Car successfully added');
+      console.log('Car successfully added', addCarData);
       return null;
     } else {
       const url = '/api/update-repair-details';
