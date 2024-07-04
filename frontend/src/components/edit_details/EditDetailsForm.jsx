@@ -29,6 +29,7 @@ function EditDetailsForm({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Field changed: ${name}, New value: ${value}`); // Logowanie
     setEditedRepairState((prevEditedRepair) => ({
       ...prevEditedRepair,
       [name]: value,

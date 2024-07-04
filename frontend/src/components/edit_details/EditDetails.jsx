@@ -13,6 +13,7 @@ import {
   handleSave as handleSaveFunction,
   checkClientExists,
 } from './handleSave';
+import { statusMap } from '../../utils/statusMap';
 
 function EditDetails() {
   const navigate = useNavigate();
@@ -37,6 +38,11 @@ function EditDetails() {
     mileage: '',
     dateOfAdmission: '',
     dateOfHandingOver: '',
+    status: '',
+    repairStatus: '',
+    repairDescription: '',
+    repairCost: '',
+    repairedBy: '',
   });
   const [error, setError] = useState(null);
   const [clientExists, setClientExists] = useState(null);
@@ -89,10 +95,10 @@ function EditDetails() {
 
             const repairData = await repairResponse.json();
             const repair = repairData.repairs.find(
-              (r) => r.car.id === car.id
+              (r) => r.carId === car.id
             );
 
-            setSelectedRepair(car);
+            setSelectedRepair({ ...car, repairId: repair?.repairId });
             setEditedRepair({
               brand: car.brand,
               model: car.model,
@@ -100,19 +106,28 @@ function EditDetails() {
               engine: car.engine,
               clientFirstName: car.client.name,
               clientLastName: car.client.surname,
-              phone: car.client.phoneNumber,
-              email: car.client.email,
+              phone: car.client.email,
+              email: car.client.phoneNumber,
               registrationNumber: car.registrationNumber,
               mechanicInfo: repair ? repair.infoFromWorker : '',
               clientInfo: repair ? repair.infoFromClient : '',
               productionDate: car.yearOfProduction,
               mileage: car.mileage,
-              dateOfAdmission: repair
-                ? repair.dateOfAdmission.split('T')[0]
+              dateOfAdmission:
+                repair && repair.dateOfAdmission
+                  ? repair.dateOfAdmission.split('T')[0]
+                  : '',
+              dateOfHandingOver:
+                repair && repair.dateOfHandingOver
+                  ? repair.dateOfHandingOver.split('T')[0]
+                  : '',
+              status: car.status,
+              repairStatus: repair ? repair.repairStatus : '',
+              repairDescription: repair
+                ? repair.repairDescription
                 : '',
-              dateOfHandingOver: repair
-                ? repair.dateOFHandingOver.split('T')[0]
-                : '',
+              repairCost: repair ? repair.repairCost : '',
+              repairedBy: repair ? repair.repairedBy : '',
             });
           } else {
             navigate(`${ROUTES.NOT_FOUND}`);
@@ -132,6 +147,7 @@ function EditDetails() {
   const handleSave = useCallback(async () => {
     console.log('Edited Repair email:', editedRepair.email);
     console.log('Edited Repair phone:', editedRepair.phone);
+    console.log('Edited Repair status:', editedRepair.status);
     const error = await handleSaveFunction(
       isNewRepair,
       selectedRepair,

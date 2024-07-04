@@ -101,7 +101,7 @@ const inputFields = [
   },
   {
     label: 'Data deadline',
-    name: 'deadlineDate',
+    name: 'dateOfHandingOver',
     type: 'date',
     required: true,
   },
@@ -111,6 +111,18 @@ const inputFields = [
     type: 'select',
     options: statusOptions,
     required: true,
+  },
+  {
+    label: 'Stan naprawy',
+    name: 'repairStatus',
+    type: 'text',
+    required: false,
+  },
+  {
+    label: 'Naprawiane przez',
+    name: 'repairedBy',
+    type: 'text',
+    required: false,
   },
 ];
 
