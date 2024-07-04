@@ -1,0 +1,14 @@
+/* PartDetails.css */
+.part-summary {
+    cursor: pointer;
+  }
+  
+  .part-details {
+    background-color: #151515;
+    color: #ff0099;
+  }
+  
+  .part-details div {
+    margin: 5px 0;
+  }
+  

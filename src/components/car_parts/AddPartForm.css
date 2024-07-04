@@ -1,0 +1,35 @@
+/* AddPartForm.css */
+.add-part-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .add-part-form input,
+  .add-part-form select,
+  .add-part-form button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+  
+  .add-part-form input:focus,
+  .add-part-form select:focus,
+  .add-part-form button:focus {
+    outline: none;
+    border-color: #ff0099;
+  }
+  
+  .add-part-form .submit-button {
+    background-color: #ff0099;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .add-part-form .submit-button:hover {
+    background-color: #7d004b;
+  }
+  

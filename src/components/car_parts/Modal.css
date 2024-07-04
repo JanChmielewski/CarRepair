@@ -1,5 +1,4 @@
 /* Modal.css */
-
 .modal {
     position: fixed;
     top: 0;
@@ -21,7 +20,7 @@
 }
 
 .modal-content {
-    background-color: var(--bg-color-darker);
+    background-color: #0b0b0b;
     padding: 50px;
     border-radius: 16px;
     box-shadow: var(--box-shadow);
@@ -35,15 +34,15 @@
 
 .modal-content h2 {
     margin-bottom: 30px;
-    font-size: 32px; /* Zwiększenie rozmiaru czcionki */
-    color: var(--text-color);
+    font-size: 32px;
+    color: #ff0099;
     text-align: center;
 }
 
 .modal-content p {
-    font-size: 20px; /* Zwiększona czcionka */
-    line-height: 2; /* Zwiększona wysokość wiersza */
-    color: var(--text-color);
+    font-size: 20px;
+    line-height: 2;
+    color: #efefef;
 }
 
 .modal-buttons {
@@ -58,35 +57,34 @@
     text-transform: uppercase;
     border: none;
     border-radius: 8px;
-    padding: 20px 30px; /* Zwiększenie rozmiaru przycisku */
+    padding: 20px 30px;
     font-family: var(--primary-font);
-    font-size: 20px; /* Zwiększenie rozmiaru czcionki */
+    font-size: 20px;
     font-weight: 700;
     box-shadow: var(--box-shadow);
-    text-shadow: var(--text-shadow);
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .cancel-btn {
-    background-color: var(--primary-color);
+    background-color: #ff0099;
 }
 
 .cancel-btn:hover {
-    background-color: var(--primary-color-hover);
+    background-color: #7d004b;
 }
 
 button.cancel-btn {
-    color: var(--secondary-color);
+    color: #151515;
 }
 
 .confirm-btn {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+    background-color: #151515;
+    color: #efefef;
 }
 
 .confirm-btn:hover {
-    background-color: var(--secondary-color-hover);
+    background-color: #252525;
 }
 
 /* Responsive design */
