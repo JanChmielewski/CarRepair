@@ -14,8 +14,6 @@ export async function handleSave(
     const firstName = editedRepair.clientFirstName;
     const lastName = editedRepair.clientLastName;
 
-    console.log('Status before save:', editedRepair.status); // Debug log
-
     if (isNewRepair) {
       let clientId;
 
@@ -52,7 +50,10 @@ export async function handleSave(
             vin: editedRepair.vinNumber,
             mileage: editedRepair.mileage,
             engine: editedRepair.engine,
-            status: editedRepair.status, // Ensure the status is being set here
+            status: editedRepair.status,
+            repairedBy: editedRepair.workerCode,
+            infoFromClient: editedRepair.infoFromClient,
+            infoFromWorker: editedRepair.infoFromWorker,
           }),
         }
       );
@@ -93,14 +94,10 @@ export async function handleSave(
             vin: editedRepair.vinNumber,
             mileage: editedRepair.mileage,
             engine: editedRepair.engine,
-            status: editedRepair.status, // Ensure the status is being updated here
-            client: {
-              clientId: selectedRepair.client.clientId,
-              name: firstName,
-              surname: lastName,
-              email: editedRepair.email,
-              phoneNumber: editedRepair.phone,
-            },
+            status: editedRepair.status,
+            repairedBy: editedRepair.workerCode,
+            infoFromClient: editedRepair.infoFromClient,
+            infoFromWorker: editedRepair.infoFromWorker,
           }),
         }
       );
@@ -131,6 +128,9 @@ export async function handleSave(
             body: JSON.stringify({
               repairStatus: editedRepair.repairStatus,
               repairCost: editedRepair.repairCost,
+              repairedBy: editedRepair.workerCode,
+              infoFromClient: editedRepair.infoFromClient,
+              infoFromWorker: editedRepair.infoFromWorker,
             }),
           }
         );

@@ -67,8 +67,9 @@ export const useCarDetails = (repairID) => {
             dateOfAdmission: repairDetails.dateOfAdmission,
             dateOfHandingOver: repairDetails.dateOFHandingOver,
             infoFromClient: repairDetails.infoFromClient,
-            repairStatus: repairDetails.status,
-            repairedBy: `${repairDetails.repairedBy.name} ${repairDetails.repairedBy.surname}`,
+            infoFromWorker: repairDetails.infoFromWorker,
+            repairStatus: repairDetails.repairStatus,
+            repairedBy: `${repairDetails.repairedBy.workerCode}`,
           });
         } else {
           setError('Car or Repair not found');

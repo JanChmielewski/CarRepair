@@ -1,11 +1,10 @@
-// DataFetchingComponent.jsx
 import React, { useState, useEffect } from 'react';
 import {
   useParams,
   useLocation,
   useNavigate,
 } from 'react-router-dom';
-import { cars, clients, repairs } from '../../utils/api';
+import { API_ENDPOINTS } from '../../utils/api/api_endpoints';
 import EditDetailsForm from './EditDetailsForm';
 import ErrorComponent from './ErrorComponent';
 import { ROUTES } from '../../utils/routes';
@@ -20,26 +19,82 @@ function DataFetching() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!isNewRepair) {
-      const repair = repairs.find(
-        (item) => item.repairID === parseInt(repairID)
-      );
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('No token found');
+        }
 
-      if (repair) {
-        const carData = cars.find(
-          (car) => car.carID === repair.carID
+        const carResponse = await fetch(
+          `${API_ENDPOINTS.GET_CARS_FOR_DASHBOARD}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + token,
+            },
+          }
         );
-        const clientData = clients.find(
-          (client) => client.clientID === carData.clientID
+
+        const repairResponse = await fetch(
+          `${API_ENDPOINTS.GET_REPAIRS}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + token,
+            },
+          }
         );
-        setSelectedRepair({
-          ...repair,
-          ...carData,
-          ...clientData,
-        });
-      } else {
-        navigate(`${ROUTES.NOT_FOUND}`);
+
+        if (!carResponse.ok || !repairResponse.ok) {
+          throw new Error(
+            `HTTP error! status: ${carResponse.status} or ${repairResponse.status}`
+          );
+        }
+
+        const carData = await carResponse.json();
+        const repairData = await repairResponse.json();
+
+        const carDetails = carData.cars.find(
+          (car) => car.id === parseInt(repairID)
+        );
+        const repairDetails = carDetails
+          ? repairData.repairs.find(
+              (repair) => repair.car.id === carDetails.id
+            )
+          : null;
+
+        if (carDetails && repairDetails) {
+          setSelectedRepair({
+            ...repairDetails,
+            ...carDetails,
+            client: {
+              ...carDetails.client,
+              ownerName: `${carDetails.client.name} ${carDetails.client.surname}`,
+              email: carDetails.client.email,
+              phone: carDetails.client.phoneNumber,
+            },
+            repair: {
+              ...repairDetails,
+              dateOfAdmission:
+                repairDetails.dateOfAdmission.split('T')[0],
+              dateOfHandingOver:
+                repairDetails.dateOFHandingOver.split('T')[0],
+            },
+          });
+        } else {
+          navigate(`${ROUTES.NOT_FOUND}`);
+        }
+      } catch (error) {
+        console.error('Fetching data failed: ', error);
+        setError('An error occurred while fetching data.');
       }
+    };
+
+    if (!isNewRepair) {
+      fetchData();
     }
   }, [isNewRepair, repairID, navigate]);
 
