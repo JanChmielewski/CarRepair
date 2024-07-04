@@ -16,7 +16,7 @@ export const useCarDetails = (repairID) => {
           throw new Error('No token found');
         }
 
-        const response = await fetch(
+        const carResponse = await fetch(
           `${API_ENDPOINTS.GET_CARS_FOR_DASHBOARD}`,
           {
             method: 'GET',
@@ -27,30 +27,49 @@ export const useCarDetails = (repairID) => {
           }
         );
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const repairResponse = await fetch(
+          `${API_ENDPOINTS.GET_REPAIRS}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + token,
+            },
+          }
+        );
+
+        if (!carResponse.ok || !repairResponse.ok) {
+          throw new Error(
+            `HTTP error! status: ${carResponse.status} or ${repairResponse.status}`
+          );
         }
 
-        const data = await response.json();
-        const carData = data.cars.find(
+        const carData = await carResponse.json();
+        const repairData = await repairResponse.json();
+
+        const carDetails = carData.cars.find(
           (car) => car.id === parseInt(repairID)
         );
-        if (carData) {
-          setCar(carData);
+        const repairDetails = repairData.repairs.find(
+          (repair) => repair.car.id === carDetails.id
+        );
+
+        if (carDetails && repairDetails) {
+          setCar(carDetails);
           setClient({
-            ownerName: `${carData.client.name} ${carData.client.surname}`,
-            email: carData.client.email,
-            phone: carData.client.phoneNumber,
+            ownerName: `${carDetails.client.name} ${carDetails.client.surname}`,
+            email: carDetails.client.email,
+            phone: carDetails.client.phoneNumber,
           });
           setRepair({
-            dateOfArrival: carData.dateOfArrival,
-            deadlineDate: carData.deadlineDate,
-            clientInfo: carData.clientInfo,
-            repairStatus: carData.status,
-            repairedBy: carData.repairedBy,
+            dateOfAdmission: repairDetails.dateOfAdmission,
+            dateOfHandingOver: repairDetails.dateOFHandingOver,
+            infoFromClient: repairDetails.infoFromClient,
+            repairStatus: repairDetails.status,
+            repairedBy: `${repairDetails.repairedBy.name} ${repairDetails.repairedBy.surname}`,
           });
         } else {
-          setError('Car not found');
+          setError('Car or Repair not found');
         }
       } catch (error) {
         console.error('Fetching data failed: ', error);

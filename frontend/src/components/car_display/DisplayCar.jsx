@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useCarDetails } from '../../hooks/useCarDetails';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../../styles/pages/_displayCar.css';
 import CopyButton from '../common/CopyButton';
 import Navbar from '../common/Navbar';
 import { ROUTES } from '../../utils/routes';
+import { statusMap } from '../../utils/statusMap';
 
 function DisplayCar() {
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ function DisplayCar() {
     useCarDetails(repairID);
 
   const vinRef = useRef(null);
-  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -69,20 +68,20 @@ function DisplayCar() {
                 ref={vinRef}
               >
                 {car.vin}
-                <CopyButton content={car.vin} />{' '}
+                <CopyButton content={car.vin} />
               </span>
             </li>
             <li>
               <span className="label">Numer rejestracyjny:</span>
               <span className="info-content copy-content">
                 {car.registrationNumber}
-                <CopyButton content={car.registrationNumber} />{' '}
+                <CopyButton content={car.registrationNumber} />
               </span>
             </li>
             <li>
               <span className="label">Data produkcji:</span>
               <span className="info-content">
-                {car.productionDate}
+                {car.yearOfProduction}
               </span>
             </li>
             <li>
@@ -111,7 +110,8 @@ function DisplayCar() {
             <li>
               <span className="label">Telefon:</span>
               <span className="info-content copy-content">
-                {client.phone} <CopyButton content={client.phone} />
+                {client.phone}
+                <CopyButton content={client.phone} />
               </span>
             </li>
             <h3 className="section-title header-title">
@@ -120,25 +120,25 @@ function DisplayCar() {
             <li>
               <span className="label">Data przyjęcia:</span>
               <span className="info-content">
-                {repair.dateOfArrival}
+                {repair.dateOfAdmission}
               </span>
             </li>
             <li>
               <span className="label">Data wydania:</span>
               <span className="info-content">
-                {repair.deadlineDate}
+                {repair.dateOfHandingOver}
               </span>
             </li>
             <li className="info-from-client">
               <span className="label">Informacje od klienta:</span>
               <span className="info-content">
-                {repair.clientInfo}
+                {repair.infoFromClient}
               </span>
             </li>
             <li>
               <span className="label">Stan naprawy:</span>
               <span className="info-content">
-                {repair.repairStatus}
+                {statusMap[repair.repairStatus]}
               </span>
             </li>
             <li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Card';
+import Card from './Card'; // Upewnij się, że ta ścieżka jest poprawna
 import { ROUTES } from '../../../utils/routes';
 
 function CarList({ searchQuery, cars }) {
@@ -27,8 +27,7 @@ function CarList({ searchQuery, cars }) {
               model={car.model}
               brand={car.brand}
               owner={client ? `${client.name} ${client.surname}` : ''}
-              date={car.status}
-              repairs={[]}
+              status={car.status}
             />
           </li>
         );

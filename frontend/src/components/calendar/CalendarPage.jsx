@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import RenderTileContent from './RenderTileContent';
 import RepairPopup from './RepairPopup';
-import { repairs, cars, clients } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { getCarInfo, formatDate, countRepairsForDate } from './utils';
 import Navbar from '../common/Navbar';

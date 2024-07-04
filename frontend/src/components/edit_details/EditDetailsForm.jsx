@@ -3,7 +3,7 @@ import InputField from '../common/InputField/InputField';
 import SaveButton from './SaveButton';
 import inputFields from '../../utils/inputFields';
 import { validateInputFields } from '../../utils/handleInputChange';
-import { checkClientExists } from './handleSave'; // Import the checkClientExists function
+import { checkClientExists } from './handleSave';
 
 function EditDetailsForm({
   editedRepair,
@@ -70,7 +70,41 @@ function EditDetailsForm({
 
   const renderInputFields = () => {
     return inputFields.map((field) => {
-      const value = editedRepairState[field.name] || '';
+      let value = editedRepairState[field.name] || '';
+
+      // Handle date fields without formatDate function for now
+      if (
+        (field.name === 'dateOfAdmission' ||
+          field.name === 'dateOfHandingOver') &&
+        value
+      ) {
+        value = value.split('T')[0]; // Ensure the value is in YYYY-MM-DD format
+      }
+
+      if (field.type === 'select') {
+        return (
+          <div key={field.name} className="input">
+            <label>{field.label}</label>
+            <select
+              name={field.name}
+              value={value}
+              onChange={handleChange}
+              required={field.required}
+            >
+              {field.options.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            {errors[field.name] && (
+              <p className="error-message red">
+                {errors[field.name]}
+              </p>
+            )}
+          </div>
+        );
+      }
 
       return (
         <div key={field.name} className="input">
@@ -90,18 +124,6 @@ function EditDetailsForm({
           />
           {errors[field.name] && (
             <p className="error-message red">{errors[field.name]}</p>
-          )}
-          {field.name === 'email' && (
-            <>
-              <button
-                className="check-client-btn"
-                onClick={handleCheckClient}
-                disabled={!isEmailValid || !isPhoneValid}
-              >
-                Sprawdź czy klient istnieje
-              </button>
-              {clientExistsMessage && <p>{clientExistsMessage}</p>}
-            </>
           )}
         </div>
       );

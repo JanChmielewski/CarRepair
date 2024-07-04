@@ -1,3 +1,15 @@
+const statusOptions = [
+  { value: 'IN_REPAIR', label: 'w naprawie' },
+  { value: 'READY_TO_PICK_UP', label: 'gotowy do odbioru' },
+  { value: 'REPAIRED', label: 'naprawiony' },
+  { value: 'WAITING_FOR_PAYMENT', label: 'oczekiwanie na zapłatę' },
+  { value: 'WAITING_FOR_PARTS', label: 'oczekiwanie na części' },
+  {
+    value: 'WAITING_FOR_DIAGNOSIS',
+    label: 'oczekiwanie na diagnostykę',
+  },
+];
+
 const inputFields = [
   {
     label: 'Imię',
@@ -83,7 +95,7 @@ const inputFields = [
   { label: 'Przebieg', name: 'mileage', required: false },
   {
     label: 'Data przyjęcia',
-    name: 'dateOfArrival',
+    name: 'dateOfAdmission',
     type: 'date',
     required: true,
   },
@@ -91,6 +103,13 @@ const inputFields = [
     label: 'Data deadline',
     name: 'deadlineDate',
     type: 'date',
+    required: true,
+  },
+  {
+    label: 'Status',
+    name: 'status',
+    type: 'select',
+    options: statusOptions,
     required: true,
   },
 ];
