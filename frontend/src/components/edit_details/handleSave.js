@@ -15,6 +15,7 @@ export async function handleSave(
     const lastName = editedRepair.clientLastName;
 
     if (isNewRepair) {
+      // Logika dla dodawania nowego samochodu i klienta (jak w twoim kodzie)
       let clientId;
 
       const clientExists = await checkClientExists(
@@ -22,12 +23,10 @@ export async function handleSave(
         token
       );
       if (clientExists) {
-        console.log('Client already exists', clientExists);
         clientId = clientExists.id;
       } else {
         const newClient = await addClient(editedRepair, token);
         clientId = newClient.clientId;
-        console.log('Client successfully added with ID:', clientId);
       }
 
       if (!clientId) {
@@ -67,43 +66,70 @@ export async function handleSave(
       console.log('Car successfully added', addCarData);
       return null;
     } else {
-      const url = `${API_ENDPOINTS.EDIT_CAR_INFO}/${selectedRepair.id}`;
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        },
-        body: JSON.stringify({
-          id: selectedRepair?.id,
-          brand: editedRepair.brand,
-          model: editedRepair.model,
-          yearOfProduction: editedRepair.productionDate,
-          registrationNumber: editedRepair.registrationNumber,
-          vin: editedRepair.vinNumber,
-          mileage: editedRepair.mileage,
-          engine: editedRepair.engine,
-          status: selectedRepair?.status,
-          client: {
-            clientId: selectedRepair?.client.clientId,
-            name: firstName,
-            surname: lastName,
-            email: editedRepair.email,
-            phoneNumber: editedRepair.phone,
+      // Logika dla edytowania istniejących danych
+      const carId = selectedRepair.id;
+      const editCarResponse = await fetch(
+        `${API_ENDPOINTS.EDIT_CAR_INFO}/${carId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
           },
-        }),
-      };
-      const response = await fetch(url, requestOptions);
+          body: JSON.stringify({
+            brand: editedRepair.brand,
+            model: editedRepair.model,
+            yearOfProduction: editedRepair.productionDate,
+            registrationNumber: editedRepair.registrationNumber,
+            vin: editedRepair.vinNumber,
+            mileage: editedRepair.mileage,
+            engine: editedRepair.engine,
+            status: selectedRepair.status,
+            client: {
+              clientId: selectedRepair.client.clientId,
+              name: firstName,
+              surname: lastName,
+              email: editedRepair.email,
+              phoneNumber: editedRepair.phone,
+            },
+          }),
+        }
+      );
 
-      if (response.ok) {
-        console.log('Repair details saved successfully');
-        return null; // No error
-      } else {
-        const errorText = await response.text();
-        throw new Error(
-          `Failed to save repair details: ${errorText}`
-        );
+      if (!editCarResponse.ok) {
+        const errorText = await editCarResponse.text();
+        throw new Error(`Failed to save car details: ${errorText}`);
       }
+
+      // Jeśli istnieją dane naprawy do zaktualizowania, zrób to
+      if (selectedRepair.repairId) {
+        const repairId = selectedRepair.repairId;
+        const editRepairResponse = await fetch(
+          `${API_ENDPOINTS.EDIT_REPAIR}/${repairId}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + token,
+            },
+            body: JSON.stringify({
+              repairDescription: editedRepair.mechanicInfo,
+              repairCost: editedRepair.repairCost,
+              repairStatus: editedRepair.repairStatus,
+            }),
+          }
+        );
+
+        if (!editRepairResponse.ok) {
+          const errorText = await editRepairResponse.text();
+          throw new Error(
+            `Failed to save repair details: ${errorText}`
+          );
+        }
+      }
+
+      console.log('Repair details saved successfully');
+      return null;
     }
   } catch (error) {
     console.error('Error saving repair details:', error);

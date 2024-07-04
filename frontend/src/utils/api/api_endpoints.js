@@ -16,6 +16,7 @@ export const API_ENDPOINTS = {
     `${BASE_URL}/addCarForRepair/${clientId}`,
   DELETE_ALL_CARS: `${BASE_URL}/deleteAllCars`,
   GET_CARS_FOR_DASHBOARD: `${BASE_URL}/carsForDashboard`,
+  DELETE_CAR: `${BASE_URL}/deleteCar/`,
 
   // Repair endpoints
   GET_REPAIRS: `${BASE_URL}/repairs`,

@@ -50,9 +50,11 @@ export const useCarDetails = (repairID) => {
         const carDetails = carData.cars.find(
           (car) => car.id === parseInt(repairID)
         );
-        const repairDetails = repairData.repairs.find(
-          (repair) => repair.car.id === carDetails.id
-        );
+        const repairDetails = carDetails
+          ? repairData.repairs.find(
+              (repair) => repair.car.id === carDetails.id
+            )
+          : null;
 
         if (carDetails && repairDetails) {
           setCar(carDetails);

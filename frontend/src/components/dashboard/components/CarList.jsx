@@ -1,8 +1,7 @@
 import React from 'react';
 import Card from './Card'; // Upewnij się, że ta ścieżka jest poprawna
-import { ROUTES } from '../../../utils/routes';
 
-function CarList({ searchQuery, cars }) {
+function CarList({ searchQuery, cars, refreshCars, removeCar }) {
   const filteredCars = cars.filter((car) => {
     const client = car.client;
     const ownerName = client
@@ -28,6 +27,8 @@ function CarList({ searchQuery, cars }) {
               brand={car.brand}
               owner={client ? `${client.name} ${client.surname}` : ''}
               status={car.status}
+              refreshCars={refreshCars}
+              removeCar={removeCar}
             />
           </li>
         );
