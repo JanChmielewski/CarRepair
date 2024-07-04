@@ -130,6 +130,8 @@ function EditDetails() {
   }, [isNewRepair, repairID, navigate]);
 
   const handleSave = useCallback(async () => {
+    console.log('Edited Repair email:', editedRepair.email);
+    console.log('Edited Repair phone:', editedRepair.phone);
     const error = await handleSaveFunction(
       isNewRepair,
       selectedRepair,

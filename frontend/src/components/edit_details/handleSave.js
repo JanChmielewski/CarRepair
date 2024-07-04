@@ -17,39 +17,23 @@ export async function handleSave(
     if (isNewRepair) {
       let clientId;
 
-      const clientExists = await checkClientExists(editedRepair);
+      const clientExists = await checkClientExists(
+        editedRepair,
+        token
+      );
       if (clientExists) {
-        console.log('Client already exists');
-        clientId = clientExists.clientId;
+        console.log('Client already exists', clientExists);
+        clientId = clientExists.id;
       } else {
-        const addClientResponse = await fetch(
-          `${API_ENDPOINTS.ADD_CLIENT}`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: 'Bearer ' + token,
-            },
-            body: JSON.stringify({
-              name: firstName,
-              surname: lastName,
-              email: editedRepair.email,
-              phoneNumber: editedRepair.phone,
-            }),
-          }
+        const newClient = await addClient(editedRepair, token);
+        clientId = newClient.clientId;
+        console.log('Client successfully added with ID:', clientId);
+      }
+
+      if (!clientId) {
+        throw new Error(
+          'Client ID is undefined after adding a new client.'
         );
-
-        const newClientData = await safeParseJSON(addClientResponse);
-        if (!addClientResponse.ok) {
-          throw new Error(
-            `Failed to add client: ${
-              newClientData.raw || newClientData
-            }`
-          );
-        }
-
-        clientId = newClientData.clientId || newClientData.id;
-        console.log('Client successfully added', clientId);
       }
 
       const addCarResponse = await fetch(
@@ -83,7 +67,7 @@ export async function handleSave(
       console.log('Car successfully added', addCarData);
       return null;
     } else {
-      const url = '/api/update-repair-details';
+      const url = `${API_ENDPOINTS.EDIT_CAR_INFO}/${selectedRepair.id}`;
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -127,8 +111,7 @@ export async function handleSave(
   }
 }
 
-export async function checkClientExists(editedRepair) {
-  const token = localStorage.getItem('token');
+export async function checkClientExists(editedRepair, token) {
   if (!token) {
     throw new Error('No token found');
   }
@@ -145,20 +128,59 @@ export async function checkClientExists(editedRepair) {
   );
 
   const clientsResponseText = await clientsResponse.text();
-  console.log('Raw response:', clientsResponseText);
 
   if (!clientsResponse.ok) {
     throw new Error('Failed to fetch clients');
   }
 
   const clientsData = JSON.parse(clientsResponseText);
-  const existingClient = clientsData.clients.find(
-    (client) =>
-      client.email === editedRepair.email ||
-      client.phoneNumber === editedRepair.phone
+
+  const searchEmail = editedRepair.phone.toLowerCase().trim();
+  const searchPhone = editedRepair.email.trim();
+
+  const existingClient = clientsData.clients.find((client) => {
+    const clientEmail = (client.email || '').toLowerCase().trim();
+    const clientPhone = (client.phoneNumber || '').trim();
+
+    const isEmailMatch = clientEmail === searchEmail;
+    const isPhoneMatch = clientPhone === searchPhone;
+
+    return isEmailMatch || isPhoneMatch;
+  });
+
+  return existingClient || undefined;
+}
+
+async function addClient(editedRepair, token) {
+  const addClientResponse = await fetch(
+    `${API_ENDPOINTS.ADD_CLIENT}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify({
+        name: editedRepair.clientFirstName,
+        surname: editedRepair.clientLastName,
+        email: editedRepair.email,
+        phoneNumber: editedRepair.phone,
+      }),
+    }
   );
 
-  return existingClient;
+  const textResponse = await addClientResponse.text();
+
+  if (!addClientResponse.ok) {
+    throw new Error(`Failed to add client: ${textResponse}`);
+  }
+
+  const parsedResponse = JSON.parse(textResponse);
+  if (parsedResponse && parsedResponse.clientId) {
+    return parsedResponse;
+  }
+
+  throw new Error('Failed to add client: Invalid response format');
 }
 
 async function safeParseJSON(response) {
