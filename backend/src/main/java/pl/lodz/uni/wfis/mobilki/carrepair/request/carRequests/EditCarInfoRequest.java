@@ -3,6 +3,7 @@ package pl.lodz.uni.wfis.mobilki.carrepair.request.carRequests;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.lodz.uni.wfis.mobilki.carrepair.model.CarStatus;
 
 import java.text.DateFormat;
 
@@ -19,6 +20,7 @@ public class EditCarInfoRequest {
             vin,
             mileage,
             engine;
+    private CarStatus status;
     private DateFormat updateDate;
 
 }

@@ -101,6 +101,10 @@ public class CarService {
             car.setEngine(editCarInfoRequest.getEngine());
             updatedFields.put("engine", editCarInfoRequest.getEngine());
         }
+        if (editCarInfoRequest.getStatus() != null) {
+            car.setStatus(editCarInfoRequest.getStatus());
+            updatedFields.put("status", editCarInfoRequest.getStatus());
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime updateDate = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);

@@ -3,7 +3,6 @@ package pl.lodz.uni.wfis.mobilki.carrepair.service;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import pl.lodz.uni.wfis.mobilki.carrepair.model.CarStatus;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.Repair;
 import pl.lodz.uni.wfis.mobilki.carrepair.model.User;
 import pl.lodz.uni.wfis.mobilki.carrepair.repository.CarRepository;
@@ -48,13 +47,18 @@ public class RepairService {
             throw new IllegalArgumentException("Car with given ID does not exist");
         }
         Repair repair = new Repair();
-        repair.setDateOfAdmission(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-//        repair.setDateOFHandingOver(repairRequest.getRepair().getDateOFHandingOver());
-        repair.setInfoFromClient(repairRequest.getInfoFromClient());
+        if (repairRequest.getDateOfAdmission() != null) {
+            repair.setDateOfAdmission(repairRequest.getDateOfAdmission());
+        }
+        if (repairRequest.getDateOFHandingOver() != null) {
+             repair.setDateOfAdmission(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+        }
+        if (repairRequest.getInfoFromClient() != null) {
+            repair.setInfoFromClient(repairRequest.getInfoFromClient());
+        }
         if (repairRequest.getInfoFromWorker() != null) {
             repair.setInfoFromWorker(repairRequest.getInfoFromWorker());
         }
-        repair.setStatus(CarStatus.WAITING_FOR_DIAGNOSIS);
         repair.setCar(carRepository.findById(carID).get());
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -88,10 +92,6 @@ public class RepairService {
         if(editRepairInfoRequest.getInfoFromWorker() != null) {
             repair.setInfoFromWorker(editRepairInfoRequest.getInfoFromWorker());
             updatedFields.put("infoFromWorker", editRepairInfoRequest.getInfoFromWorker());
-        }
-        if(editRepairInfoRequest.getCarStatus() != null) {
-            repair.setStatus(editRepairInfoRequest.getCarStatus());
-            updatedFields.put("status", editRepairInfoRequest.getCarStatus());
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

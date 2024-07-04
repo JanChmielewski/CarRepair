@@ -35,10 +35,6 @@ public class Repair {
     @Column
     private String infoFromWorker;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private CarStatus status;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User repairedBy;
