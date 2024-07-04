@@ -15,7 +15,6 @@ public class RepairDTO {
     private LocalDateTime dateOFHandingOver;
     private String infoFromClient;
     private String infoFromWorker;
-    private String status;
     private String repairedBy;
     private Car car;
 }
