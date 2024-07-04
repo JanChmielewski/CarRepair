@@ -67,4 +67,10 @@ public class CarController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/deleteCar/{carID}")
+    public ResponseEntity<?> deleteCar(@PathVariable("carID") Long carID) {
+        carService.deleteCar(carID);
+        return ResponseEntity.ok("Car with id: " + carID + " deleted successfully");
+    }
+
 }

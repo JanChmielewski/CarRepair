@@ -110,4 +110,8 @@ public class CarService {
         carRepository.save(car);
         return updatedFields;
     }
+
+    public void deleteCar(Long carID) {
+        carRepository.deleteById(carID);
+    }
 }

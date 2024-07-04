@@ -44,6 +44,8 @@ public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFil
                         .requestMatchers(HttpMethod.POST, "/addCarForRepair/{clientId}").hasAuthority("USER")
                         .requestMatchers(HttpMethod.GET, "/carsForDashboard").hasAuthority("USER")
                         .requestMatchers(HttpMethod.POST, "/editCarInfo/{carID}").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/deleteAllCars").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/deleteCar/{carID}").hasAuthority("USER")
                         // REPAIR REQUESTS
                         .requestMatchers(HttpMethod.GET, "/repairs").hasAuthority("USER")
                         .requestMatchers(HttpMethod.GET, "/repairs/{repairID}").hasAuthority("USER")
