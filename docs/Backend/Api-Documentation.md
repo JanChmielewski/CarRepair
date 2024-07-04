@@ -30,6 +30,7 @@ http://localhost:8080
     * [```GET /users```](#get-users)
     * [```POST /register```](#post-register)
     * [```POST api/login ```](#post-login)
+
 * [Client](#client)
     * [```GET /clients```](#get-clients)
     * [```POST /addClient```](#post-addclient)
@@ -37,6 +38,7 @@ http://localhost:8080
     * [```GET /cars```](#get-cars)
     * [```POST /addCarForRepair/{clientId}```](#post-addcarforrepairclientid)
     * [```DELETE /deleteAllCars```](#delete-deleteallcars)
+    * [```DELETE /deleteCar/{carID}```](#delete-deleteCarcarID)
     * [```GET /carsForDashboard```](#get-carsfordashboard)
     * [```POST /editCarInfo/{carId}```](#post-editcarinfocarid)
 
@@ -50,7 +52,7 @@ The `User` endpoint provides APIs for managing user accounts in the system.
 
 Returns a list of all users in the system.
 
-##### Request: 
+##### Request:
 
 ``` http request
 GET /users
@@ -73,7 +75,8 @@ GET /users
 
 #### POST /register
 
-This task needs to be performed by an admin user, who must be manually inserted into the database. The admin user can then
+This task needs to be performed by an admin user, who must be manually inserted into the database. The admin user can
+then
 register a new user in the system using this endpoint.
 
 ##### Request:
@@ -169,7 +172,7 @@ GET /clients
 
 Adds a new client to the system.
 
-##### Request: 
+##### Request:
 
 ``` http request
 POST /addClient
@@ -267,16 +270,32 @@ POST /addCarForRepair/1
 
 Deletes all cars from the system.
 
-##### Request: 
+##### Request:
 
 ``` http request
 DELETE /deleteAllCars
 ```
 
-##### Response: 
+##### Response:
 
 ```text
 All cars deleted successfully
+```
+
+#### DELETE /deleteCar/{carID}
+
+Deletes a car from the system by carID.
+
+##### Request:
+
+``` http request
+DELETE /deleteCar/1
+```
+
+##### Response:
+
+```text
+Car with id: 1 deleted successfully
 ```
 
 #### GET /carsForDashboard
@@ -337,7 +356,7 @@ GET /carsForDashboard
 
 #### POST /editCarInfo/{carId}
 
-Endpoint for editing information about car like mileage or registration number. 
+Endpoint for editing information about car like mileage or registration number.
 
 ##### Request:
 
