@@ -36,6 +36,9 @@ public class CarService {
         carsForDashboard.addAll(carRepository.findByStatus(CarStatus.WAITING_FOR_DIAGNOSIS));
         carsForDashboard.addAll(carRepository.findByStatus(CarStatus.READY_TO_PICK_UP));
         carsForDashboard.addAll(carRepository.findByStatus(CarStatus.WAITING_FOR_PARTS));
+        carsForDashboard.addAll(carRepository.findByStatus(CarStatus.WAITING_FOR_PAYMENT));
+        carsForDashboard.addAll(carRepository.findByStatus(CarStatus.WAITING_FOR_REPAIR));
+        carsForDashboard.addAll(carRepository.findByStatus(CarStatus.REPAIRED));
         return carsForDashboard;
     }
 
