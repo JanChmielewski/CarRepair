@@ -38,6 +38,10 @@ function DisplayCar() {
     navigate(`${ROUTES.EDIT_DETAILS}/${repairID}`);
   };
 
+  const formatDate = (dateString) => {
+    return dateString.split('T')[0];
+  };
+
   return (
     <div className="root">
       <div className="flex-container">
@@ -120,13 +124,13 @@ function DisplayCar() {
             <li>
               <span className="label">Data przyjęcia:</span>
               <span className="info-content">
-                {repair.dateOfAdmission}
+                {formatDate(repair.dateOfAdmission)}
               </span>
             </li>
             <li>
               <span className="label">Data wydania:</span>
               <span className="info-content">
-                {repair.dateOfHandingOver}
+                {formatDate(repair.dateOfHandingOver)}
               </span>
             </li>
             <li className="info-from-client">
@@ -138,7 +142,7 @@ function DisplayCar() {
             <li>
               <span className="label">Stan naprawy:</span>
               <span className="info-content">
-                {statusMap[repair.repairStatus]}
+                {statusMap[car.status]}
               </span>
             </li>
             <li>
