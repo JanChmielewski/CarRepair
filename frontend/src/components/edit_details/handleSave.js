@@ -14,7 +14,7 @@ export async function handleSave(
     const firstName = editedRepair.clientFirstName;
     const lastName = editedRepair.clientLastName;
 
-    console.log('Status before save:', editedRepair.status); // Debug log
+    console.log('Status before save:', editedRepair.status);
 
     if (isNewRepair) {
       let clientId;

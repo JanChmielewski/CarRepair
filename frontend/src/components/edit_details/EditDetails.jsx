@@ -117,6 +117,7 @@ function EditDetails() {
                 dateOfHandingOver:
                   repair.dateOFHandingOver.split('T')[0],
                 status: car.status,
+                repairStatus: repair.repairStatus,
                 repairDescription: repair.repairDescription,
                 repairCost: repair.repairCost,
                 repairedBy: repair.repairedBy.workerCode,
