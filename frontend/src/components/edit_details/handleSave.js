@@ -14,6 +14,8 @@ export async function handleSave(
     const firstName = editedRepair.clientFirstName;
     const lastName = editedRepair.clientLastName;
 
+    console.log('Status before save:', editedRepair.status); // Debug log
+
     if (isNewRepair) {
       let clientId;
 
@@ -51,9 +53,6 @@ export async function handleSave(
             mileage: editedRepair.mileage,
             engine: editedRepair.engine,
             status: editedRepair.status,
-            repairedBy: editedRepair.workerCode,
-            infoFromClient: editedRepair.infoFromClient,
-            infoFromWorker: editedRepair.infoFromWorker,
           }),
         }
       );
@@ -65,7 +64,42 @@ export async function handleSave(
         );
       }
 
-      console.log('Car successfully added', addCarData);
+      // Add repair details
+      const addRepairResponse = await fetch(
+        `${API_ENDPOINTS.ADD_REPAIR}/${addCarData.carID}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            repairDescription: editedRepair.repairDescription,
+            repairCost: editedRepair.repairCost,
+            repairStatus: editedRepair.repairStatus,
+            dateOfAdmission: editedRepair.dateOfAdmission,
+            dateOfHandingOver: editedRepair.dateOfHandingOver,
+            infoFromClient: editedRepair.infoFromClient,
+            infoFromWorker: editedRepair.infoFromWorker,
+            repairedBy: editedRepair.repairedBy,
+          }),
+        }
+      );
+
+      const addRepairData = await safeParseJSON(addRepairResponse);
+      if (!addRepairResponse.ok) {
+        throw new Error(
+          `Failed to add repair: ${
+            addRepairData.raw || addRepairData
+          }`
+        );
+      }
+
+      console.log(
+        'Car and repair successfully added',
+        addCarData,
+        addRepairData
+      );
       return null;
     } else {
       if (!selectedRepair) {
@@ -77,7 +111,7 @@ export async function handleSave(
         throw new Error('Car ID is undefined.');
       }
 
-      // Aktualizacja danych samochodu
+      // Update car details
       const editCarResponse = await fetch(
         `${API_ENDPOINTS.EDIT_CAR_INFO}/${carId}`,
         {
@@ -95,9 +129,13 @@ export async function handleSave(
             mileage: editedRepair.mileage,
             engine: editedRepair.engine,
             status: editedRepair.status,
-            repairedBy: editedRepair.workerCode,
-            infoFromClient: editedRepair.infoFromClient,
-            infoFromWorker: editedRepair.infoFromWorker,
+            client: {
+              clientId: selectedRepair.client.clientId,
+              name: firstName,
+              surname: lastName,
+              email: editedRepair.email,
+              phoneNumber: editedRepair.phone,
+            },
           }),
         }
       );
@@ -110,11 +148,14 @@ export async function handleSave(
       console.log('Response from server:', editCarData); // Debug log
 
       if (!editCarResponse.ok) {
-        const errorText = await editCarResponse.text();
-        throw new Error(`Failed to save car details: ${errorText}`);
+        throw new Error(
+          `Failed to save car details: ${
+            editCarData.raw || editCarData
+          }`
+        );
       }
 
-      // Aktualizacja danych naprawy, jeśli istnieją
+      // Update repair details
       if (selectedRepair.repairId) {
         const repairId = selectedRepair.repairId;
         const editRepairResponse = await fetch(
@@ -126,24 +167,33 @@ export async function handleSave(
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-              repairStatus: editedRepair.repairStatus,
+              repairDescription: editedRepair.repairDescription,
               repairCost: editedRepair.repairCost,
-              repairedBy: editedRepair.workerCode,
+              repairStatus: editedRepair.repairStatus,
+              dateOfAdmission: editedRepair.dateOfAdmission,
+              dateOfHandingOver: editedRepair.dateOfHandingOver,
               infoFromClient: editedRepair.infoFromClient,
               infoFromWorker: editedRepair.infoFromWorker,
+              repairedBy: editedRepair.repairedBy,
             }),
           }
         );
 
+        const editRepairData = await safeParseJSON(
+          editRepairResponse
+        );
         if (!editRepairResponse.ok) {
           const errorText = await editRepairResponse.text();
           throw new Error(
             `Failed to save repair details: ${errorText}`
           );
         }
+        console.log(
+          'Repair details saved successfully',
+          editRepairData
+        );
       }
 
-      console.log('Repair details saved successfully');
       return null;
     }
   } catch (error) {

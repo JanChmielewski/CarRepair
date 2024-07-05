@@ -21,4 +21,6 @@ export const API_ENDPOINTS = {
 
   // Repair endpoints
   GET_REPAIRS: `${BASE_URL}/repairs`,
+  ADD_REPAIR: `${BASE_URL}/addRepair`,
+  EDIT_REPAIR: `${BASE_URL}/editRepair`,
 };

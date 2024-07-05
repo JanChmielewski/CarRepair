@@ -40,7 +40,7 @@ function EditDetailsForm({
       setIsEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
     } else if (name === 'phone') {
       setPhone(value);
-      setIsPhoneValid(/^\d{9,15}$/.test(value));
+      setIsPhoneValid(/^\d{9,15}$/.test(value)); // Adjust the regex based on your phone number validation requirements
     }
   };
 
@@ -59,16 +59,26 @@ function EditDetailsForm({
     }
   };
 
+  const handleCheckClient = async () => {
+    const clientExists = await checkClientExists(editedRepairState);
+    if (clientExists) {
+      setClientExistsMessage('Client already exists');
+    } else {
+      setClientExistsMessage('Client does not exist');
+    }
+  };
+
   const renderInputFields = () => {
     return inputFields.map((field) => {
       let value = editedRepairState[field.name] || '';
 
+      // Handle date fields without formatDate function for now
       if (
         (field.name === 'dateOfAdmission' ||
           field.name === 'dateOfHandingOver') &&
         value
       ) {
-        value = value.split('T')[0];
+        value = value.split('T')[0]; // Ensure the value is in YYYY-MM-DD format
       }
 
       if (field.type === 'select') {
@@ -110,7 +120,7 @@ function EditDetailsForm({
             isOnlyDigits={
               field.name === 'phone' || field.name === 'mileage'
             }
-            error={errors[field.name]}
+            error={errors[field.name]} // Pass the error message
           />
           {errors[field.name] && (
             <p className="error-message red">{errors[field.name]}</p>
