@@ -3,7 +3,6 @@ import { countRepairsForDate } from './utils';
 
 const RenderTileContent = ({ repairs, date, onClickRepair }) => {
   const repairCount = countRepairsForDate(repairs, date);
-  console.log(`Repairs count for ${date}: ${repairCount}`);
   let repairString = 'napraw';
 
   if (repairCount === 1) {

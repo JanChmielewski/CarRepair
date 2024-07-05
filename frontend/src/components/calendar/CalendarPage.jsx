@@ -54,10 +54,6 @@ const CalendarPage = () => {
         const carsData = await carsResponse.json();
         const clientsData = await clientsResponse.json();
 
-        console.log('Repairs data:', repairsData.repairs);
-        console.log('Cars data:', carsData.cars);
-        console.log('Clients data:', clientsData.clients);
-
         setRepairs(repairsData.repairs);
         setCars(carsData.cars);
         setClients(clientsData.clients);
@@ -72,13 +68,11 @@ const CalendarPage = () => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     const formattedDate = formatDate(date);
-    console.log('Selected Date:', formattedDate);
     const filteredRepairs = repairs.filter(
       (repair) =>
         repair.dateOFHandingOver &&
         repair.dateOFHandingOver.split('T')[0] === formattedDate
     );
-    console.log('Filtered repairs for date:', filteredRepairs);
     setSelectedRepairs(filteredRepairs);
     setIsPopupOpen(true);
   };

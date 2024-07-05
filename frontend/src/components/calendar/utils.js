@@ -8,13 +8,10 @@ export const formatDate = (date) => {
 
 export const countRepairsForDate = (repairs, date) => {
   const formattedDate = formatDate(date);
-  console.log('Counting repairs for date:', formattedDate);
   const filteredRepairs = repairs.filter((repair) => {
     const repairDate = formatDate(new Date(repair.dateOFHandingOver));
-    console.log('Repair Date:', repairDate);
     return repairDate === formattedDate;
   });
-  console.log('Filtered Repairs:', filteredRepairs);
   return filteredRepairs.length;
 };
 
