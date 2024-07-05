@@ -1,21 +1,25 @@
-export const getCarInfo = (carID, cars, clients) => {
-  const car = cars.find((car) => car.carID === carID);
-  const client = clients.find(
-    (client) => client.clientID === car.clientID
-  );
-  return `${car.brand} ${car.model} (Owner: ${client.ownerName})`;
-};
-
 export const formatDate = (date) => {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}-${month}-${year}`;
+  const d = new Date(date);
+  const day = `0${d.getDate()}`.slice(-2);
+  const month = `0${d.getMonth() + 1}`.slice(-2);
+  const year = d.getFullYear();
+  return `${year}-${month}-${day}`;
 };
 
 export const countRepairsForDate = (repairs, date) => {
   const formattedDate = formatDate(date);
-  return repairs.filter(
-    (repair) => repair.deadlineDate === formattedDate
-  ).length;
+  const filteredRepairs = repairs.filter((repair) => {
+    const repairDate = formatDate(new Date(repair.dateOFHandingOver));
+    return repairDate === formattedDate;
+  });
+  return filteredRepairs.length;
+};
+
+export const getCarInfo = (carID, cars, clients) => {
+  const car = cars.find((car) => car.id === carID);
+  if (!car) return 'Nie znaleziono informacji o samochodzie';
+  const client = clients.find(
+    (client) => client.clientId === car.clientId
+  );
+  return `${car.brand} ${car.model} (${client.name} ${client.surname})`;
 };

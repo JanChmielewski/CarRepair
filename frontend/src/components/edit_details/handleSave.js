@@ -14,8 +14,9 @@ export async function handleSave(
     const firstName = editedRepair.clientFirstName;
     const lastName = editedRepair.clientLastName;
 
+    console.log('Status before save:', editedRepair.status); // Debug log
+
     if (isNewRepair) {
-      // Logika dla dodawania nowego samochodu i klienta (jak w twoim kodzie)
       let clientId;
 
       const clientExists = await checkClientExists(
@@ -41,7 +42,7 @@ export async function handleSave(
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             brand: editedRepair.brand,
@@ -51,7 +52,7 @@ export async function handleSave(
             vin: editedRepair.vinNumber,
             mileage: editedRepair.mileage,
             engine: editedRepair.engine,
-            status: 'WAITING_FOR_DIAGNOSIS',
+            status: editedRepair.status,
           }),
         }
       );
@@ -63,18 +64,61 @@ export async function handleSave(
         );
       }
 
-      console.log('Car successfully added', addCarData);
+      // Add repair details
+      const addRepairResponse = await fetch(
+        `${API_ENDPOINTS.ADD_REPAIR}/${addCarData.carID}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            repairDescription: editedRepair.repairDescription,
+            repairCost: editedRepair.repairCost,
+            repairStatus: editedRepair.repairStatus,
+            dateOfAdmission: editedRepair.dateOfAdmission,
+            dateOfHandingOver: editedRepair.dateOfHandingOver,
+            infoFromClient: editedRepair.infoFromClient,
+            infoFromWorker: editedRepair.infoFromWorker,
+            repairedBy: editedRepair.repairedBy,
+          }),
+        }
+      );
+
+      const addRepairData = await safeParseJSON(addRepairResponse);
+      if (!addRepairResponse.ok) {
+        throw new Error(
+          `Failed to add repair: ${
+            addRepairData.raw || addRepairData
+          }`
+        );
+      }
+
+      console.log(
+        'Car and repair successfully added',
+        addCarData,
+        addRepairData
+      );
       return null;
     } else {
-      // Logika dla edytowania istniejących danych
+      if (!selectedRepair) {
+        throw new Error('Selected repair is not defined.');
+      }
+
       const carId = selectedRepair.id;
+      if (!carId) {
+        throw new Error('Car ID is undefined.');
+      }
+
+      // Update car details
       const editCarResponse = await fetch(
         `${API_ENDPOINTS.EDIT_CAR_INFO}/${carId}`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             brand: editedRepair.brand,
@@ -84,7 +128,7 @@ export async function handleSave(
             vin: editedRepair.vinNumber,
             mileage: editedRepair.mileage,
             engine: editedRepair.engine,
-            status: selectedRepair.status,
+            status: editedRepair.status,
             client: {
               clientId: selectedRepair.client.clientId,
               name: firstName,
@@ -95,13 +139,23 @@ export async function handleSave(
           }),
         }
       );
+      console.log(
+        'Sending car update request with status:',
+        editedRepair.status
+      );
+
+      const editCarData = await safeParseJSON(editCarResponse);
+      console.log('Response from server:', editCarData); // Debug log
 
       if (!editCarResponse.ok) {
-        const errorText = await editCarResponse.text();
-        throw new Error(`Failed to save car details: ${errorText}`);
+        throw new Error(
+          `Failed to save car details: ${
+            editCarData.raw || editCarData
+          }`
+        );
       }
 
-      // Jeśli istnieją dane naprawy do zaktualizowania, zrób to
+      // Update repair details
       if (selectedRepair.repairId) {
         const repairId = selectedRepair.repairId;
         const editRepairResponse = await fetch(
@@ -110,25 +164,36 @@ export async function handleSave(
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer ' + token,
+              Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-              repairDescription: editedRepair.mechanicInfo,
+              repairDescription: editedRepair.repairDescription,
               repairCost: editedRepair.repairCost,
               repairStatus: editedRepair.repairStatus,
+              dateOfAdmission: editedRepair.dateOfAdmission,
+              dateOfHandingOver: editedRepair.dateOfHandingOver,
+              infoFromClient: editedRepair.infoFromClient,
+              infoFromWorker: editedRepair.infoFromWorker,
+              repairedBy: editedRepair.repairedBy,
             }),
           }
         );
 
+        const editRepairData = await safeParseJSON(
+          editRepairResponse
+        );
         if (!editRepairResponse.ok) {
           const errorText = await editRepairResponse.text();
           throw new Error(
             `Failed to save repair details: ${errorText}`
           );
         }
+        console.log(
+          'Repair details saved successfully',
+          editRepairData
+        );
       }
 
-      console.log('Repair details saved successfully');
       return null;
     }
   } catch (error) {
@@ -148,7 +213,7 @@ export async function checkClientExists(editedRepair, token) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -161,8 +226,8 @@ export async function checkClientExists(editedRepair, token) {
 
   const clientsData = JSON.parse(clientsResponseText);
 
-  const searchEmail = editedRepair.phone.toLowerCase().trim();
-  const searchPhone = editedRepair.email.trim();
+  const searchEmail = editedRepair.email.toLowerCase().trim();
+  const searchPhone = editedRepair.phone.trim();
 
   const existingClient = clientsData.clients.find((client) => {
     const clientEmail = (client.email || '').toLowerCase().trim();
@@ -184,7 +249,7 @@ async function addClient(editedRepair, token) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name: editedRepair.clientFirstName,

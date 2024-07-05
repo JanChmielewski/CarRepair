@@ -78,12 +78,12 @@ const inputFields = [
   },
   {
     label: 'Informacje od mechanika',
-    name: 'mechanicInfo',
+    name: 'infoFromWorker',
     required: false,
   },
   {
     label: 'Informacje od klienta',
-    name: 'clientInfo',
+    name: 'infoFromClient',
     required: false,
   },
   {
@@ -100,8 +100,8 @@ const inputFields = [
     required: true,
   },
   {
-    label: 'Data deadline',
-    name: 'deadlineDate',
+    label: 'Data doręczenia',
+    name: 'dateOfHandingOver',
     type: 'date',
     required: true,
   },
@@ -111,6 +111,12 @@ const inputFields = [
     type: 'select',
     options: statusOptions,
     required: true,
+  },
+  {
+    label: 'Naprawiane przez',
+    name: 'repairedBy',
+    type: 'text',
+    required: false,
   },
 ];
 

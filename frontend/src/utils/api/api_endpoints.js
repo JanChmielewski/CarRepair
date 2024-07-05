@@ -17,7 +17,10 @@ export const API_ENDPOINTS = {
   DELETE_ALL_CARS: `${BASE_URL}/deleteAllCars`,
   GET_CARS_FOR_DASHBOARD: `${BASE_URL}/carsForDashboard`,
   DELETE_CAR: `${BASE_URL}/deleteCar/`,
+  EDIT_CAR_INFO: `${BASE_URL}/editCarInfo`,
 
   // Repair endpoints
   GET_REPAIRS: `${BASE_URL}/repairs`,
+  ADD_REPAIR: `${BASE_URL}/addRepair`,
+  EDIT_REPAIR: `${BASE_URL}/editRepair`,
 };

@@ -31,12 +31,17 @@ function EditDetails() {
     phone: '',
     email: '',
     registrationNumber: '',
-    mechanicInfo: '',
-    clientInfo: '',
+    infoFromWorker: '',
+    infoFromClient: '',
     productionDate: '',
     mileage: '',
     dateOfAdmission: '',
     dateOfHandingOver: '',
+    status: '',
+    repairStatus: '',
+    repairDescription: '',
+    repairCost: '',
+    repairedBy: '',
   });
   const [error, setError] = useState(null);
   const [clientExists, setClientExists] = useState(null);
@@ -92,28 +97,33 @@ function EditDetails() {
               (r) => r.car.id === car.id
             );
 
-            setSelectedRepair(car);
-            setEditedRepair({
-              brand: car.brand,
-              model: car.model,
-              vinNumber: car.vin,
-              engine: car.engine,
-              clientFirstName: car.client.name,
-              clientLastName: car.client.surname,
-              phone: car.client.phoneNumber,
-              email: car.client.email,
-              registrationNumber: car.registrationNumber,
-              mechanicInfo: repair ? repair.infoFromWorker : '',
-              clientInfo: repair ? repair.infoFromClient : '',
-              productionDate: car.yearOfProduction,
-              mileage: car.mileage,
-              dateOfAdmission: repair
-                ? repair.dateOfAdmission.split('T')[0]
-                : '',
-              dateOfHandingOver: repair
-                ? repair.dateOFHandingOver.split('T')[0]
-                : '',
-            });
+            if (repair) {
+              setSelectedRepair({ ...car, repairId: repair.id });
+              setEditedRepair({
+                brand: car.brand,
+                model: car.model,
+                vinNumber: car.vin,
+                engine: car.engine,
+                clientFirstName: car.client.name,
+                clientLastName: car.client.surname,
+                phone: car.client.phoneNumber,
+                email: car.client.email,
+                registrationNumber: car.registrationNumber,
+                infoFromWorker: repair.infoFromWorker,
+                infoFromClient: repair.infoFromClient,
+                productionDate: car.yearOfProduction,
+                mileage: car.mileage,
+                dateOfAdmission: repair.dateOfAdmission.split('T')[0],
+                dateOfHandingOver:
+                  repair.dateOFHandingOver.split('T')[0],
+                status: car.status,
+                repairDescription: repair.repairDescription,
+                repairCost: repair.repairCost,
+                repairedBy: repair.repairedBy.workerCode,
+              });
+            } else {
+              setError('Repair not found');
+            }
           } else {
             navigate(`${ROUTES.NOT_FOUND}`);
           }
@@ -130,8 +140,6 @@ function EditDetails() {
   }, [isNewRepair, repairID, navigate]);
 
   const handleSave = useCallback(async () => {
-    console.log('Edited Repair email:', editedRepair.email);
-    console.log('Edited Repair phone:', editedRepair.phone);
     const error = await handleSaveFunction(
       isNewRepair,
       selectedRepair,
