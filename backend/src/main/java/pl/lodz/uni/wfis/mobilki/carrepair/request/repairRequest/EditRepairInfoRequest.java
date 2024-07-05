@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class EditRepairInfoRequest {
-    private Long repairId;
     private LocalDateTime
             dateOfAdmission,
             dateOFHandingOver;

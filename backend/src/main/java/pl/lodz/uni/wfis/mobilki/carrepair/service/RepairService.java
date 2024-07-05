@@ -97,7 +97,11 @@ public class RepairService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime updateDate = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
         repair.setLastUpdated(updateDate);
+
+        repairRepository.save(repair);
+
         updatedFields.put("lastUpdated", updateDate.format(formatter));
+
         return updatedFields;
 
     }
